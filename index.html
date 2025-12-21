@@ -435,14 +435,14 @@
 
   <script>
     /* =========================
-      ✅ 抽籤系統規則（邏輯）
-      1) 每天可抽 1 次：以「本地日期」todayKey() 判斷（台灣 00:00 換日）
-      2) 同一天重複點「求靈籤」：顯示同一結果（避免一直刷籤）
-      3) 還願狀態：同一天有效；隔天自動重置
-      4) 資料儲存：LocalStorage
-         - yikou:drawDate
-         - yikou:drawResult
-         - yikou:vowDoneDate
+       ✅ 抽籤系統規則（邏輯）
+       1) 每天可抽 1 次：以「本地日期」todayKey() 判斷（台灣 00:00 換日）
+       2) 同一天重複點「求靈籤」：顯示同一結果（避免一直刷籤）
+       3) 還願狀態：同一天有效；隔天自動重置
+       4) 資料儲存：LocalStorage
+          - yikou:drawDate
+          - yikou:drawResult
+          - yikou:vowDoneDate
     ========================= */
 
     // ✅ 本地日期（避免 toISOString() 的 UTC 時差問題）
