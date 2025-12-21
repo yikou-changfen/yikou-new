@@ -480,8 +480,9 @@
       document.getElementById('taskArea').style.display = 'block';
       
       const img = document.getElementById('fortuneImage');
-      img.src = data.img;
-      img.style.display = 'block';
+      img.onerror = () => { img.style.display = "none"; };
+img.onload = () => { img.style.display = "block"; };
+img.src = data.img;
       document.getElementById('fortuneText').innerText = data.text;
     }
 
