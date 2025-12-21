@@ -3,135 +3,509 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>一口腸粉｜廣東腸粉 現蒸現做</title>
-  <meta name="description" content="台中一中街必吃廣東腸粉，現蒸現做、復古港味。">
-  <link rel="icon" href="assets/brand/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="assets/brand/favicon-16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="assets/brand/favicon-32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+  <meta name="description" content="台中一中街廣東腸粉，現蒸現做。等候也不無聊：抽一支解憂靈籤。">
+
+  <link rel="icon" href="assets/brand/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/brand/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/apple-touch-icon.png">
+
   <meta property="og:title" content="一口腸粉｜廣東腸粉 現蒸現做">
   <meta property="og:description" content="一中街必吃廣東腸粉。等候抽籤，運氣也一起蒸熱。">
   <meta property="og:image" content="assets/brand/og-image.png">
   <meta property="og:type" content="website">
+
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
-    :root {
-      --bg:#0f1816;
-      --gold:#efc166;
-      --red:#c53030;
-      --text:#f5f0e8;
-      --deep-green:rgba(15,24,22,0.9);
+    :root { 
+      --bg: #0f1816; 
+      --gold: #efc166; 
+      --red: #c53030; 
+      --text: #f5f0e8; 
+      --muted: #cfd5cb;
+      --header-bg: rgba(15, 24, 22, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --border: rgba(238, 203, 117, 0.3);
     }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:'Noto Serif TC',serif; background:var(--bg); color:var(--text); text-align:center; padding-bottom:80px; }
-    a { color:inherit; }
-    /* Header */
-    .site-header { position:sticky; top:0; z-index:1000; backdrop-filter:blur(12px); background:linear-gradient(90deg, rgba(15,24,22,0.92), rgba(15,24,22,0.8)); border-bottom:1px solid rgba(239,193,102,0.35); padding:10px 16px; }
-    .header-inner { display:flex; align-items:center; justify-content:space-between; gap:14px; max-width:1100px; margin:0 auto; }
-    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
-    .brand img { height:44px; width:auto; }
-    .brand-text { text-align:left; }
-    .brand-name { font-size:1.1rem; color:var(--gold); font-weight:900; letter-spacing:0.04em; }
-    .brand-subtitle { font-family:'Noto Sans TC',sans-serif; font-size:0.9rem; color:var(--text); opacity:0.85; }
-    .header-actions { display:flex; gap:10px; }
-    .btn { padding:14px 16px; border-radius:12px; text-decoration:none; font-weight:bold; font-family:'Noto Sans TC',sans-serif; display:inline-flex; align-items:center; justify-content:center; gap:8px; min-width:140px; font-size:0.95rem; border:none; }
-    .btn-uber { background:#06C167; color:white; }
-    .btn-maps { background:var(--red); color:white; }
-    /* Hero & content */
-    .hero { padding:80px 20px 50px; max-width:900px; margin:0 auto; }
-    h1 { font-size:2.5rem; margin-bottom:10px; color:var(--gold); }
-    .tagline { color:var(--red); font-weight:bold; border:1px solid var(--red); padding:6px 16px; border-radius:50px; display:inline-block; margin-bottom:20px; }
-    .btn-group { display:flex; flex-direction:column; gap:15px; max-width:300px; margin:30px auto; }
-    .menu { max-width:800px; margin:0 auto; padding:20px; }
-    .card { background:rgba(255,255,255,0.05); border:1px solid var(--gold); border-radius:10px; padding:20px; margin-bottom:20px; }
-    /* Footer */
-    .site-footer { background:linear-gradient(180deg, rgba(12,19,17,0.95), rgba(12,19,17,0.98)); color:var(--text); padding:26px 18px 32px; border-top:1px solid rgba(239,193,102,0.25); box-shadow:0 -12px 20px rgba(0,0,0,0.25); margin-top:40px; }
-    .footer-inner { display:flex; flex-direction:column; gap:18px; max-width:1100px; margin:0 auto; text-align:left; }
-    .footer-brand { display:flex; gap:10px; align-items:center; }
-    .footer-brand img { height:32px; width:auto; }
-    .footer-brand-text { display:flex; flex-direction:column; }
-    .footer-brand-name { font-size:1rem; font-weight:900; color:var(--gold); }
-    .footer-brand-slogan { font-family:'Noto Sans TC',sans-serif; font-size:0.9rem; opacity:0.9; }
-    .footer-info { font-family:'Noto Sans TC',sans-serif; font-size:0.9rem; line-height:1.6; opacity:0.9; }
-    .footer-actions { display:flex; flex-direction:column; gap:10px; }
-    .footer-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 14px; border-radius:12px; font-family:'Noto Sans TC',sans-serif; font-weight:700; text-decoration:none; color:var(--text); background:rgba(197,48,48,0.9); box-shadow:0 6px 14px rgba(0,0,0,0.35); }
-    .footer-btn.secondary { background:rgba(239,193,102,0.9); color:#1f1206; }
-    .footer-btn.ghost { background:rgba(255,255,255,0.08); color:var(--text); border:1px solid rgba(239,193,102,0.35); }
-    .footer-meta { font-size:0.75rem; opacity:0.7; font-family:'Noto Sans TC',sans-serif; }
-    @media (min-width:768px) {
-      body { padding-bottom:100px; }
-      .header-inner { gap:20px; }
-      .brand-name { font-size:1.2rem; }
-      .brand-subtitle { font-size:1rem; }
-      .btn { font-size:1rem; min-width:150px; }
-      .hero { padding:110px 20px 60px; }
-      h1 { font-size:3rem; }
-      .btn-group { flex-direction:row; justify-content:center; }
-      .footer-inner { flex-direction:row; justify-content:space-between; align-items:flex-start; }
-      .footer-actions { flex-direction:column; align-items:flex-end; }
+    
+    * { box-sizing: border-box; }
+
+    body { 
+      margin: 0; 
+      font-family: 'Noto Sans TC', sans-serif; /* 內文用黑體 */
+      background: var(--bg); 
+      color: var(--text); 
+      text-align: center; 
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(238,203,117,0.05), transparent 35%),
+        radial-gradient(circle at 80% 0%, rgba(192,57,43,0.08), transparent 30%);
+    }
+
+    h1, h2, h3 { font-family: 'Noto Serif TC', serif; } /* 標題用宋體 */
+
+    /* --- Header 品牌列 --- */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header-logo {
+      height: 44px;
+      width: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      object-fit: cover;
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+    }
+
+    .brand-name { font-size: 1.1rem; font-weight: 900; color: var(--gold); letter-spacing: 1px; }
+    .brand-sub { font-size: 0.75rem; opacity: 0.8; }
+
+    .header-actions { display: flex; gap: 8px; }
+    
+    .btn-header {
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: transform 0.1s;
+    }
+    .btn-header:active { transform: scale(0.95); }
+    .btn-uber-sm { background: #06C167; color: white; }
+    .btn-maps-sm { background: var(--red); color: white; }
+
+    /* --- 主要內容區 --- */
+    .main-content {
+      flex: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 15px;
+      width: 100%;
+    }
+
+    /* V2 抽籤區 */
+    .hero { padding: 30px 0; }
+    
+    .tagline {
+      color: var(--red); 
+      font-weight: bold; 
+      border: 1px solid var(--red); 
+      padding: 4px 12px; 
+      border-radius: 50px; 
+      display: inline-block; 
+      margin-bottom: 15px; 
+      font-size: 0.9rem;
+      background: rgba(197, 48, 48, 0.1);
+    }
+
+    .fortune-box {
+      background: rgba(255,255,255,0.03);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 30px 20px;
+      min-height: 320px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .fortune-img {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: none;
+    }
+
+    .fortune-text {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #fff;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.4;
+    }
+
+    /* 通用大按鈕 */
+    .btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(197, 48, 48, 0.4);
+      transition: all 0.2s;
+      width: 100%;
+      max-width: 280px;
+      display: block;
+      margin: 10px auto;
+      text-decoration: none;
+    }
+    .btn:active { transform: scale(0.96); }
+    
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.95rem;
+      box-shadow: none;
+    }
+
+    .task-area {
+      margin-top: 25px;
+      border-top: 1px dashed rgba(239, 193, 102, 0.3);
+      padding-top: 20px;
+      display: none;
+      width: 100%;
+    }
+    
+    .hint { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; }
+
+    /* 菜單區 */
+    .menu-section {
+      margin-top: 50px;
+      text-align: left;
+    }
+    .section-title {
+      text-align: center;
+      color: var(--gold);
+      margin-bottom: 24px;
+      font-size: 1.5rem;
+      font-weight: 900;
+      position: relative;
+    }
+    
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .menu-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: #222;
+    }
+
+    .menu-body {
+      padding: 16px;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .menu-title { margin: 0; color: var(--gold); font-size: 1.1rem; font-weight: bold; }
+    .menu-price { margin: 0; color: var(--text); font-weight: bold; font-size: 0.95rem; }
+    .menu-desc { margin: 0; font-size: 0.9rem; opacity: 0.8; line-height: 1.5; }
+    .badge { 
+      font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; 
+      border: 1px solid var(--red); color: var(--red); margin-left: 5px; vertical-align: middle;
+    }
+
+    /* --- Footer 落款 --- */
+    .site-footer {
+      background: rgba(0, 0, 0, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px 20px 60px;
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .footer-logo { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--gold); }
+    .footer-slogan { font-size: 0.9rem; color: var(--gold); font-weight: bold; letter-spacing: 1px; }
+
+    .footer-info p { margin: 5px 0; font-size: 0.85rem; opacity: 0.7; }
+
+    .footer-links { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 280px; }
+    .btn-footer {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .btn-portaly { background: var(--gold); color: #000; border-color: var(--gold); font-weight: bold; }
+
+    .copyright { margin-top: 40px; font-size: 0.75rem; opacity: 0.4; }
+
+    /* 桌面版調整 */
+    @media (min-width: 768px) {
+      .footer-content { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; }
+      .footer-brand, .footer-info { align-items: flex-start; }
+      .footer-links { align-items: flex-start; width: auto; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
-<body id="top">
+<body>
+
   <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#top" aria-label="一口腸粉首頁">
-        <img src="assets/brand/logo.png" alt="一口腸粉 Logo">
-        <div class="brand-text">
-          <div class="brand-name">一口腸粉</div>
-          <div class="brand-subtitle">廣東腸粉｜現蒸現做</div>
-        </div>
-      </a>
-      <div class="header-actions">
-        <a href="https://www.ubereats.com/tw" class="btn btn-uber">🛵 Uber Eats 點餐</a>
-        <a href="https://goo.gl/maps/PLACEHOLDER" class="btn btn-maps">📍 導航去現場</a>
-        <!-- 若需更新外送或地圖連結，請替換上述 href -->
+    <div class="brand-group">
+      <img class="header-logo" src="assets/brand/logo.png" alt="Logo">
+      <div class="brand-info">
+        <span class="brand-name">一口腸粉</span>
+        <span class="brand-sub">廣東腸粉｜現蒸現做</span>
       </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://www.ubereats.com/tw" target="_blank" class="btn-header btn-uber-sm">Uber Eats</a>
+      <a href="https://goo.gl/maps/PLACEHOLDER" target="_blank" class="btn-header btn-maps-sm">導航</a>
     </div>
   </header>
-  <div class="hero">
-    <span class="tagline">比你前任更黏的腸粉</span>
-    <h1>一口腸粉</h1>
-    <p>台中一中街｜現做蒸氣｜復古港味</p>
-    <div class="btn-group">
-      <a href="https://www.ubereats.com/tw" class="btn btn-uber">🛵 Uber Eats 點餐</a>
-      <a href="https://goo.gl/maps/PLACEHOLDER" class="btn btn-maps">📍 導航去現場</a>
-    </div>
-  </div>
-  <div class="menu">
-    <h2 style="color:var(--gold)">🔥 必吃英雄榜</h2>
-    <div class="card"><h3>經典肉蛋腸粉</h3><p>溫體豬 x 滑嫩蛋，回購第一名。</p></div>
-    <div class="card"><h3>海陸全餐腸粉</h3><p>現剝大蝦 + 肉絲，豪華必點。</p></div>
-    <div class="card"><h3>每日鮮蚵腸粉</h3><p>產地直送鮮蚵，限量供應。</p></div>
-  </div>
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="assets/brand/logo.png" alt="一口腸粉 Logo">
-        <div class="footer-brand-text">
-          <div class="footer-brand-name">一口腸粉 Yi Kou Chang Fen</div>
-          <div class="footer-brand-slogan">比你前任更黏的腸粉</div>
+
+  <main class="main-content">
+    
+    <div class="hero">
+      <div class="tagline">比你前任更黏的腸粉</div>
+      
+      <div class="fortune-box" id="fortuneBox">
+        <div id="startView">
+          <h2 style="color:var(--gold); margin-bottom:10px;">今日運勢</h2>
+          <p style="opacity:0.8; margin-bottom:30px; line-height:1.6;">等餐無聊？<br>抽一支籤，讓運氣一起蒸熱</p>
+          <button class="btn" onclick="drawFortune()">🎴 求靈籤</button>
+        </div>
+
+        <div id="resultView" style="display:none;">
+          <img id="fortuneImage" class="fortune-img" src="" alt="籤詩圖片">
+          <div id="fortuneText" class="fortune-text"></div>
+          
+          <div class="task-area" id="taskArea">
+            <p style="font-size:0.9rem;">想讓好運更黏？<br>分享到 IG/Threads 擴散功德</p>
+            <button class="btn btn-secondary" onclick="copyText()">📋 複製文案 + 連結</button>
+            <p class="hint">☝️ 點擊複製，長按上方圖片可儲存</p>
+            
+            <button class="btn" style="margin-top:20px; background:#06C167;" onclick="markAsDone()">✅ 我已分享還願</button>
+          </div>
+
+          <div id="rewardArea" style="display:none; margin-top:20px;">
+            <h3 style="color:var(--gold);">🎉 功德圓滿</h3>
+            <p id="eggText" style="font-size:1.1rem; color:#fff; line-height:1.5;"></p>
+          </div>
         </div>
       </div>
-      <div class="footer-info">
-        <div>台中一中街｜廣東腸粉 現蒸現做</div>
-        <div>現場點餐 / 外帶</div>
-        <!-- 如需補充地址與營業時間，請於此處更新 -->
+    </div>
+
+    <div class="menu-section">
+      <div class="section-title">MENU / 必吃推薦</div>
+      <div class="menu-grid" id="menu-grid">
+        </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img class="footer-logo" src="assets/brand/logo.png" alt="Footer Logo">
+        <span class="footer-slogan">比你前任更黏的腸粉</span>
       </div>
-      <div class="footer-actions">
-        <a class="footer-btn" href="#" aria-label="Instagram">
-          <!-- IG_LINK -->
-          IG 官方帳號
-        </a>
-        <a class="footer-btn ghost" href="#" aria-label="Threads">
-          <!-- THREADS_LINK -->
-          Threads
-        </a>
-        <a class="footer-btn secondary" href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener">Portaly 入口</a>
-        <a class="footer-btn ghost" href="#top">⬆️ 回到頂部</a>
+      <div class="footer-info">
+        <p><strong>一口腸粉 Yi Kou Chang Fen</strong></p>
+        <p>台中一中街｜廣東腸粉 現蒸現做</p>
+        <p>現場點餐 / 外帶 / Uber Eats</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://portaly.cc/yikouchangfen" target="_blank" class="btn-footer btn-portaly">👉 去 Portaly 看看</a>
+        <a href="https://www.instagram.com/" class="btn-footer">追蹤 IG (IG_LINK)</a>
+        <a href="https://www.threads.net/" class="btn-footer">來 Threads 嘴砲 (THREADS_LINK)</a>
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="btn-footer" style="opacity:0.6;">⬆️ 回到頂部</a>
       </div>
     </div>
-    <div class="footer-meta">© 2025 一口腸粉</div>
+    <div class="copyright">© 2025 一口腸粉 All Rights Reserved.</div>
   </footer>
+
+  <script>
+    // --- V2 資料庫與邏輯 ---
+    const fortunes = [
+      { text: "大吉：前任如浮雲，腸粉才暖胃。", img: "https://fakeimg.pl/600x800/c53030/fff/?text=DaJi&font=noto" },
+      { text: "中平：今天不適合加賴，適合加蛋。", img: "https://fakeimg.pl/600x800/efc166/000/?text=ZhongPing&font=noto" },
+      { text: "小吉：你不缺桃花，你缺的是熱的。", img: "https://fakeimg.pl/600x800/1e453e/fff/?text=XiaoJi&font=noto" },
+      { text: "上上：好運會遲到，但腸粉不會冷場。", img: "https://fakeimg.pl/600x800/c53030/fff/?text=ShangShang&font=noto" },
+      { text: "吉：嘴硬沒用，先吃一口再說。", img: "https://fakeimg.pl/600x800/efc166/000/?text=Ji&font=noto" }
+    ];
+
+    const spicyLines = [
+      "前任如浮雲，腸粉才暖胃。",
+      "今天不適合加賴，適合加蛋。",
+      "嘴硬沒用，先吃一口再說。",
+      "別跟運氣硬碰硬，跟腸粉合作。",
+      "人生太苦？那就加點醬。"
+    ];
+
+    const easterEggs = [
+      "解鎖成功：下次來，老闆對你微笑一次。",
+      "你今天的功德值 +1，走路比較順。",
+      "隱藏籤王：大吉大利，吃完不胖（大概）。",
+      "功德圓滿：今天少遇到一個討厭的人。"
+    ];
+
+    // 菜單資料 (圖片先用預設圖，之後可替換)
+    const menuData = [
+      { title: '招牌肉蛋腸粉', price: 'TWD 120', desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。', img: 'https://fakeimg.pl/360x200/?text=Meat+Egg' },
+      { title: '海陸雙拼腸粉', price: 'TWD 150', desc: '海味 x 肉香雙主角，口感雙重奏。', img: 'https://fakeimg.pl/360x200/?text=Surf+Turf', badge: '人氣' },
+      { title: '鮮蚵腸粉', price: 'TWD 135', desc: '產地鮮蚵現蒸，海味爆汁。', img: 'https://fakeimg.pl/360x200/?text=Oyster', badge: '限量' },
+      { title: '經典鮮蝦腸粉', price: 'TWD 140', desc: '現剝大蝦 Q 彈，蒸出清甜。', img: 'https://fakeimg.pl/360x200/?text=Shrimp' },
+      { title: '黃金玉米鮮蝦腸粉', price: 'TWD 145', desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。', img: 'https://fakeimg.pl/360x200/?text=Corn+Shrimp' },
+      { title: '豪華雙鮮腸粉', price: 'TWD 160', desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。', img: 'https://fakeimg.pl/360x200/?text=Deluxe' }
+    ];
+
+    // 初始化：檢查 LocalStorage
+    window.onload = function() {
+      renderMenu(); // 渲染菜單
+      
+      const today = new Date().toISOString().slice(0, 10);
+      const lastDraw = localStorage.getItem('yikou:drawDate');
+      const lastResultIndex = localStorage.getItem('yikou:drawResult');
+      const vowDone = localStorage.getItem('yikou:vowDoneDate');
+
+      if (lastDraw === today && lastResultIndex !== null) {
+        showResult(fortunes[lastResultIndex]);
+        if (vowDone === today) {
+          markAsDone(false);
+        }
+      }
+    };
+
+    function renderMenu() {
+      const grid = document.getElementById('menu-grid');
+      grid.innerHTML = menuData.map(item => `
+        <article class="menu-card">
+          <img class="menu-thumb" src="${item.img}" alt="${item.title}" loading="lazy">
+          <div class="menu-body">
+            <div class="menu-header">
+              <h3 class="menu-title">${item.title} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
+            </div>
+            <p class="menu-price">${item.price}</p>
+            <p class="menu-desc">${item.desc}</p>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function drawFortune() {
+      const today = new Date().toISOString().slice(0, 10);
+      const lastDraw = localStorage.getItem('yikou:drawDate');
+      
+      let result;
+      let index;
+
+      if (lastDraw === today) {
+         index = localStorage.getItem('yikou:drawResult');
+         result = fortunes[index];
+      } else {
+        index = Math.floor(Math.random() * fortunes.length);
+        result = fortunes[index];
+        localStorage.setItem('yikou:drawDate', today);
+        localStorage.setItem('yikou:drawResult', index);
+        localStorage.removeItem('yikou:vowDoneDate');
+      }
+
+      showResult(result);
+    }
+
+    function showResult(data) {
+      document.getElementById('startView').style.display = 'none';
+      document.getElementById('resultView').style.display = 'block';
+      document.getElementById('taskArea').style.display = 'block';
+      
+      const img = document.getElementById('fortuneImage');
+      img.src = data.img;
+      img.style.display = 'block';
+      document.getElementById('fortuneText').innerText = data.text;
+    }
+
+    function copyText() {
+      const line = spicyLines[Math.floor(Math.random() * spicyLines.length)];
+      const text = `#一口腸粉 #一中街美食 ${line} ${window.location.href}`;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        alert("已複製！快去 IG/Threads 貼上吧！");
+      }).catch(err => {
+        prompt("請手動複製以下文字：", text);
+      });
+    }
+
+    function markAsDone(animate = true) {
+      const today = new Date().toISOString().slice(0, 10);
+      localStorage.setItem('yikou:vowDoneDate', today);
+
+      document.getElementById('taskArea').style.display = 'none';
+      document.getElementById('rewardArea').style.display = 'block';
+      
+      const egg = easterEggs[Math.floor(Math.random() * easterEggs.length)];
+      document.getElementById('eggText').innerText = egg;
+      
+      if (animate) {
+        if (navigator.vibrate) navigator.vibrate(200);
+      }
+    }
+  </script>
 </body>
 </html>
