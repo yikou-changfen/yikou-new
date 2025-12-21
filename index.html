@@ -3,39 +3,546 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>一口腸粉｜台中一中街｜港式復古餐車</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <title>一口腸粉｜我是廣東腸粉</title>
+  <meta name="description" content="一中街現做蒸氣腸粉，學生與觀光客必吃的復古港味。">
+  <link rel="icon" href="assets/brand/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/brand/favicon-16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="assets/brand/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/brand/android-chrome-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/brand/android-chrome-512.png">
+  <meta property="og:title" content="一口腸粉｜我是廣東腸粉">
+  <meta property="og:description" content="一中街現做蒸氣腸粉，學生/觀光客必吃。求一支靈籤再開吃。">
+  <meta property="og:image" content="assets/brand/og-image.png">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0f1816; --gold:#efc166; --red:#c53030; --text:#f5f0e8; }
-    body { margin:0; font-family:'Noto Serif TC',serif; background:var(--bg); color:var(--text); text-align:center; padding-bottom:50px; }
-    .hero { padding:60px 20px; }
-    h1 { font-size:2.5rem; margin-bottom:10px; color:var(--gold); }
-    .tagline { color:var(--red); font-weight:bold; border:1px solid var(--red); padding:5px 15px; border-radius:50px; display:inline-block; margin-bottom:20px; }
-    .btn-group { display:flex; flex-direction:column; gap:15px; max-width:300px; margin:30px auto; }
-    .btn { padding:15px; border-radius:10px; text-decoration:none; font-weight:bold; font-family:'Noto Sans TC',sans-serif; }
-    .btn-uber { background:#06C167; color:white; }
-    .btn-maps { background:var(--red); color:white; }
-    .menu { max-width:800px; margin:0 auto; padding:20px; }
-    .card { background:rgba(255,255,255,0.05); border:1px solid var(--gold); border-radius:10px; padding:20px; margin-bottom:20px; }
-    .footer { opacity:0.6; font-size:0.8rem; margin-top:40px; }
+    :root {
+      --bg: #0f1816;
+      --deep: #0b120f;
+      --text: #f5f0e8;
+      --muted: #cfd5cb;
+      --gold: #eecb75;
+      --red: #c0392b;
+      --green: #114c3a;
+      --card: rgba(255, 255, 255, 0.04);
+      --border: rgba(238, 203, 117, 0.3);
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(238,203,117,0.06), transparent 35%),
+                  radial-gradient(circle at 80% 0%, rgba(192,57,43,0.08), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 120px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(90deg, rgba(11,18,15,0.96), rgba(17,76,58,0.82));
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.28);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand img { height: 44px; width: auto; }
+    .brand-text { display: flex; flex-direction: column; }
+    .brand-title { font-size: 1.05rem; font-weight: 900; color: var(--gold); letter-spacing: 0.04em; }
+    .brand-tagline { font-size: 0.9rem; color: var(--muted); margin-top: -2px; }
+
+    .header-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .btn {
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      min-width: 130px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+    .btn-uber { background: linear-gradient(120deg, #06C167, #0b9b52); }
+    .btn-maps { background: var(--red); }
+    .btn-more { background: rgba(255,255,255,0.06); border-color: var(--border); }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 18px; }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(17,76,58,0.15), rgba(0,0,0,0));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 70px 20px 36px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      margin-top: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "港味蒸氣";
+      position: absolute;
+      right: -28px;
+      bottom: -30px;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 3.8rem;
+      color: rgba(238,203,117,0.08);
+      transform: rotate(-12deg);
+    }
+    .tag-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--red);
+      color: var(--red);
+      background: rgba(192,57,43,0.08);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 6px 0 10px;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2.3rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+    .hero-sub { color: var(--muted); margin: 0 0 18px; }
+
+    .cta-row { display: flex; flex-direction: column; gap: 12px; align-items: center; justify-content: center; }
+
+    .section {
+      margin-top: 38px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 18px 26px;
+      box-shadow: var(--shadow);
+    }
+    .section h2 {
+      margin: 0 0 12px;
+      font-family: 'Noto Serif TC', serif;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .section p { margin-top: 0; color: var(--muted); }
+
+    .fortune-display { margin-top: 16px; }
+    .fortune-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .fortune-image-wrap { position: relative; }
+    .fortune-image-wrap img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+      background: rgba(0,0,0,0.12);
+    }
+    .fortune-title { font-size: 1.2rem; margin: 12px 0 4px; color: var(--gold); font-weight: 800; }
+    .fortune-text { margin: 0; color: #f9f7f2; }
+
+    .fortune-actions { display: grid; gap: 12px; margin-top: 16px; }
+    .fortune-tip { font-size: 0.9rem; color: var(--muted); text-align: center; }
+
+    .mission {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(17,76,58,0.22);
+      border: 1px solid rgba(17,76,58,0.4);
+    }
+    .mission h3 { margin: 0 0 8px; color: var(--gold); }
+    .mission p { margin: 0 0 12px; }
+
+    .share-success {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(238,203,117,0.15);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-weight: 700;
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .share-success.active { display: block; }
+    .sparkle {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25), transparent 35%),
+                  radial-gradient(circle at 80% 30%, rgba(255,255,255,0.25), transparent 35%),
+                  radial-gradient(circle at 50% 80%, rgba(255,255,255,0.2), transparent 40%);
+      opacity: 0;
+      animation: sparkle 1.2s ease forwards;
+    }
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.8); }
+      40% { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.05); }
+    }
+
+    .menu-cover {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 6px 0 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.32);
+    }
+    .menu-cover img { width: 100%; height: 240px; object-fit: cover; display: block; }
+
+    .menu-grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+    .menu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 100%;
+    }
+    .menu-thumb { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .menu-body { padding: 14px; text-align: left; display: grid; gap: 6px; }
+    .menu-title { margin: 0; color: var(--gold); font-size: 1.05rem; }
+    .menu-price { margin: 0; color: var(--muted); font-weight: 700; }
+    .menu-desc { margin: 0; color: #f5f0e8; font-size: 0.95rem; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 10px; background: rgba(192,57,43,0.16); border: 1px solid rgba(192,57,43,0.45); color: #ffd9c8; font-size: 0.8rem; }
+
+    footer {
+      margin-top: 44px;
+      background: linear-gradient(180deg, rgba(11,18,15,0.98), rgba(6,10,9,1));
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -16px 24px rgba(0,0,0,0.35);
+      padding: 24px 18px 28px;
+      color: var(--text);
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; gap: 16px; }
+    .footer-brand { display: flex; gap: 10px; align-items: center; }
+    .footer-brand img { height: 32px; width: auto; }
+    .footer-brand-text { display: flex; flex-direction: column; }
+    .footer-brand-name { color: var(--gold); font-weight: 800; }
+    .footer-slogan { color: var(--muted); }
+    .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .footer-btn { padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.92rem; }
+    .footer-meta { font-size: 0.82rem; color: var(--muted); }
+
+    @media (min-width: 720px) {
+      .header-inner { padding: 14px 22px; }
+      .btn { padding: 12px 18px; font-size: 1rem; }
+      .cta-row { flex-direction: row; }
+      .section { padding: 26px 24px 30px; }
+      .hero { padding: 90px 28px 42px; }
+      h1 { font-size: 2.8rem; }
+      .fortune-actions { grid-template-columns: repeat(2, 1fr); }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .menu-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-inner { grid-template-columns: 1.4fr 1fr 1fr; align-items: start; }
+      .footer-links { justify-content: flex-end; }
+    }
   </style>
 </head>
-<body>
-  <div class="hero">
-    <span class="tagline">比你前任更黏的腸粉</span>
-    <h1>一口腸粉</h1>
-    <p>台中一中街｜現做蒸氣｜復古港味</p>
-    <div class="btn-group">
-      <a href="https://www.ubereats.com/tw" class="btn btn-uber">🛵 Uber Eats 點餐</a>
-      <a href="https://goo.gl/maps/PLACEHOLDER" class="btn btn-maps">📍 導航去現場</a>
+<body id="top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="一口腸粉首頁">
+        <img src="assets/brand/logo.png" alt="一口腸粉 Logo" width="64" height="44" loading="lazy">
+        <div class="brand-text">
+          <span class="brand-title">一口腸粉</span>
+          <span class="brand-tagline">我是廣東腸粉</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a class="btn btn-uber" href="#" aria-label="Uber Eats 點餐"><!-- TODO: UberEats link -->🛵 Uber Eats</a>
+        <a class="btn btn-maps" href="#" aria-label="Google Maps 導航"><!-- TODO: Google Maps link -->📍 Google Maps</a>
+        <a class="btn btn-more" href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener">🔗 更多連結</a>
+      </div>
     </div>
-  </div>
-  <div class="menu">
-    <h2 style="color:var(--gold)">🔥 必吃英雄榜</h2>
-    <div class="card"><h3>經典肉蛋腸粉</h3><p>溫體豬 x 滑嫩蛋，回購第一名。</p></div>
-    <div class="card"><h3>海陸全餐腸粉</h3><p>現剝大蝦 + 肉絲，豪華必點。</p></div>
-    <div class="card"><h3>每日鮮蚵腸粉</h3><p>產地直送鮮蚵，限量供應。</p></div>
-  </div>
-  <div class="footer">© 2025 一口腸粉</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag-badge">比你前任更黏</span>
+      <h1>一口腸粉</h1>
+      <p class="hero-sub">台中一中街｜蒸氣現做｜復古港味</p>
+      <div class="cta-row">
+        <a class="btn btn-uber" href="#"><!-- TODO: UberEats link -->🛵 Uber Eats</a>
+        <a class="btn btn-maps" href="#"><!-- TODO: Google Maps link -->📍 導航去現場</a>
+        <a class="btn btn-more" href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener">🔗 Portaly</a>
+      </div>
+    </section>
+
+    <section class="section" id="fortune">
+      <h2>求一支靈籤，再開吃</h2>
+      <p>每日限定一次，抽到的籤會陪你一整天。還願分享到 IG/Threads，功德值加倍。</p>
+      <div class="fortune-actions">
+        <button class="btn btn-more" id="draw-btn">🎴 求靈籤</button>
+        <button class="btn btn-uber" id="redeem-btn" disabled>✅ 我已分享/還願</button>
+      </div>
+
+      <div class="fortune-display" id="fortune-display" aria-live="polite"></div>
+    </section>
+
+    <section class="section" id="menu">
+      <h2>MENU / 必吃推薦</h2>
+      <p>蒸氣現做，熱騰騰上桌。圖片僅供參考，實際以現場為準。</p>
+      <div class="menu-cover">
+        <img src="assets/menu/cover.jpg" alt="必吃推薦封面" loading="lazy" width="1100" height="240">
+      </div>
+      <div class="menu-grid" id="menu-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/brand/logo.png" alt="一口腸粉 Logo" loading="lazy" width="48" height="32">
+          <div class="footer-brand-text">
+            <span class="footer-brand-name">一口腸粉 Yi Kou Chang Fen</span>
+            <span class="footer-slogan">我是廣東腸粉｜比你前任更黏的腸粉</span>
+          </div>
+        </div>
+        <p class="footer-meta" id="footer-meta"></p>
+      </div>
+      <div>
+        <p class="footer-meta">台中一中街｜廣東腸粉 現蒸現做<br>現場點餐 / 外帶</p>
+        <p class="footer-meta">圖片僅供參考，實際以現場為準。</p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-btn" href="#"><!-- IG_LINK -->IG</a>
+        <a class="footer-btn" href="#"><!-- THREADS_LINK -->Threads</a>
+        <a class="footer-btn" href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener">Portaly</a>
+        <a class="footer-btn" href="#top">⬆️ 回到頂部</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const fortunes = [
+      { id: 1, title: '大吉', text: '今日你是蒸氣 VIP，點什麼都有人讓座。' },
+      { id: 2, title: '中吉', text: '排隊別抱怨，抱著腸粉才會軟。' },
+      { id: 3, title: '小吉', text: '你的好運像腸粉皮，薄薄卻牢牢包住餡。' },
+      { id: 4, title: '中平', text: '保持溫度，嘴硬的人也會被蒸軟。' },
+      { id: 5, title: '大吉', text: '老闆看到你會多淋一圈醬，連幸運都加重口味。' },
+      { id: 6, title: '中吉', text: '別催，慢慢蒸的才滑；你的願望也一樣。' },
+      { id: 7, title: '小吉', text: '今天適合分享，把功德灑給好友，回頭有人請客。' },
+      { id: 8, title: '中平', text: '不缺桃花，缺的是熱的—記得吃熱食。' },
+      { id: 9, title: '大吉', text: '運氣已備好，你只需要把醬油膏倒滿。' },
+      { id: 10, title: '中吉', text: '求籤是儀式，吃飽才是解方。' },
+      { id: 11, title: '小吉', text: '今天的耐心值+1，排隊也像在充電。' },
+      { id: 12, title: '吉利', text: '今天不適合內耗，適合內餡。' },
+      { id: 13, title: '大吉', text: '等候抽籤時，蒸氣也在幫你洗晦氣。' },
+      { id: 14, title: '中吉', text: '把壞心情捲起來，像腸粉一樣吞掉。' }
+    ];
+
+    const spicyLines = [
+      '前任如浮雲，腸粉才暖胃。',
+      '今天不適合加賴，適合加蛋。',
+      '你不缺桃花，你缺的是熱的。',
+      '好運會遲到，但腸粉不會冷場。',
+      '嘴硬沒用，先吃一口再說。'
+    ];
+
+    const easterEggs = [
+      '解鎖成功：下次來，老闆對你微笑一次。',
+      '你今天的功德值 +1，走路比較順。',
+      '隱藏籤王：大吉大利，吃完不胖（大概）。',
+      '功德圓滿：今天少遇到一個討厭的人。'
+    ];
+
+    const menuData = [
+      { title: '招牌肉蛋腸粉', price: 'TWD 120', desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。', img: 'assets/menu/rou-dan.jpg' },
+      { title: '海陸雙拼腸粉', price: 'TWD 150', desc: '海味 x 肉香雙主角，口感雙重奏。', img: 'assets/menu/hai-lu-shuang-pin.png' },
+      { title: '鮮蚵腸粉', price: 'TWD 135', desc: '產地鮮蚵現蒸，海味爆汁。', img: 'assets/menu/xian-he.jpg' },
+      { title: '經典鮮蝦腸粉', price: 'TWD 140', desc: '現剝大蝦 Q 彈，蒸出清甜。', img: 'assets/menu/xian-xia.jpg' },
+      { title: '黃金玉米鮮蝦腸粉', price: 'TWD 145', desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。', img: 'assets/menu/yu-mi-xia.jpg' },
+      { title: '鮮味吻仔魚腸粉', price: 'TWD 130', desc: '吻仔魚鹹香，適合分享的暖胃選。', img: 'assets/menu/wen-zai-yu.jpg' },
+      { title: '豪華雙鮮腸粉', price: 'TWD 160', desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。', img: 'assets/menu/hao-hua-shuang-xian.jpg' },
+      { title: '雙蛋加倍（隱藏版）', price: 'TWD 110', desc: '蛋香雙倍，現場供應視情況。', img: 'assets/menu/shuang-dan.jpg', badge: '隱藏版' }
+    ];
+
+    const storageKeys = {
+      date: 'yikou_fortune_date',
+      id: 'yikou_fortune_id',
+      redeemedDate: 'yikou_redeem_date'
+    };
+
+    const todayStr = new Date().toISOString().slice(0, 10);
+    const drawBtn = document.getElementById('draw-btn');
+    const redeemBtn = document.getElementById('redeem-btn');
+    const display = document.getElementById('fortune-display');
+
+    function getStoredFortune() {
+      const storedDate = localStorage.getItem(storageKeys.date);
+      const storedId = localStorage.getItem(storageKeys.id);
+      if (storedDate === todayStr && storedId) {
+        return fortunes.find(f => String(f.id) === storedId) || null;
+      }
+      return null;
+    }
+
+    function setStoredFortune(fortune) {
+      localStorage.setItem(storageKeys.date, todayStr);
+      localStorage.setItem(storageKeys.id, fortune.id);
+    }
+
+    function hasRedeemedToday() {
+      return localStorage.getItem(storageKeys.redeemedDate) === todayStr;
+    }
+
+    function setRedeemed() {
+      localStorage.setItem(storageKeys.redeemedDate, todayStr);
+    }
+
+    function renderFortuneCard(fortune) {
+      const isRedeemed = hasRedeemedToday();
+      const fortuneHTML = `
+        <div class="fortune-card">
+          <div class="fortune-image-wrap">
+            <img src="https://fakeimg.pl/600x800/?text=Fortune_Image" alt="籤詩圖片" width="600" height="800" loading="lazy">
+          </div>
+          <div class="fortune-title">${fortune.title}｜第 ${fortune.id} 籤</div>
+          <p class="fortune-text">${fortune.text}</p>
+          <p class="fortune-tip">長按上方籤詩圖片即可儲存</p>
+          <div class="mission">
+            <h3>還願任務</h3>
+            <p>想讓好運更黏？分享到 IG/Threads 擴散功德。</p>
+            <div class="fortune-actions">
+              <button class="btn btn-more" id="copy-btn">📋 複製文案</button>
+              <button class="btn btn-uber" id="confirm-btn">✨ 我已分享/還願 ✅</button>
+            </div>
+            <p class="fortune-tip">文案內含當前頁面網址，方便好友跟上。</p>
+          </div>
+          <div class="share-success ${isRedeemed ? 'active' : ''}" id="share-success">
+            <div class="sparkle"></div>
+            <span id="share-text">${isRedeemed ? randomEasterEgg() : ''}</span>
+          </div>
+        </div>
+      `;
+      display.innerHTML = fortuneHTML;
+      bindMissionButtons();
+      redeemBtn.disabled = isRedeemed;
+    }
+
+    function randomEasterEgg() {
+      return easterEggs[Math.floor(Math.random() * easterEggs.length)];
+    }
+
+    function bindMissionButtons() {
+      const copyBtn = document.getElementById('copy-btn');
+      const confirmBtn = document.getElementById('confirm-btn');
+      const success = document.getElementById('share-success');
+      const shareText = document.getElementById('share-text');
+
+      copyBtn?.addEventListener('click', async () => {
+        const spicy = spicyLines[Math.floor(Math.random() * spicyLines.length)];
+        const copyContent = `#一口腸粉 #一中街美食 ${spicy} ${location.href}`;
+        try {
+          await navigator.clipboard.writeText(copyContent);
+          copyBtn.textContent = '已複製，去貼上！';
+        } catch (err) {
+          copyBtn.textContent = '複製失敗，請長按選取';
+        }
+      });
+
+      confirmBtn?.addEventListener('click', () => {
+        setRedeemed();
+        redeemBtn.disabled = true;
+        success.classList.add('active');
+        const existingSparkle = success.querySelector('.sparkle');
+        existingSparkle?.classList.remove('sparkle');
+        // reflow to restart animation
+        void success.offsetWidth;
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        success.prepend(sparkle);
+        shareText.textContent = randomEasterEgg();
+      });
+    }
+
+    function drawFortune() {
+      let fortune = getStoredFortune();
+      if (!fortune) {
+        fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+        setStoredFortune(fortune);
+      }
+      renderFortuneCard(fortune);
+    }
+
+    drawBtn.addEventListener('click', drawFortune);
+
+    function initFortuneOnLoad() {
+      const stored = getStoredFortune();
+      if (stored) {
+        renderFortuneCard(stored);
+      }
+      if (hasRedeemedToday()) {
+        redeemBtn.disabled = true;
+      }
+    }
+
+    function renderMenu() {
+      const grid = document.getElementById('menu-grid');
+      grid.innerHTML = menuData.map(item => `
+        <article class="menu-card">
+          <img class="menu-thumb" src="${item.img}" alt="${item.title}" loading="lazy" width="360" height="200">
+          <div class="menu-body">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+              <h3 class="menu-title">${item.title}</h3>
+              ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
+            </div>
+            <p class="menu-price">${item.price}</p>
+            <p class="menu-desc">${item.desc}</p>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function setFooterYear() {
+      const meta = document.getElementById('footer-meta');
+      meta.textContent = `© ${new Date().getFullYear()} 一口腸粉 Yi Kou Chang Fen`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMenu();
+      setFooterYear();
+      initFortuneOnLoad();
+    });
+  </script>
 </body>
 </html>
