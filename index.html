@@ -383,28 +383,102 @@
 
   <script>
     // --- V2 資料庫與邏輯 ---
-    const fortunes = [
-  { text: "大吉：前任如浮雲，腸粉才暖胃。", img: "assets/fortune/da-ji.webp" },
-  { text: "中平：今天不適合加賴，適合加蛋。", img: "assets/fortune/zhong-ping.webp" },
-  { text: "小吉：你不缺桃花，你缺的是熱的。", img: "assets/fortune/xiao-ji.webp" },
-  { text: "上上：好運會遲到，但腸粉不會冷場。", img: "assets/fortune/shang-shang.webp" },
-  { text: "吉：嘴硬沒用，先吃一口再說。", img: "assets/fortune/ji.webp" }
-];
+   const fortunes = [
+      // --- 愛情與前任篇 ---
+      { text: "大吉：前任回頭不是報恩，是報仇。還是腸粉實在。\n💡 推薦：招牌肉蛋腸粉 (穩定的幸福)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：他已讀不回，腸粉秒做秒回。選愛你的。\n💡 推薦：經典鮮蝦腸粉 (現剝不瞎)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "小吉：你不缺桃花，你缺的是熱量。\n💡 推薦：雙蛋腸粉 (蛋蛋的哀傷)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "吉：別做別人的選項，做自己的限量版。\n💡 推薦：鮮蚵腸粉 (每日限量)", img: "assets/fortune/ji.webp" },
+      { text: "上上：舊的不去，新的不來。胃只有一個，留給好吃的。\n💡 推薦：豪華海鮮腸粉 (對自己好點)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：單身不可怕，可怕的是肚子餓還沒人約。\n💡 推薦：海陸雙拼腸粉 (一個人吃兩份)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：暈船是因為肚子空，吃飽了就上岸了。\n💡 推薦：招牌肉蛋腸粉 (踏實感)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：與其期待白馬王子，不如期待老闆多送一顆蛋。\n💡 推薦：雙蛋腸粉 (加倍快樂)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：曖昧像極了沒熟的蛋，要破不破最煩人。\n💡 推薦：黃金玉米鮮蝦腸粉 (甜甜的)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：今天適合斬斷爛桃花，吃點重口味壓壓驚。\n💡 推薦：吻仔魚腸粉 (加辣)", img: "assets/fortune/shang-shang.webp" },
 
+      // --- 工作與社畜篇 ---
+      { text: "大吉：老闆畫的餅吃不飽，老闆蒸的腸粉才管飽。\n💡 推薦：海陸雙拼腸粉 (海闊天空)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：薪水像生理期，一個月來一次，一週就沒了。\n💡 推薦：吻仔魚腸粉 (銅板價)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：加班是為了生活，吃腸粉是為了生存。\n💡 推薦：招牌肉蛋腸粉 (補血)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：別把公司當家，因為房東會生氣。\n💡 推薦：豪華海鮮腸粉 (犒賞自己)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：你的能力不只如此，你的食量也是。\n💡 推薦：雙蛋腸粉 (補充蛋白質)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：週一不可怕，可怕的是週一沒吃早餐。\n💡 推薦：黃金玉米鮮蝦腸粉 (開啟活力)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：同事的鍋，不要背；老闆的腸粉，要排隊。\n💡 推薦：經典鮮蝦腸粉 (做人要圓滑)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：離職信寫好了嗎？還沒就先吃飽再想。\n💡 推薦：海陸雙拼腸粉 (好聚好散)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：今天不宜背黑鍋，適合吃鮮蚵。\n💡 推薦：鮮蚵腸粉 (海味滿滿)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：職場如戲，全靠演技；腸粉如玉，全靠蒸氣。\n💡 推薦：招牌肉蛋腸粉 (基本功)", img: "assets/fortune/shang-shang.webp" },
 
-    const spicyLines = [
-      "前任如浮雲，腸粉才暖胃。",
-      "今天不適合加賴，適合加蛋。",
-      "嘴硬沒用，先吃一口再說。",
-      "別跟運氣硬碰硬，跟腸粉合作。",
-      "人生太苦？那就加點醬。"
-    ];
+      // --- 人生哲理篇 ---
+      { text: "大吉：人生苦短，再不吃就冷了。\n💡 推薦：豪華海鮮腸粉 (及時行樂)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：選擇障礙不是病，是錢不夠多。今天準你全點。\n💡 推薦：海陸雙拼腸粉 (一次滿足)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：運氣就像醬汁，淋對了地方就精彩。\n💡 推薦：吻仔魚腸粉 (鹹香夠味)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：別低頭，雙下巴會跑出來；別流淚，腸粉會變鹹。\n💡 推薦：黃金玉米鮮蝦腸粉 (甜能解憂)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：不要因為走得太遠，就忘了為什麼要吃腸粉。\n💡 推薦：招牌肉蛋腸粉 (莫忘初衷)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：人生就像鮮蚵，不開口誰知道你有料？\n💡 推薦：鮮蚵腸粉 (大膽表現)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：軟爛是一種生活態度，跟腸粉皮一樣。\n💡 推薦：雙蛋腸粉 (滑嫩到底)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：與其在別人的劇本裡當配角，不如在腸粉攤前當主角。\n💡 推薦：豪華海鮮腸粉 (C位出道)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：煩惱像蔥花，挑掉就好，不用太計較。\n💡 推薦：經典鮮蝦腸粉 (清爽)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：今天適合躺平，讓腸粉來動就好。\n💡 推薦：海陸雙拼腸粉 (動靜皆宜)", img: "assets/fortune/shang-shang.webp" },
 
-    const easterEggs = [
-      "解鎖成功：下次來，老闆對你微笑一次。",
-      "你今天的功德值 +1，走路比較順。",
-      "隱藏籤王：大吉大利，吃完不胖（大概）。",
-      "功德圓滿：今天少遇到一個討厭的人。"
+      // --- 減肥與身材篇 ---
+      { text: "大吉：減肥是明天的事，吃飽才有力氣喊口號。\n💡 推薦：海陸雙拼腸粉 (吃飽好上路)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：體重只是數字，美味才是真理。\n💡 推薦：豪華海鮮腸粉 (無視熱量)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：衣服縮水了，絕對不是你胖了。\n💡 推薦：鮮蚵腸粉 (低脂高蛋白)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：吃點魚，據說吃魚會變聰明，也會變輕盈。\n💡 推薦：吻仔魚腸粉 (補鈣)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：你不是胖，你是可愛到膨脹。\n💡 推薦：雙蛋腸粉 (圓潤福氣)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：現在餓著肚子，半夜就會吃泡麵。不如現在吃好點。\n💡 推薦：招牌肉蛋腸粉 (健康點)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：別讓肚子裡的空虛，變成心裡的寂寞。\n💡 推薦：海陸雙拼腸粉 (填滿身心)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：蒸的料理沒有油煙，吃了不會有罪惡感。\n💡 推薦：鮮蝦腸粉 (清蒸無負擔)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：肚子叫得比鬧鐘還大聲，該處理一下了。\n💡 推薦：黃金玉米鮮蝦腸粉 (止飢)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：臉圓圓的人運氣都不會太差。\n💡 推薦：雙蛋腸粉 (圓滿)", img: "assets/fortune/shang-shang.webp" },
+
+      // --- 學生與考試篇 ---
+      { text: "大吉：考試就像腸粉，皮薄餡多才有料。\n💡 推薦：海陸雙拼腸粉 (料多實在)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：腦容量不足，請盡快用澱粉擴充記憶體。\n💡 推薦：招牌肉蛋腸粉 (基本盤)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：考卷上的空白，不如腸粉皮上的醬油精彩。\n💡 推薦：吻仔魚腸粉 (有滋有味)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：雙蛋不是考鴨蛋，是好事成雙。\n💡 推薦：雙蛋腸粉 (100分)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：書讀不完沒關係，飯不能吃不完。\n💡 推薦：豪華海鮮腸粉 (吃飽再戰)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：早八起不來？那是因為沒有腸粉叫你。\n💡 推薦：黃金玉米鮮蝦腸粉 (喚醒靈魂)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：不要跟教授過不去，要跟肚子過不去。\n💡 推薦：海陸雙拼腸粉 (撐死自己)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：畢業遙遙無期，腸粉現點現做。\n💡 推薦：鮮蚵腸粉 (把握當下)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：報告寫不出來，是因為蝦紅素攝取不足。\n💡 推薦：經典鮮蝦腸粉 (補腦)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：All Pass 是一種信仰，吃飽是一種修養。\n💡 推薦：招牌肉蛋腸粉 (安穩過關)", img: "assets/fortune/shang-shang.webp" },
+
+      // --- 運勢與發財篇 ---
+      { text: "大吉：財神爺在路上了，先吃點金黃色的招財。\n💡 推薦：黃金玉米鮮蝦腸粉 (招財金)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：今天不宜亂花錢，但可以花在腸粉上。\n💡 推薦：吻仔魚腸粉 (精打細算)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：股票跌了別怕，腸粉的品質不會跌。\n💡 推薦：豪華海鮮腸粉 (對沖風險)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：錢沒有不見，只是變成了你喜歡的形狀（和味道）。\n💡 推薦：海陸雙拼腸粉 (投資肚子)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：你的貴人就在這附近，可能正在排隊買腸粉。\n💡 推薦：經典鮮蝦腸粉 (廣結善緣)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：今日運勢紅紅火火，記得加辣。\n💡 推薦：招牌肉蛋腸粉 (大紅大紫)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：口袋不深沒關係，這盤你絕對吃得起。\n💡 推薦：雙蛋腸粉 (經濟實惠)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：每咬一口鮮蝦，下期發票就多一個號碼。\n💡 推薦：經典鮮蝦腸粉 (迷信一下)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：流汗總比流淚好，吃辣總比吃虧好。\n💡 推薦：鮮蚵腸粉 (加特辣)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：今天適合做個富豪夢，先從豪華全餐開始。\n💡 推薦：豪華海鮮腸粉 (財富自由)", img: "assets/fortune/shang-shang.webp" },
+
+      // --- 搞怪與嘴砲篇 ---
+      { text: "大吉：你長得真好看，尤其是吃東西的時候。\n💡 推薦：海陸雙拼腸粉 (顏值擔當)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：我掐指一算，你五行缺腸粉。\n💡 推薦：招牌肉蛋腸粉 (補五行)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：別問我今天為什麼這麼帥，因為我蒸氣薰的。\n💡 推薦：鮮蚵腸粉 (鮮氣逼人)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：如果生活欺騙了你，你就用腸粉欺騙胃。\n💡 推薦：雙蛋腸粉 (自我安慰)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：這支籤沒什麼特別，就是想叫你吃蝦。\n💡 推薦：經典鮮蝦腸粉 (聽話)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：你今天的幸運色是醬油色。\n💡 推薦：招牌肉蛋腸粉 (淋好淋滿)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：只要你不尷尬，尷尬的就是那個沒吃腸粉的人。\n💡 推薦：豪華海鮮腸粉 (霸氣全場)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：別看了，再看手機也不會變出午餐。\n💡 推薦：海陸雙拼腸粉 (行動派)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：今天適合裝傻，像吻仔魚一樣隨波逐流。\n💡 推薦：吻仔魚腸粉 (放空)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：恭喜你，解鎖了「一中街最懂吃」的成就。\n💡 推薦：黃金玉米鮮蝦腸粉 (懂吃)", img: "assets/fortune/shang-shang.webp" },
+
+      // --- 隱藏彩蛋篇 ---
+      { text: "大吉：老闆今天心情好，這盤可能特別大份。\n💡 推薦：豪華海鮮腸粉 (看運氣)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：想偷懶？吃完這盤再說。\n💡 推薦：雙蛋腸粉 (吃飽好睡)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：你的前任配不上你的胃。\n💡 推薦：鮮蚵腸粉 (他沒眼光)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：人生沒有過不去的坎，只有過不去的體重。\n💡 推薦：經典鮮蝦腸粉 (低卡)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：這不是一支籤，這是你的點餐指南。\n💡 推薦：海陸雙拼腸粉 (聽籤的)", img: "assets/fortune/shang-shang.webp" },
+      { text: "大吉：別讓別人決定你的快樂，但老闆可以決定你的辣度。\n💡 推薦：招牌肉蛋腸粉 (小辣)", img: "assets/fortune/da-ji.webp" },
+      { text: "中平：生活很苦，但玉米是甜的。\n💡 推薦：黃金玉米鮮蝦腸粉 (苦中作樂)", img: "assets/fortune/zhong-ping.webp" },
+      { text: "吉：今天適合當個廢物，但要做個吃飽的廢物。\n💡 推薦：豪華海鮮腸粉 (廢物極致)", img: "assets/fortune/ji.webp" },
+      { text: "小吉：你的錢包說它還可以，不要怕。\n💡 推薦：海陸雙拼腸粉 (勇敢刷)", img: "assets/fortune/xiao-ji.webp" },
+      { text: "上上：比你前任更黏的，只有老闆蒸的皮。\n💡 推薦：招牌肉蛋腸粉 (黏TT)", img: "assets/fortune/shang-shang.webp" }
     ];
 
     // 菜單資料 (圖片先用預設圖，之後可替換)
