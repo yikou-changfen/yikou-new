@@ -563,12 +563,48 @@ img.src = data.img;
     function copyText() {
       const line = spicyLines[Math.floor(Math.random() * spicyLines.length)];
       const text = `#一口腸粉 #一中街美食 ${line} ${window.location.href}`;
-      
-      navigator.clipboard.writeText(text).then(() => {
-        alert("已複製！快去 IG/Threads 貼上吧！");
-      }).catch(err => {
-        prompt("請手動複製以下文字：", text);
-      });
+
+      // 1) 優先走 Clipboard API（需要 https + 支援）
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text)
+            .then(() => alert("已複製！快去 IG/Threads 貼上吧！"))
+            .catch(() => fallbackCopy(text));
+          return;
+        }
+      } catch (e) {
+        // 會走到這裡通常是 clipboard 不存在/被封鎖
+      }
+
+      // 2) 走 fallback（兼容 IG 內建瀏覽器 / 舊裝置）
+      fallbackCopy(text);
+    }
+
+    function fallbackCopy(text) {
+      // A) 先嘗試舊式 copy（很多 WebView 反而比較吃這套）
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.top = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, ta.value.length);
+
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+
+        if (ok) {
+          alert("已複製！快去 IG/Threads 貼上吧！");
+          return;
+        }
+      } catch (e) {
+        // ignore
+      }
+
+      // B) 最後保底：跳 prompt 讓使用者手動長按複製（一定能用）
+      prompt("你的瀏覽器不允許自動複製，請長按全選後複製：", text);
     }
 
     function markAsDone(animate = true) {
