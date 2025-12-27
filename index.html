@@ -110,7 +110,6 @@
           <img id="fortuneImage" class="fortune-img" src="" alt="籤詩圖片" />
           <div id="fortuneText" class="fortune-text"></div>
 
-          <!-- ✅ 電子擲筊改運區 -->
           <div id="redrawSection" style="margin: 6px 0 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); width:100%;">
             <p style="font-size: 0.85rem; opacity: 0.7; margin: 0 0 8px;">
               覺得不準？<br>誠心祈求，看神明給不給換
@@ -169,7 +168,6 @@
 
   <div id="toast" class="toast" aria-live="polite"></div>
 
-  <!-- ✅ 籤筒資料（確保 fortunes.js 在 index.html 同層） -->
   <script src="fortunes.js"></script>
 
   <script>
@@ -177,9 +175,8 @@
        ✅ 主程式邏輯（含電子擲筊改運）
        ========================= */
 
-    // ✅ 成功率：改這裡就好
-    // 1/3 比較「神」，0.4 比較「黏」；自己選一個 KPI 😂
-    const REDRAW_SUCCESS_RATE = 1/3; // 0.333...
+    // ✅ 成功率：1/3 (約33%)
+    const REDRAW_SUCCESS_RATE = 1/3;
     const REDRAW_DELAY_MS = 1200;
 
     function todayKey() {
@@ -190,7 +187,7 @@
       return `${yyyy}-${mm}-${dd}`;
     }
 
-    // ✅ 菜單資料
+    // ✅ 菜單資料 (已同步移除吻仔魚)
     const menuData = [
       { title: '招牌肉蛋腸粉', price: 'TWD 70', desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。', img: 'assets/menu/web/rou-dan.webp' },
       { title: '海陸雙拼腸粉', price: 'TWD 100', desc: '海味 x 肉香雙主角，口感雙重奏。', img: 'assets/menu/web/hai-lu-shuang-pin.webp', badge: '人氣' },
@@ -198,7 +195,7 @@
       { title: '經典鮮蝦腸粉', price: 'TWD 90', desc: '現剝大蝦 Q 彈，蒸出清甜。', img: 'assets/menu/web/xian-xia.webp' },
       { title: '黃金玉米鮮蝦腸粉', price: 'TWD 90', desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。', img: 'assets/menu/web/yu-mi-xia.webp' },
       { title: '豪華海鮮腸粉', price: 'TWD 140', desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。', img: 'assets/menu/web/hao-hua-shuang-xian.webp' },
-      { title: '吻仔魚腸粉', price: 'TWD 80', desc: '鹹香吻仔魚，越嚼越順口。', img: 'assets/menu/web/wen-zai-yu.webp' },
+      // 吻仔魚腸粉 已下架
       { title: '雙蛋腸粉', price: 'TWD 70', desc: '蛋香加倍，口感更滑更黏。', img: 'assets/menu/web/shuang-dan.webp' }
     ];
 
@@ -218,7 +215,6 @@
       `).join('');
     }
 
-    // ✅ 籤圖：依籤等級對應
     const imgByGrade = {
       "上上": "assets/fortune/shang-shang.webp",
       "大吉": "assets/fortune/da-ji.webp",
@@ -227,7 +223,6 @@
       "中平": "assets/fortune/zhong-ping.webp"
     };
 
-    // ✅ 分享文案素材
     const spicyLines = [
       "前任如浮雲，腸粉才暖胃。",
       "今天不適合加賴，適合加蛋。",
@@ -239,7 +234,6 @@
       "我的幸福很簡單：熱的、黏的、好吃的。"
     ];
 
-    // ✅ 還願彩蛋
     const easterEggs = [
       "解鎖成功：下次來，老闆對你微笑一次。",
       "你今天的功德值 +1，走路比較順。",
@@ -249,7 +243,7 @@
       "今日成就：把壞心情蒸到融化。"
     ];
 
-    // ✅ 擲筊失敗嘲諷（符合傲嬌嘴賤風）
+    // 擲筊失敗嘲諷
     const boBeiFailLines = [
       "命運已定，快去吃腸粉。",
       "你太盧了，神明已讀不回。",
@@ -290,7 +284,7 @@
       const today = todayKey();
       const vowDone = localStorage.getItem("yikou:vowDoneDate");
 
-      // 已還願：直接不給改運（你都還願了還改運，太不敬了）
+      // 已還願：直接隱藏
       if (vowDone === today) {
         section.style.display = "none";
         return;
@@ -298,7 +292,7 @@
 
       section.style.display = "block";
 
-      // 今日用過擲筊：禁用
+      // 今日用過擲筊
       if (hasUsedRedrawToday()) {
         btn.disabled = true;
         btn.style.opacity = "0.5";
@@ -320,14 +314,13 @@
       const vowDone = localStorage.getItem("yikou:vowDoneDate");
       const idx = getSavedIndex();
 
-      // 同日有抽過：直接顯示
       if (lastDraw === today && idx !== null) {
         showResult(fortunes[idx]);
         if (vowDone === today) markAsDone(false);
         return;
       }
 
-      // 新的一天或資料異常：重置（包含擲筊機會）
+      // 重置狀態
       localStorage.removeItem("yikou:drawDate");
       localStorage.removeItem("yikou:drawResult");
       localStorage.removeItem("yikou:vowDoneDate");
@@ -335,7 +328,6 @@
       setRedrawUIState();
     };
 
-    // ✅ 抽籤：isRedraw=true 表示「強制重抽一次」
     function drawFortune(isRedraw = false) {
       if (typeof fortunes === 'undefined' || !fortunes || fortunes.length === 0) {
         showToast("⚠️ 籤筒整理中，請稍後再試");
@@ -344,7 +336,6 @@
 
       const today = todayKey();
 
-      // 非重抽：同一天結果固定
       if (!isRedraw) {
         const lastDraw = localStorage.getItem("yikou:drawDate");
         const savedIdx = getSavedIndex();
@@ -354,20 +345,17 @@
         }
       }
 
-      // 執行抽籤
       const index = Math.floor(Math.random() * fortunes.length);
       localStorage.setItem("yikou:drawDate", today);
       localStorage.setItem("yikou:drawResult", String(index));
-      localStorage.removeItem("yikou:vowDoneDate"); // 重抽後：還願狀態重置
+      localStorage.removeItem("yikou:vowDoneDate"); 
 
       showResult(fortunes[index]);
     }
 
-    // ✨ 核心：電子擲筊改運（每日一次）✨
     function attemptRedraw() {
       if (isRedrawRolling) return;
 
-      // 沒籤就不要擲筊（理論上看不到按鈕，但保險）
       const idx = getSavedIndex();
       if (idx === null) {
         showToast("先抽籤再擲筊，流程不要亂 😏");
@@ -387,21 +375,17 @@
       showToast("🎲 擲筊中...（叩、叩、叩）");
 
       window.setTimeout(() => {
-        // 記錄今天已用過擲筊機會（不管成功/失敗都算一次）
         localStorage.setItem("yikou:lastRedrawDate", todayKey());
 
         const isSuccess = Math.random() < REDRAW_SUCCESS_RATE;
 
         if (isSuccess) {
           showToast("🎉 聖筊！神明：下不為例，准你重抽一次。");
-          // 強制重抽：抽到的新結果會成為今天固定結果
           drawFortune(true);
         } else {
-          // 失敗：笑筊/陰筊風味
           const type = (Math.random() < 0.5) ? "😂 笑筊" : "🥶 陰筊";
           const taunt = boBeiFailLines[Math.floor(Math.random() * boBeiFailLines.length)];
           showToast(`${type}！${taunt}`);
-          // 不重抽，維持原籤
           showResult(fortunes[idx]);
         }
 
@@ -416,7 +400,6 @@
       document.getElementById("startView").style.display = "none";
       document.getElementById("resultView").style.display = "block";
 
-      // 還願狀態 / 改運按鈕狀態
       const today = todayKey();
       const vowDone = localStorage.getItem("yikou:vowDoneDate");
 
@@ -428,17 +411,14 @@
         document.getElementById("rewardArea").style.display = "none";
       }
 
-      // 改運 UI 更新（已還願就隱藏）
       setRedrawUIState();
 
-      // 籤圖
       const img = document.getElementById("fortuneImage");
       const imgSrc = imgByGrade[data.grade] || imgByGrade["吉"];
       img.onerror = () => { img.style.display = "none"; };
       img.onload = () => { img.style.display = "block"; };
       img.src = imgSrc;
 
-      // 文字
       const display = `${data.grade}：${data.msg}\n💡 推薦：${data.rec}`;
       currentFortuneDisplay = display;
       document.getElementById("fortuneText").innerText = display;
@@ -451,8 +431,8 @@
       try {
         if (navigator.clipboard && window.isSecureContext) {
           navigator.clipboard.writeText(text)
-            。then(() => showToast("已複製！快去 IG/Threads 貼上吧！"))
-            。catch(() => fallbackCopy(text));
+            .then(() => showToast("已複製！快去 IG/Threads 貼上吧！"))
+            .catch(() => fallbackCopy(text));
           return;
         }
       } catch (e) {}
@@ -487,7 +467,6 @@
       document.getElementById("taskArea").style.display = "none";
       document.getElementById("rewardArea").style.display = "block";
 
-      // 還願後：擲筊改運直接收掉
       const redrawSection = document.getElementById("redrawSection");
       if (redrawSection) redrawSection.style.display = "none";
 
