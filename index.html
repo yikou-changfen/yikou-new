@@ -459,6 +459,94 @@
       border-top: 1px dashed rgba(92, 58, 45, 0.22);
     }
 
+    .share-mode {
+      display: grid;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .share-kicker {
+      margin: 0;
+      color: var(--red);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .share-mode h3 {
+      margin: 0;
+      color: var(--red-dark);
+      font-size: 1.32rem;
+      line-height: 1.2;
+    }
+
+    .share-lead {
+      margin: 0;
+      color: var(--soy);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .share-challenge {
+      margin: 0;
+      padding: 12px;
+      border: 1px solid rgba(215, 53, 42, 0.22);
+      border-radius: 8px;
+      background: rgba(255, 248, 237, 0.88);
+      color: var(--ink);
+      font-size: 0.98rem;
+      font-weight: 900;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .share-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .share-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 10px;
+      border: 1px solid rgba(92, 58, 45, 0.18);
+      border-radius: 8px;
+      background: #fffaf1;
+      color: var(--red-dark);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+
+    .share-action:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .share-action.primary {
+      background: var(--red);
+      color: white;
+      border-color: var(--red);
+      box-shadow: 0 10px 22px rgba(215, 53, 42, 0.2);
+    }
+
+    .share-action.threads {
+      background: #241712;
+      color: white;
+      border-color: #241712;
+    }
+
+    .share-action.story {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+
     .hint {
       margin-top: 8px;
       color: var(--muted);
@@ -716,6 +804,7 @@
       .hero h1 { font-size: 2.55rem; }
       .hero-facts { grid-template-columns: 1fr; }
       .quick-grid { grid-template-columns: 1fr; }
+      .share-grid { grid-template-columns: 1fr; }
 
       .section-head {
         align-items: flex-start;
@@ -823,14 +912,24 @@
               </div>
 
               <div class="task-area" id="taskArea">
-                <p style="font-size:0.9rem; color:var(--soy); font-weight:700;">想讓好運更黏？<br />分享到 IG/Threads 擴散功德</p>
-                <button class="btn btn-secondary" onclick="copyText()">複製文案 + 連結</button>
-                <p class="hint">點擊複製，長按上方圖片可儲存</p>
-                <button class="btn" style="margin-top:20px; background:var(--green);" onclick="markAsDone()">我已分享還願</button>
+                <div class="share-mode" id="shareMode">
+                  <p class="share-kicker">SHARE MODE</p>
+                  <h3>把你的籤丟出去</h3>
+                  <p class="share-lead">抽到就不要自己藏。發給朋友一起改運，IG 限動丟圖、Threads 丟梗文都可以。</p>
+                  <p class="share-challenge" id="challengeText">挑戰載入中...</p>
+                  <div class="share-grid" aria-label="分享功能">
+                    <button class="share-action primary" type="button" onclick="shareFortune()">一鍵分享</button>
+                    <button class="share-action threads" type="button" onclick="shareToThreads()">發到 Threads</button>
+                    <button class="share-action story" type="button" onclick="downloadShareCard()">存 IG 限動圖</button>
+                    <button class="share-action" type="button" onclick="copyText()">複製文案</button>
+                  </div>
+                  <p class="hint">IG 限動建議先存圖；Threads 可直接帶入挑戰文案。</p>
+                  <button class="btn" style="margin-top:8px; background:var(--green);" onclick="markAsDone()">我已發起挑戰</button>
+                </div>
               </div>
 
               <div id="rewardArea" style="display:none; margin-top:20px;">
-                <h3 style="color:var(--red-dark); margin-bottom:6px;">功德圓滿</h3>
+                <h3 style="color:var(--red-dark); margin-bottom:6px;">挑戰發射成功</h3>
                 <p id="eggText" style="font-size:1.05rem; color:var(--soy); line-height:1.5; margin:0; font-weight:700;"></p>
               </div>
             </div>
@@ -940,13 +1039,24 @@
       "我的幸福很簡單：熱的、黏的、好吃的。"
     ];
 
+    const challengeLines = [
+      "標記一個最近需要改運的人，叫他先抽再說。",
+      "傳給那個嘴硬但會餓的人，看他今天抽到什麼。",
+      "點名一位排隊會碎念的朋友，讓腸粉蒸平他的情緒。",
+      "把這支籤丟給群組，今天誰最需要被熱騰騰安慰？",
+      "挑戰朋友抽一支：輸的人下次負責先看菜單。",
+      "傳給一個還在暈船的人，叫他改吃比較黏的。",
+      "今天的改運任務：找一個朋友一起把壞心情蒸掉。",
+      "把好運丟出去，看看誰會被這卷腸粉召喚。"
+    ];
+
     const easterEggs = [
-      "解鎖成功：下次來，老闆對你微笑一次。",
-      "你今天的功德值 +1，走路比較順。",
-      "隱藏籤王：大吉大利，吃完不胖（大概）。",
-      "功德圓滿：今天少遇到一個討厭的人。",
-      "功德爆表：你會在轉角遇到一個好消息。",
-      "今日成就：把壞心情蒸到融化。"
+      "今日功德：你成功讓朋友也餓了。",
+      "挑戰成立：這條籤詩已經開始在路上蒸。",
+      "社交熱度 +1：你離群組美食公審更近一步。",
+      "病毒值上升：下一個想吃腸粉的人可能就是他。",
+      "友情測試開始：看誰會第一個回你「哪裡買」。",
+      "今日成就：把壞心情和朋友一起蒸到融化。"
     ];
 
     // 擲筊失敗嘲諷
@@ -960,6 +1070,8 @@
     ];
 
     let currentFortuneDisplay = "";
+    let currentFortuneData = null;
+    let currentChallengeLine = "";
     let isRedrawRolling = false;
 
     function showToast(msg) {
@@ -1031,6 +1143,7 @@
       localStorage.removeItem("yikou:drawResult");
       localStorage.removeItem("yikou:vowDoneDate");
       localStorage.removeItem("yikou:lastRedrawDate");
+      localStorage.removeItem("yikou:shareChallengeIndex");
       setRedrawUIState();
     };
 
@@ -1055,6 +1168,7 @@
       localStorage.setItem("yikou:drawDate", today);
       localStorage.setItem("yikou:drawResult", String(index));
       localStorage.removeItem("yikou:vowDoneDate"); 
+      localStorage.removeItem("yikou:shareChallengeIndex");
 
       showResult(fortunes[index]);
     }
@@ -1100,8 +1214,35 @@
       }, REDRAW_DELAY_MS);
     }
 
+    function getShareUrl() {
+      return `${window.location.origin}${window.location.pathname}`;
+    }
+
+    function getChallengeIndex() {
+      const rawSaved = localStorage.getItem("yikou:shareChallengeIndex");
+      const saved = Number(rawSaved);
+      if (rawSaved !== null && Number.isInteger(saved) && saved >= 0 && saved < challengeLines.length) return saved;
+
+      const drawIndex = getSavedIndex() ?? 0;
+      const dateSeed = todayKey().replace(/-/g, "").split("").reduce((sum, char) => sum + Number(char || 0), 0);
+      const index = (drawIndex * 7 + dateSeed) % challengeLines.length;
+      localStorage.setItem("yikou:shareChallengeIndex", String(index));
+      return index;
+    }
+
+    function getChallengeLine() {
+      currentChallengeLine = challengeLines[getChallengeIndex()] || challengeLines[0];
+      return currentChallengeLine;
+    }
+
+    function updateChallengeUI() {
+      const challenge = document.getElementById("challengeText");
+      if (challenge) challenge.innerText = getChallengeLine();
+    }
+
     function showResult(data) {
       if (!data) return;
+      currentFortuneData = data;
 
       document.getElementById("startView").style.display = "none";
       document.getElementById("resultView").style.display = "block";
@@ -1128,16 +1269,16 @@
       const display = `${data.grade}：${data.msg}\n💡 推薦：${data.rec}`;
       currentFortuneDisplay = display;
       document.getElementById("fortuneText").innerText = display;
+      updateChallengeUI();
     }
 
     function copyText() {
-      const line = spicyLines[Math.floor(Math.random() * spicyLines.length)];
-      const text = `#一口腸粉 #一中街美食\n${currentFortuneDisplay}\n${line}\n${window.location.href}`;
+      const text = buildShareText();
 
       try {
         if (navigator.clipboard && window.isSecureContext) {
           navigator.clipboard.writeText(text)
-            .then(() => showToast("已複製！快去 IG/Threads 貼上吧！"))
+            .then(() => showToast("已複製！快去 IG/Threads 貼上吧"))
             .catch(() => fallbackCopy(text));
           return;
         }
@@ -1160,10 +1301,203 @@
         const ok = document.execCommand("copy");
         document.body.removeChild(ta);
 
-        if (ok) { showToast("已複製！快去 IG/Threads 貼上吧！"); return; }
+        if (ok) { showToast("已複製！快去 IG/Threads 貼上吧"); return; }
       } catch (e) {}
 
       prompt("你的瀏覽器不允許自動複製，請長按全選後複製：", text);
+    }
+
+    function buildShareText() {
+      const challenge = currentChallengeLine || getChallengeLine();
+      const spicy = spicyLines[(getChallengeIndex() + 3) % spicyLines.length];
+
+      if (!currentFortuneData) {
+        return `#一口腸粉 #一中街美食 #今日運勢\n${challenge}\n${getShareUrl()}`;
+      }
+
+      return [
+        `我在一口腸粉抽到「${currentFortuneData.grade}」`,
+        currentFortuneData.msg,
+        `推薦：${currentFortuneData.rec}`,
+        "",
+        challenge,
+        spicy,
+        "",
+        "#一口腸粉 #一中街美食 #今日運勢",
+        getShareUrl()
+      ].join("\n");
+    }
+
+    function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 8) {
+      const paragraphs = String(text).split("\n");
+      let lines = [];
+
+      paragraphs.forEach((paragraph) => {
+        let line = "";
+        Array.from(paragraph).forEach((char) => {
+          const testLine = line + char;
+          if (ctx.measureText(testLine).width > maxWidth && line) {
+            lines.push(line);
+            line = char;
+            return;
+          }
+          line = testLine;
+        });
+        if (line) lines.push(line);
+      });
+
+      if (lines.length > maxLines) {
+        lines = lines.slice(0, maxLines);
+        lines[maxLines - 1] = `${lines[maxLines - 1].slice(0, -1)}…`;
+      }
+
+      lines.forEach((line, index) => ctx.fillText(line, x, y + index * lineHeight));
+      return y + lines.length * lineHeight;
+    }
+
+    function fillRoundRect(ctx, x, y, width, height, radius, color) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(x, y, width, height, radius);
+      } else {
+        ctx.rect(x, y, width, height);
+      }
+      ctx.fill();
+    }
+
+    async function generateShareCardBlob() {
+      if (document.fonts && document.fonts.ready) {
+        try { await Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 300))]); } catch (e) {}
+      }
+
+      const data = currentFortuneData || { grade: "今日籤", msg: "今天適合吃點熱的，讓運氣一起蒸上來。", rec: "招牌肉蛋腸粉" };
+      const challenge = currentChallengeLine || getChallengeLine();
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("Canvas not supported");
+
+      ctx.fillStyle = "#fff8ed";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#d7352a";
+      ctx.fillRect(0, 0, canvas.width, 360);
+      ctx.fillStyle = "#9f211b";
+      ctx.fillRect(0, 360, canvas.width, 32);
+      for (let x = 0; x < canvas.width; x += 96) {
+        ctx.fillStyle = ["#f3b53f", "#188a5a", "#d7352a"][Math.floor(x / 96) % 3];
+        ctx.fillRect(x, 392, 96, 28);
+      }
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#fff8ed";
+      ctx.font = "900 54px 'Noto Sans TC', sans-serif";
+      ctx.fillText("一口腸粉 今日靈籤", 540, 105);
+      ctx.font = "900 34px 'Noto Sans TC', sans-serif";
+      ctx.fillStyle = "#ffe1a1";
+      ctx.fillText("比你前任更黏的腸粉", 540, 158);
+
+      fillRoundRect(ctx, 320, 205, 440, 108, 54, "#fff8ed");
+      ctx.fillStyle = "#9f211b";
+      ctx.font = "900 62px 'Noto Serif TC', serif";
+      ctx.fillText(data.grade, 540, 278);
+
+      fillRoundRect(ctx, 74, 500, 932, 760, 28, "#ffffff");
+      ctx.strokeStyle = "rgba(215, 53, 42, 0.28)";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(102, 528, 876, 704);
+
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#2f1d15";
+      ctx.font = "900 58px 'Noto Serif TC', serif";
+      ctx.fillText("今日籤詩", 140, 620);
+
+      ctx.fillStyle = "#5c3a2d";
+      ctx.font = "900 48px 'Noto Sans TC', sans-serif";
+      drawWrappedText(ctx, data.msg, 140, 710, 800, 68, 6);
+
+      fillRoundRect(ctx, 140, 1045, 800, 120, 18, "#fff1d8");
+      ctx.fillStyle = "#9f211b";
+      ctx.font = "900 34px 'Noto Sans TC', sans-serif";
+      ctx.fillText("推薦這卷", 170, 1094);
+      ctx.fillStyle = "#2f1d15";
+      ctx.font = "900 38px 'Noto Sans TC', sans-serif";
+      drawWrappedText(ctx, data.rec, 170, 1142, 730, 48, 2);
+
+      fillRoundRect(ctx, 74, 1320, 932, 330, 28, "#241712");
+      ctx.fillStyle = "#f3b53f";
+      ctx.font = "900 40px 'Noto Sans TC', sans-serif";
+      ctx.fillText("朋友挑戰", 140, 1402);
+      ctx.fillStyle = "#fff8ed";
+      ctx.font = "900 46px 'Noto Sans TC', sans-serif";
+      drawWrappedText(ctx, challenge, 140, 1482, 800, 62, 3);
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#9f211b";
+      ctx.font = "900 34px 'Noto Sans TC', sans-serif";
+      ctx.fillText("#一口腸粉 #一中街美食 #今日運勢", 540, 1742);
+      ctx.fillStyle = "#806a5e";
+      ctx.font = "700 30px 'Noto Sans TC', sans-serif";
+      ctx.fillText(getShareUrl(), 540, 1800);
+
+      return await new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) resolve(blob);
+          else reject(new Error("Canvas export failed"));
+        }, "image/png", 0.95);
+      });
+    }
+
+    async function shareFortune() {
+      const shareUrl = getShareUrl();
+      const text = buildShareText();
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "一口腸粉今日籤",
+            text,
+            url: shareUrl
+          });
+          showToast("分享面板已開啟，快把朋友拖下水");
+          return;
+        } catch (e) {
+          if (e && e.name === "AbortError") {
+            showToast("已取消分享");
+            return;
+          }
+        }
+      }
+
+      copyText();
+      showToast("你的瀏覽器不支援一鍵分享，已改成複製文案");
+    }
+
+    function shareToThreads() {
+      const text = encodeURIComponent(buildShareText());
+      window.open(`https://www.threads.net/intent/post?text=${text}`, "_blank", "noopener,noreferrer");
+      showToast("Threads 文案已帶上，換你補一句狠的");
+    }
+
+    async function downloadShareCard() {
+      try {
+        const blob = await generateShareCardBlob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `yikou-fortune-${todayKey()}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+        showToast("IG 限動圖已下載，丟出去就對了");
+      } catch (e) {
+        copyText();
+        showToast("圖卡產生失敗，先幫你複製文案");
+      }
     }
 
     function markAsDone(animate = true) {
@@ -1181,7 +1515,7 @@
 
       if (animate) {
         if (navigator.vibrate) navigator.vibrate(150);
-        showToast("功德已入帳 ✅");
+        showToast("挑戰已發起，朋友準備餓了");
       }
     }
   </script>
