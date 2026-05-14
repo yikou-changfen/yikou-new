@@ -935,6 +935,11 @@
       .site-header {
         align-items: stretch;
         flex-direction: column;
+        left: 0;
+        position: fixed;
+        right: 0;
+        transition: transform .22s ease;
+        will-change: transform;
       }
 
       .header-actions {
@@ -973,9 +978,13 @@
         transform: translateY(-8px);
       }
 
+      .site-header.lang-collapsed {
+        transform: translateY(-105%);
+      }
+
       .hero {
         min-height: 540px;
-        padding-top: 116px;
+        padding-top: 190px;
       }
 
       .hero-actions { grid-template-columns: 1fr; }
@@ -1685,7 +1694,6 @@
       const mobileQuery = window.matchMedia("(max-width: 640px)");
       let lastY = window.scrollY || 0;
       let ticking = false;
-      const threshold = 12;
       const topRevealY = 40;
 
       function setCollapsed(shouldCollapse) {
@@ -1702,17 +1710,8 @@
           return;
         }
 
-        if (currentY <= topRevealY) {
-          setCollapsed(false);
-        } else if (currentY > lastY + threshold) {
-          setCollapsed(true);
-        } else if (currentY < lastY - threshold) {
-          setCollapsed(false);
-        }
-
-        if (Math.abs(currentY - lastY) > threshold) {
-          lastY = currentY;
-        }
+        setCollapsed(currentY > topRevealY);
+        lastY = currentY;
         ticking = false;
       }
 
