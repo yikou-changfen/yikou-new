@@ -138,6 +138,40 @@
       flex: 0 0 auto;
     }
 
+    .header-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .language-switcher {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .lang-btn {
+      min-width: 34px;
+      min-height: 34px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--soy);
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: var(--red);
+      color: white;
+    }
+
     .btn-header,
     .btn,
     .btn-footer {
@@ -906,9 +940,19 @@
       .header-actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        width: 100%;
       }
 
       .brand-group {
+        justify-content: center;
+      }
+
+      .header-tools {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .language-switcher {
         justify-content: center;
       }
 
@@ -952,31 +996,39 @@
       <img class="header-logo" src="assets/brand/logo.png" alt="Logo" />
       <div class="brand-info">
         <span class="brand-name">一口腸粉</span>
-        <span class="brand-sub">廣東腸粉｜現蒸現做</span>
+        <span class="brand-sub" data-i18n="brandSub">廣東腸粉｜現蒸現做</span>
       </div>
     </a>
-    <div class="header-actions">
-      <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-header btn-uber-sm">Uber Eats</a>
-      <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-header btn-maps-sm">導航</a>
+    <div class="header-tools">
+      <div class="language-switcher" aria-label="Language">
+        <button class="lang-btn active" type="button" data-lang="zh" onclick="setLanguage('zh')">中</button>
+        <button class="lang-btn" type="button" data-lang="en" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" type="button" data-lang="ja" onclick="setLanguage('ja')">日</button>
+        <button class="lang-btn" type="button" data-lang="ko" onclick="setLanguage('ko')">한</button>
+      </div>
+      <div class="header-actions">
+        <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-header btn-uber-sm">Uber Eats</a>
+        <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-header btn-maps-sm" data-i18n="nav">導航</a>
+      </div>
     </div>
   </header>
 
   <main class="main-content">
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-content">
-        <p class="eyebrow">台中一中街｜夜市現蒸腸粉</p>
+        <p class="eyebrow" data-i18n="heroEyebrow">台中一中街｜夜市現蒸腸粉</p>
         <h1 id="heroTitle">一口腸粉</h1>
-        <div class="tagline">比你前任更黏的腸粉</div>
-        <p class="hero-copy">逛到餓就來一卷。熱蒸、滑嫩、醬香，現場吃、外帶、叫外送都很順。</p>
+        <div class="tagline" data-i18n="tagline">比你前任更黏的腸粉</div>
+        <p class="hero-copy" data-i18n="heroCopy">逛到餓就來一卷。熱蒸、滑嫩、醬香，現場吃、外帶、叫外送都很順。</p>
         <div class="hero-actions">
-          <a href="#menu" class="hero-action primary">看菜單</a>
-          <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="hero-action secondary">直接導航</a>
+          <a href="#menu" class="hero-action primary" data-i18n="viewMenu">看菜單</a>
+          <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="hero-action secondary" data-i18n="directNav">直接導航</a>
           <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="hero-action delivery">Uber Eats</a>
         </div>
         <div class="hero-facts" aria-label="店家特色">
-          <span>一中街必吃</span>
-          <span>現蒸現做</span>
-          <span>等餐抽籤</span>
+          <span data-i18n="heroFact1">一中街必吃</span>
+          <span data-i18n="heroFact2">現蒸現做</span>
+          <span data-i18n="heroFact3">等餐抽籤</span>
         </div>
       </div>
     </section>
@@ -984,79 +1036,79 @@
     <div class="content-shell">
       <section class="quick-grid" aria-label="快速資訊">
         <div class="quick-card">
-          <strong>在哪裡</strong>
-          <span>台中一中街商圈，逛街、下課、夜市散步都順路。</span>
+          <strong data-i18n="quickWhereTitle">在哪裡</strong>
+          <span data-i18n="quickWhereText">台中一中街商圈，逛街、下課、夜市散步都順路。</span>
         </div>
         <div class="quick-card">
-          <strong>吃什麼</strong>
-          <span>肉蛋、鮮蝦、鮮蚵、海陸雙拼，熱熱一卷最剛好。</span>
+          <strong data-i18n="quickEatTitle">吃什麼</strong>
+          <span data-i18n="quickEatText">肉蛋、鮮蝦、鮮蚵、海陸雙拼，熱熱一卷最剛好。</span>
         </div>
         <div class="quick-card">
-          <strong>玩什麼</strong>
-          <span>等餐抽今日靈籤，發 IG 限動或 Threads 揪朋友一起餓。</span>
+          <strong data-i18n="quickPlayTitle">玩什麼</strong>
+          <span data-i18n="quickPlayText">等餐抽今日靈籤，發 IG 限動或 Threads 揪朋友一起餓。</span>
         </div>
       </section>
 
       <section class="location-strip" aria-label="到店與點餐">
         <div>
-          <strong>一中街逛到餓，就來一卷</strong>
-          <span>現場點、外帶走、叫外送都可以。尖峰時段先看菜單，輪到你就不用猶豫。</span>
+          <strong data-i18n="locationTitle">一中街逛到餓，就來一卷</strong>
+          <span data-i18n="locationText">現場點、外帶走、叫外送都可以。尖峰時段先看菜單，輪到你就不用猶豫。</span>
         </div>
         <div class="location-actions">
-          <a class="location-link map" href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer">開地圖</a>
-          <a class="location-link order" href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer">叫外送</a>
+          <a class="location-link map" href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" data-i18n="openMap">開地圖</a>
+          <a class="location-link order" href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" data-i18n="orderDelivery">叫外送</a>
         </div>
       </section>
 
       <section class="menu-section" id="menu" aria-labelledby="menuTitle">
         <div class="section-head">
           <div>
-            <p class="section-kicker">MENU / 必吃推薦</p>
-            <h2 class="section-title" id="menuTitle">今天想吃哪一卷？</h2>
+            <p class="section-kicker" data-i18n="menuKicker">MENU / 必吃推薦</p>
+            <h2 class="section-title" id="menuTitle" data-i18n="menuTitle">今天想吃哪一卷？</h2>
           </div>
         </div>
         <div class="menu-grid" id="menu-grid"></div>
-        <p class="menu-note">價格與品項以現場公告為準；熱門口味售完就要等下次。</p>
+        <p class="menu-note" data-i18n="menuNote">價格與品項以現場公告為準；熱門口味售完就要等下次。</p>
       </section>
 
       <section class="process-section" aria-labelledby="processTitle">
         <div class="section-head">
           <div>
-            <p class="section-kicker">STEAM / 現蒸現做</p>
-            <h2 class="section-title" id="processTitle">蒸氣上來，就知道要開吃</h2>
+            <p class="section-kicker" data-i18n="processKicker">STEAM / 現蒸現做</p>
+            <h2 class="section-title" id="processTitle" data-i18n="processTitle">蒸氣上來，就知道要開吃</h2>
           </div>
         </div>
         <div class="process-grid">
           <article class="process-card">
             <img src="assets/menu/web/rou-dan.webp" alt="熱蒸肉蛋腸粉" loading="lazy" />
             <div class="process-body">
-              <span class="process-step">01 現蒸</span>
-              <h3>熱熱出爐</h3>
-              <p>腸粉皮要趁熱才滑，蒸氣就是最短的等待提示。</p>
+              <span class="process-step" data-i18n="processStep1">01 現蒸</span>
+              <h3 data-i18n="processCardTitle1">熱熱出爐</h3>
+              <p data-i18n="processText1">腸粉皮要趁熱才滑，蒸氣就是最短的等待提示。</p>
             </div>
           </article>
           <article class="process-card">
             <img src="assets/menu/web/xian-xia.webp" alt="鮮蝦腸粉淋醬" loading="lazy" />
             <div class="process-body">
-              <span class="process-step">02 淋醬</span>
-              <h3>醬香補上</h3>
-              <p>滑嫩腸粉配鹹香醬汁，一口下去才完整。</p>
+              <span class="process-step" data-i18n="processStep2">02 淋醬</span>
+              <h3 data-i18n="processCardTitle2">醬香補上</h3>
+              <p data-i18n="processText2">滑嫩腸粉配鹹香醬汁，一口下去才完整。</p>
             </div>
           </article>
           <article class="process-card">
             <img src="assets/menu/web/hai-lu-shuang-pin.webp" alt="海陸雙拼腸粉" loading="lazy" />
             <div class="process-body">
-              <span class="process-step">03 加料</span>
-              <h3>肉香海味都要</h3>
-              <p>第一次來不知道怎麼點，海陸雙拼最不容易後悔。</p>
+              <span class="process-step" data-i18n="processStep3">03 加料</span>
+              <h3 data-i18n="processCardTitle3">肉香海味都要</h3>
+              <p data-i18n="processText3">第一次來不知道怎麼點，海陸雙拼最不容易後悔。</p>
             </div>
           </article>
           <article class="process-card">
             <img src="assets/menu/web/cover.webp" alt="一口腸粉出餐" loading="lazy" />
             <div class="process-body">
-              <span class="process-step">04 帶走</span>
-              <h3>逛街邊走邊吃</h3>
-              <p>夜市小吃就是要快、熱、香，拿了就能繼續逛。</p>
+              <span class="process-step" data-i18n="processStep4">04 帶走</span>
+              <h3 data-i18n="processCardTitle4">逛街邊走邊吃</h3>
+              <p data-i18n="processText4">夜市小吃就是要快、熱、香，拿了就能繼續逛。</p>
             </div>
           </article>
         </div>
@@ -1065,17 +1117,17 @@
       <section class="fortune-section" aria-labelledby="fortuneTitle">
         <div class="fortune-layout">
           <div class="fortune-intro">
-            <p class="section-kicker">LUCK / 等餐抽籤</p>
-            <h2 id="fortuneTitle">抽一支，順便揪朋友</h2>
-            <p>等餐不用乾等。抽到好籤就丟 IG 限動，抽到怪籤就丟 Threads。</p>
+            <p class="section-kicker" data-i18n="fortuneKicker">LUCK / 等餐抽籤</p>
+            <h2 id="fortuneTitle" data-i18n="fortuneTitle">抽一支，順便揪朋友</h2>
+            <p data-i18n="fortuneIntro">等餐不用乾等。抽到好籤就丟 IG 限動，抽到怪籤就丟 Threads。</p>
           </div>
 
           <div class="fortune-box" id="fortuneBox">
             <div id="startView">
-              <h2>今日運勢</h2>
-              <p style="color:var(--muted); margin-bottom:30px; line-height:1.6; font-weight:700;">等餐無聊？<br />抽一支籤，讓運氣一起蒸熱</p>
-              <button class="btn" onclick="drawFortune()">求靈籤</button>
-              <p style="color:var(--muted); font-size:0.8rem; margin-top:10px;">規則：每天 1 次，同一天重抽結果不變</p>
+              <h2 data-i18n="fortuneStartTitle">今日運勢</h2>
+              <p style="color:var(--muted); margin-bottom:30px; line-height:1.6; font-weight:700;" data-i18n="fortuneStartText">等餐無聊？抽一支籤，讓運氣一起蒸熱</p>
+              <button class="btn" onclick="drawFortune()" data-i18n="drawButton">求靈籤</button>
+              <p style="color:var(--muted); font-size:0.8rem; margin-top:10px;" data-i18n="fortuneRule">規則：每天 1 次，同一天重抽結果不變</p>
             </div>
 
             <div id="resultView" style="display:none;">
@@ -1083,8 +1135,8 @@
               <div id="fortuneText" class="fortune-text"></div>
 
               <div id="redrawSection" style="margin: 6px 0 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(92,58,45,0.16); width:100%;">
-                <p style="font-size: 0.85rem; color:var(--muted); margin: 0 0 8px; font-weight:700;">
-                  覺得不準？<br>誠心祈求，看神明給不給換
+                <p style="font-size: 0.85rem; color:var(--muted); margin: 0 0 8px; font-weight:700;" data-i18n="redrawPrompt">
+                  覺得不準？誠心祈求，看神明給不給換
                 </p>
                 <button
                   id="btnRedraw"
@@ -1092,29 +1144,29 @@
                   style="font-size: 0.9rem; padding: 8px 16px;"
                   onclick="attemptRedraw()"
                 >
-                  擲筊改運 (每日一次)
+                  🙏 擲筊改運 (每日一次)
                 </button>
               </div>
 
               <div class="task-area" id="taskArea">
                 <div class="share-mode" id="shareMode">
-                  <p class="share-kicker">SHARE MODE</p>
-                  <h3>把你的籤丟出去</h3>
-                  <p class="share-lead">抽到就不要自己藏。發給朋友一起改運，IG 限動丟圖、Threads 丟梗文都可以。</p>
-                  <p class="share-challenge" id="challengeText">挑戰載入中...</p>
+                  <p class="share-kicker" data-i18n="shareKicker">SHARE MODE</p>
+                  <h3 data-i18n="shareTitle">把你的籤丟出去</h3>
+                  <p class="share-lead" data-i18n="shareLead">抽到就不要自己藏。發給朋友一起改運，IG 限動丟圖、Threads 丟梗文都可以。</p>
+                  <p class="share-challenge" id="challengeText" data-i18n="shareLoading">挑戰載入中...</p>
                   <div class="share-grid" aria-label="分享功能">
-                    <button class="share-action primary" type="button" onclick="shareFortune()">一鍵分享</button>
-                    <button class="share-action threads" type="button" onclick="shareToThreads()">發到 Threads</button>
-                    <button class="share-action story" type="button" onclick="downloadShareCard()">存 IG 限動圖</button>
-                    <button class="share-action" type="button" onclick="copyText()">複製文案</button>
+                    <button class="share-action primary" type="button" onclick="shareFortune()" data-i18n="shareOneTap">一鍵分享</button>
+                    <button class="share-action threads" type="button" onclick="shareToThreads()" data-i18n="shareThreads">發到 Threads</button>
+                    <button class="share-action story" type="button" onclick="downloadShareCard()" data-i18n="shareStory">存 IG 限動圖</button>
+                    <button class="share-action" type="button" onclick="copyText()" data-i18n="copyTextBtn">複製文案</button>
                   </div>
-                  <p class="hint">IG 限動建議先存圖；Threads 可直接帶入挑戰文案。</p>
-                  <button class="btn" style="margin-top:8px; background:var(--green);" onclick="markAsDone()">我已發起挑戰</button>
+                  <p class="hint" data-i18n="shareHint">IG 限動建議先存圖；Threads 可直接帶入挑戰文案。</p>
+                  <button class="btn" style="margin-top:8px; background:var(--green);" onclick="markAsDone()" data-i18n="shareDone">我已發起挑戰</button>
                 </div>
               </div>
 
               <div id="rewardArea" style="display:none; margin-top:20px;">
-                <h3 style="color:var(--red-dark); margin-bottom:6px;">挑戰發射成功</h3>
+                <h3 style="color:var(--red-dark); margin-bottom:6px;" data-i18n="rewardTitle">挑戰發射成功</h3>
                 <p id="eggText" style="font-size:1.05rem; color:var(--soy); line-height:1.5; margin:0; font-weight:700;"></p>
               </div>
             </div>
@@ -1128,20 +1180,20 @@
     <div class="footer-content">
       <div class="footer-brand">
         <img class="footer-logo" src="assets/brand/logo.png" alt="Footer Logo" />
-        <span class="footer-slogan">比你前任更黏的腸粉</span>
+        <span class="footer-slogan" data-i18n="tagline">比你前任更黏的腸粉</span>
       </div>
       <div class="footer-info">
         <p><strong>一口腸粉 Yi Kou Chang Fen</strong></p>
-        <p>台中一中街｜廣東腸粉 現蒸現做</p>
-        <p>現場點餐 / 外帶 / Uber Eats</p>
+        <p data-i18n="footerLocation">台中一中街｜廣東腸粉 現蒸現做</p>
+        <p data-i18n="footerMethods">現場點餐 / 外帶 / Uber Eats</p>
       </div>
       <div class="footer-links">
-        <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-footer">導航到店</a>
+        <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-footer" data-i18n="footerMap">導航到店</a>
         <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-footer">Uber Eats</a>
-        <a href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener noreferrer" class="btn-footer btn-portaly">Portaly 資訊</a>
-        <a href="https://www.instagram.com/yikouchangfen/" target="_blank" rel="noopener noreferrer" class="btn-footer">追蹤 IG</a>
-        <a href="https://www.threads.net/" target="_blank" rel="noopener noreferrer" class="btn-footer">看 Threads</a>
-        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="btn-footer" style="opacity:0.7;">回到頂部</a>
+        <a href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener noreferrer" class="btn-footer btn-portaly" data-i18n="footerPortaly">Portaly 資訊</a>
+        <a href="https://www.instagram.com/yikouchangfen/" target="_blank" rel="noopener noreferrer" class="btn-footer" data-i18n="footerIg">追蹤 IG</a>
+        <a href="https://www.threads.net/" target="_blank" rel="noopener noreferrer" class="btn-footer" data-i18n="footerThreads">看 Threads</a>
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="btn-footer" style="opacity:0.7;" data-i18n="backTop">回到頂部</a>
       </div>
     </div>
     <div class="copyright">© 2025 一口腸粉 All Rights Reserved.</div>
@@ -1168,29 +1220,551 @@
       return `${yyyy}-${mm}-${dd}`;
     }
 
+    const supportedLangs = ["zh", "en", "ja", "ko"];
+    let currentLang = (() => {
+      try {
+        const saved = localStorage.getItem("yikou:lang");
+        return supportedLangs.includes(saved) ? saved : "zh";
+      } catch (e) {
+        return "zh";
+      }
+    })();
+
+    const translations = {
+      zh: {
+        brandSub: "台中一中街夜市",
+        nav: "導航",
+        heroEyebrow: "台中一中街｜夜市現蒸腸粉",
+        tagline: "比你前任更黏的腸粉",
+        heroCopy: "逛到餓就來一卷。熱蒸、滑嫩、醬香，現場吃、外帶、叫外送都很順。",
+        viewMenu: "看菜單",
+        directNav: "直接導航",
+        heroFact1: "一中街必吃",
+        heroFact2: "現蒸現做",
+        heroFact3: "等餐抽籤",
+        quickWhereTitle: "在哪裡",
+        quickWhereText: "台中一中街商圈，逛街、下課、夜市散步都順路。",
+        quickEatTitle: "吃什麼",
+        quickEatText: "肉蛋、鮮蝦、鮮蚵、海陸雙拼，熱熱一卷最剛好。",
+        quickPlayTitle: "玩什麼",
+        quickPlayText: "等餐抽今日靈籤，發 IG 限動或 Threads 揪朋友一起餓。",
+        locationTitle: "一中街逛到餓，就來一卷",
+        locationText: "現場點、外帶走、叫外送都可以。尖峰時段先看菜單，輪到你就不用猶豫。",
+        openMap: "開地圖",
+        orderDelivery: "叫外送",
+        menuKicker: "MENU / 必吃推薦",
+        menuTitle: "今天想吃哪一卷？",
+        menuNote: "價格與品項以現場公告為準；熱門口味售完就要等下次。",
+        processKicker: "STEAM / 現蒸現做",
+        processTitle: "蒸氣上來，就知道要開吃",
+        processStep1: "01 現蒸",
+        processCardTitle1: "熱熱出爐",
+        processText1: "腸粉皮要趁熱才滑，蒸氣就是最短的等待提示。",
+        processStep2: "02 淋醬",
+        processCardTitle2: "醬香補上",
+        processText2: "滑嫩腸粉配鹹香醬汁，一口下去才完整。",
+        processStep3: "03 加料",
+        processCardTitle3: "肉香海味都要",
+        processText3: "第一次來不知道怎麼點，海陸雙拼最不容易後悔。",
+        processStep4: "04 帶走",
+        processCardTitle4: "逛街邊走邊吃",
+        processText4: "夜市小吃就是要快、熱、香，拿了就能繼續逛。",
+        fortuneKicker: "LUCK / 等餐抽籤",
+        fortuneTitle: "抽一支，順便揪朋友",
+        fortuneIntro: "等餐不用乾等。抽到好籤就丟 IG 限動，抽到怪籤就丟 Threads。",
+        fortuneStartTitle: "今日運勢",
+        fortuneStartText: "等餐無聊？抽一支籤，讓運氣一起蒸熱",
+        drawButton: "求靈籤",
+        fortuneRule: "規則：每天 1 次，同一天重抽結果不變",
+        redrawPrompt: "覺得不準？誠心祈求，看神明給不給換",
+        shareKicker: "SHARE MODE",
+        shareTitle: "把你的籤丟出去",
+        shareLead: "抽到就不要自己藏。發給朋友一起改運，IG 限動丟圖、Threads 丟梗文都可以。",
+        shareLoading: "挑戰載入中...",
+        shareOneTap: "一鍵分享",
+        shareThreads: "發到 Threads",
+        shareStory: "存 IG 限動圖",
+        copyTextBtn: "複製文案",
+        shareHint: "IG 限動建議先存圖；Threads 可直接帶入挑戰文案。",
+        shareDone: "我已發起挑戰",
+        rewardTitle: "挑戰發射成功",
+        footerLocation: "台中一中街｜廣東腸粉 現蒸現做",
+        footerMethods: "現場點餐 / 外帶 / Uber Eats",
+        footerMap: "導航到店",
+        footerPortaly: "Portaly 資訊",
+        footerIg: "追蹤 IG",
+        footerThreads: "看 Threads",
+        backTop: "回到頂部",
+        languageToast: "語言已切換",
+        recommendLabel: "💡 推薦",
+        copyToast: "已複製！快去 IG/Threads 貼上吧",
+        copyPrompt: "你的瀏覽器不允許自動複製，請長按全選後複製：",
+        shareOpenedToast: "分享面板已開啟，快把朋友拖下水",
+        shareCanceledToast: "已取消分享",
+        shareFallbackToast: "你的瀏覽器不支援一鍵分享，已改成複製文案",
+        threadsToast: "Threads 文案已帶上，換你補一句狠的",
+        storyToast: "IG 限動圖已下載，丟出去就對了",
+        storyFallbackToast: "圖卡產生失敗，先幫你複製文案",
+        markDoneToast: "挑戰已發起，朋友準備餓了",
+        drawUnavailableToast: "⚠️ 籤筒整理中，請稍後再試",
+        drawFirstToast: "先抽籤再擲筊，流程不要亂 😏",
+        redrawUsedToast: "🚫 今天已擲過了！神明說：別太盧。",
+        redrawRollingToast: "🎲 擲筊中...（叩、叩、叩）",
+        redrawSuccessToast: "🎉 聖筊！神明：下不為例，准你重抽一次。",
+        redrawUsedButton: "❌ 今日機會已用盡",
+        redrawRollingButton: "🎲 擲筊中...",
+        redrawButton: "🙏 擲筊改運 (每日一次)",
+        shareTextPrefix: "我在一口腸粉抽到「{grade}」",
+        shareHashTags: "#一口腸粉 #一中街美食 #今日運勢",
+        shareCardTitle: "一口腸粉 今日靈籤",
+        shareCardPoem: "今日籤詩",
+        shareCardRecommendation: "推薦這卷",
+        shareCardChallenge: "朋友挑戰",
+        shareDefaultGrade: "今日籤",
+        shareDefaultMsg: "今天適合吃點熱的，讓運氣一起蒸上來。",
+        shareDefaultRec: "招牌肉蛋腸粉"
+      },
+      en: {
+        brandSub: "Taichung Yizhong Night Market",
+        nav: "Map",
+        heroEyebrow: "Taichung Yizhong Street | Steamed rice rolls",
+        tagline: "Rice rolls stickier than your ex",
+        heroCopy: "Hungry while shopping? Grab a hot, silky rice roll with savory sauce. Eat here, take away, or order delivery.",
+        viewMenu: "Menu",
+        directNav: "Get directions",
+        heroFact1: "Yizhong must-eat",
+        heroFact2: "Steamed to order",
+        heroFact3: "Fortune draw",
+        quickWhereTitle: "Where",
+        quickWhereText: "Inside Taichung's Yizhong shopping area, easy to visit while walking around.",
+        quickEatTitle: "What to eat",
+        quickEatText: "Pork egg, shrimp, oyster, or surf and turf. Hot rolls are the best.",
+        quickPlayTitle: "Fun while waiting",
+        quickPlayText: "Draw a fortune, post an IG Story, or challenge friends on Threads.",
+        locationTitle: "Hungry in Yizhong? Come get a roll",
+        locationText: "Order at the stall, take away, or use Uber Eats. Check the menu first during busy hours.",
+        openMap: "Open map",
+        orderDelivery: "Delivery",
+        menuKicker: "MENU / Must-try picks",
+        menuTitle: "Which roll today?",
+        menuNote: "Menu and prices follow the stall notice. Popular items may sell out.",
+        processKicker: "STEAM / Made fresh",
+        processTitle: "When the steam rises, it is time to eat",
+        processStep1: "01 Steam",
+        processCardTitle1: "Served hot",
+        processText1: "Rice rolls are best while hot and silky. Steam is your waiting signal.",
+        processStep2: "02 Sauce",
+        processCardTitle2: "Savory sauce",
+        processText2: "Soft rice rolls with salty-sweet sauce. One bite makes it complete.",
+        processStep3: "03 Fillings",
+        processCardTitle3: "Meat and seafood",
+        processText3: "First time here? Surf and turf is the easy pick.",
+        processStep4: "04 Take away",
+        processCardTitle4: "Eat while exploring",
+        processText4: "Night-market food should be quick, hot, and fragrant.",
+        fortuneKicker: "LUCK / Draw while waiting",
+        fortuneTitle: "Draw one and challenge a friend",
+        fortuneIntro: "Do not just wait. Good fortune goes to IG; weird fortune goes to Threads.",
+        fortuneStartTitle: "Today's fortune",
+        fortuneStartText: "Waiting in line? Draw one and heat up your luck.",
+        drawButton: "Draw fortune",
+        fortuneRule: "Rule: once per day. Same day keeps the same result.",
+        redrawPrompt: "Feels off? Ask the gods if you can redraw.",
+        shareKicker: "SHARE MODE",
+        shareTitle: "Share your fortune",
+        shareLead: "Do not keep it to yourself. Send it to friends, save an IG Story card, or post a Threads challenge.",
+        shareLoading: "Loading challenge...",
+        shareOneTap: "Share",
+        shareThreads: "Post to Threads",
+        shareStory: "Save IG Story card",
+        copyTextBtn: "Copy text",
+        shareHint: "For IG Stories, save the card first. Threads can open with the text ready.",
+        shareDone: "Challenge sent",
+        rewardTitle: "Challenge launched",
+        footerLocation: "Taichung Yizhong Street | Steamed cheung fun",
+        footerMethods: "Stall orders / Takeaway / Uber Eats",
+        footerMap: "Get directions",
+        footerPortaly: "Portaly info",
+        footerIg: "Follow IG",
+        footerThreads: "Threads",
+        backTop: "Top",
+        languageToast: "Language switched",
+        recommendLabel: "💡 Pick",
+        copyToast: "Copied. Paste it to IG or Threads.",
+        copyPrompt: "Your browser blocked auto-copy. Select and copy this text:",
+        shareOpenedToast: "Share panel opened",
+        shareCanceledToast: "Share canceled",
+        shareFallbackToast: "Sharing is not supported here. Text copied instead.",
+        threadsToast: "Threads opened with your challenge text",
+        storyToast: "IG Story card downloaded",
+        storyFallbackToast: "Card export failed. Text copied instead.",
+        markDoneToast: "Challenge sent. Your friends may get hungry.",
+        drawUnavailableToast: "⚠️ Fortune box is taking a break. Try again later.",
+        drawFirstToast: "Draw a fortune first, then ask to redraw 😏",
+        redrawUsedToast: "🚫 You already tried today.",
+        redrawRollingToast: "🎲 Asking the gods...",
+        redrawSuccessToast: "🎉 Approved! You may redraw once.",
+        redrawUsedButton: "❌ Used today",
+        redrawRollingButton: "🎲 Rolling...",
+        redrawButton: "🙏 Redraw once today",
+        shareTextPrefix: "I drew “{grade}” at Yi Kou Chang Fen",
+        shareHashTags: "#YiKouChangFen #YizhongStreet #TaichungFood",
+        shareCardTitle: "Yi Kou Fortune",
+        shareCardPoem: "Today's fortune",
+        shareCardRecommendation: "Recommended roll",
+        shareCardChallenge: "Friend challenge",
+        shareDefaultGrade: "Fortune",
+        shareDefaultMsg: "Today calls for something hot and freshly steamed.",
+        shareDefaultRec: "Signature Pork & Egg Rice Roll"
+      },
+      ja: {
+        brandSub: "台中・一中街夜市",
+        nav: "地図",
+        heroEyebrow: "台中一中街｜蒸したて腸粉",
+        tagline: "元恋人よりくっつく腸粉",
+        heroCopy: "歩いてお腹が空いたら一巻。熱々、なめらか、醤油だれの香り。店頭、持ち帰り、デリバリーもOK。",
+        viewMenu: "メニュー",
+        directNav: "道案内",
+        heroFact1: "一中街の必食",
+        heroFact2: "注文後に蒸す",
+        heroFact3: "待ち時間におみくじ",
+        quickWhereTitle: "場所",
+        quickWhereText: "台中・一中街商圈の中。買い物や夜市散歩の途中に寄りやすいです。",
+        quickEatTitle: "おすすめ",
+        quickEatText: "豚肉卵、エビ、牡蠣、海陸ミックス。熱々の一巻がちょうどいい。",
+        quickPlayTitle: "待ち時間",
+        quickPlayText: "今日のおみくじを引いて、IGストーリーやThreadsで友達にシェア。",
+        locationTitle: "一中街でお腹が空いたら、一巻どうぞ",
+        locationText: "店頭注文、持ち帰り、Uber Eatsに対応。混雑時は先にメニューを見るのがおすすめ。",
+        openMap: "地図を開く",
+        orderDelivery: "デリバリー",
+        menuKicker: "MENU / 人気メニュー",
+        menuTitle: "今日はどの一巻？",
+        menuNote: "価格と品目は店頭表示が優先です。人気商品は売り切れる場合があります。",
+        processKicker: "STEAM / 蒸したて",
+        processTitle: "湯気が上がったら、食べどき",
+        processStep1: "01 蒸す",
+        processCardTitle1: "熱々で提供",
+        processText1: "腸粉は熱いうちが一番なめらか。湯気が待ち時間の合図です。",
+        processStep2: "02 たれ",
+        processCardTitle2: "香ばしいたれ",
+        processText2: "なめらかな腸粉に甘辛いたれ。一口で完成します。",
+        processStep3: "03 具材",
+        processCardTitle3: "肉も海鮮も",
+        processText3: "初めてなら、海陸ミックスが選びやすい一皿です。",
+        processStep4: "04 持ち帰り",
+        processCardTitle4: "歩きながら楽しむ",
+        processText4: "夜市小吃は早く、熱く、香りよく。",
+        fortuneKicker: "LUCK / 待ち時間のおみくじ",
+        fortuneTitle: "一枚引いて、友達にも送る",
+        fortuneIntro: "待つだけではもったいない。良い籤はIGへ、変な籤はThreadsへ。",
+        fortuneStartTitle: "今日の運勢",
+        fortuneStartText: "待ち時間に一枚引いて、運も一緒に温めよう。",
+        drawButton: "おみくじを引く",
+        fortuneRule: "ルール：1日1回。同じ日は同じ結果です。",
+        redrawPrompt: "しっくりこない？もう一度引けるか神様に聞いてみて。",
+        shareKicker: "SHARE MODE",
+        shareTitle: "籤をシェア",
+        shareLead: "自分だけで持たず、友達に送ろう。IGストーリー画像やThreads投稿に使えます。",
+        shareLoading: "チャレンジを読込中...",
+        shareOneTap: "共有",
+        shareThreads: "Threadsへ投稿",
+        shareStory: "IG画像を保存",
+        copyTextBtn: "文面をコピー",
+        shareHint: "IGストーリーは先に画像保存がおすすめ。Threadsは文面を入れて開けます。",
+        shareDone: "チャレンジ完了",
+        rewardTitle: "チャレンジ送信成功",
+        footerLocation: "台中一中街｜蒸したて腸粉",
+        footerMethods: "店頭注文 / 持ち帰り / Uber Eats",
+        footerMap: "道案内",
+        footerPortaly: "Portaly情報",
+        footerIg: "IGをフォロー",
+        footerThreads: "Threadsを見る",
+        backTop: "上へ戻る",
+        languageToast: "言語を切り替えました",
+        recommendLabel: "💡 おすすめ",
+        copyToast: "コピーしました。IGやThreadsに貼れます。",
+        copyPrompt: "自動コピーできませんでした。選択してコピーしてください：",
+        shareOpenedToast: "共有画面を開きました",
+        shareCanceledToast: "共有をキャンセルしました",
+        shareFallbackToast: "共有に対応していないため、文面をコピーしました",
+        threadsToast: "Threadsに文面を入れて開きました",
+        storyToast: "IGストーリー画像を保存しました",
+        storyFallbackToast: "画像生成に失敗したため、文面をコピーしました",
+        markDoneToast: "チャレンジ完了。友達もお腹が空くかも。",
+        drawUnavailableToast: "⚠️ おみくじ箱は準備中です。後でもう一度お試しください。",
+        drawFirstToast: "まずおみくじを引いてから、もう一度お願いしてね 😏",
+        redrawUsedToast: "🚫 今日はもうお願い済みです。",
+        redrawRollingToast: "🎲 神様に確認中...",
+        redrawSuccessToast: "🎉 OK！もう一度だけ引けます。",
+        redrawUsedButton: "❌ 本日は使用済み",
+        redrawRollingButton: "🎲 確認中...",
+        redrawButton: "🙏 もう一度引く（1日1回）",
+        shareTextPrefix: "一口腸粉で「{grade}」を引きました",
+        shareHashTags: "#一口腸粉 #一中街グルメ #台中グルメ",
+        shareCardTitle: "一口腸粉 今日のおみくじ",
+        shareCardPoem: "今日のおみくじ",
+        shareCardRecommendation: "おすすめの一巻",
+        shareCardChallenge: "友達チャレンジ",
+        shareDefaultGrade: "今日の籤",
+        shareDefaultMsg: "今日は熱々の蒸したてを食べるのにぴったり。",
+        shareDefaultRec: "看板 豚肉と卵の腸粉"
+      },
+      ko: {
+        brandSub: "타이중 이중제 야시장",
+        nav: "지도",
+        heroEyebrow: "타이중 이중제｜바로 찐 창펀",
+        tagline: "전 애인보다 더 착 붙는 창펀",
+        heroCopy: "쇼핑하다 배고프면 한 롤. 뜨겁고 부드럽고 소스 향이 좋은 창펀을 현장, 포장, 배달로 즐기세요.",
+        viewMenu: "메뉴",
+        directNav: "길찾기",
+        heroFact1: "이중제 필수 간식",
+        heroFact2: "주문 후 바로 찜",
+        heroFact3: "기다리며 운세 뽑기",
+        quickWhereTitle: "위치",
+        quickWhereText: "타이중 이중제 상권 안에 있어 쇼핑과 야시장 산책 중 들르기 좋습니다.",
+        quickEatTitle: "메뉴",
+        quickEatText: "돼지고기 달걀, 새우, 굴, 해륙 더블. 뜨거운 한 롤이 딱 좋아요.",
+        quickPlayTitle: "기다리는 재미",
+        quickPlayText: "오늘의 운세를 뽑고 IG 스토리나 Threads에 친구를 태그해 보세요.",
+        locationTitle: "이중제에서 배고프면 한 롤",
+        locationText: "현장 주문, 포장, Uber Eats 가능. 바쁜 시간에는 메뉴를 먼저 확인하세요.",
+        openMap: "지도 열기",
+        orderDelivery: "배달",
+        menuKicker: "MENU / 추천 메뉴",
+        menuTitle: "오늘은 어떤 롤?",
+        menuNote: "가격과 품목은 현장 공지를 기준으로 합니다. 인기 메뉴는 품절될 수 있습니다.",
+        processKicker: "STEAM / 바로 찜",
+        processTitle: "김이 올라오면 먹을 시간",
+        processStep1: "01 찌기",
+        processCardTitle1: "뜨겁게 완성",
+        processText1: "창펀은 뜨거울 때 가장 부드러워요. 김이 기다림의 신호입니다.",
+        processStep2: "02 소스",
+        processCardTitle2: "고소한 소스",
+        processText2: "부드러운 창펀에 짭짤달콤한 소스. 한 입이면 완성입니다.",
+        processStep3: "03 토핑",
+        processCardTitle3: "고기와 해산물",
+        processText3: "처음이라면 해륙 더블이 후회 없는 선택입니다.",
+        processStep4: "04 포장",
+        processCardTitle4: "걸으며 먹기",
+        processText4: "야시장 간식은 빠르고 뜨겁고 향긋해야 합니다.",
+        fortuneKicker: "LUCK / 기다리며 운세",
+        fortuneTitle: "하나 뽑고 친구에게 공유",
+        fortuneIntro: "그냥 기다리지 마세요. 좋은 운세는 IG에, 웃긴 운세는 Threads에.",
+        fortuneStartTitle: "오늘의 운세",
+        fortuneStartText: "줄 서는 동안 하나 뽑고 운도 같이 데워 보세요.",
+        drawButton: "운세 뽑기",
+        fortuneRule: "규칙: 하루 1회. 같은 날은 같은 결과입니다.",
+        redrawPrompt: "마음에 안 드나요? 다시 뽑아도 되는지 물어보세요.",
+        shareKicker: "SHARE MODE",
+        shareTitle: "운세 공유하기",
+        shareLead: "혼자만 보지 말고 친구에게 보내세요. IG 스토리 이미지나 Threads 챌린지로 쓸 수 있습니다.",
+        shareLoading: "챌린지 불러오는 중...",
+        shareOneTap: "공유",
+        shareThreads: "Threads에 올리기",
+        shareStory: "IG 스토리 저장",
+        copyTextBtn: "문구 복사",
+        shareHint: "IG 스토리는 먼저 이미지를 저장하세요. Threads는 문구를 넣어 열 수 있습니다.",
+        shareDone: "챌린지 완료",
+        rewardTitle: "챌린지 발사 성공",
+        footerLocation: "타이중 이중제｜바로 찐 창펀",
+        footerMethods: "현장 주문 / 포장 / Uber Eats",
+        footerMap: "길찾기",
+        footerPortaly: "Portaly 정보",
+        footerIg: "IG 팔로우",
+        footerThreads: "Threads 보기",
+        backTop: "맨 위로",
+        languageToast: "언어가 변경되었습니다",
+        recommendLabel: "💡 추천",
+        copyToast: "복사되었습니다. IG나 Threads에 붙여넣으세요.",
+        copyPrompt: "브라우저가 자동 복사를 막았습니다. 선택해서 복사하세요:",
+        shareOpenedToast: "공유 창을 열었습니다",
+        shareCanceledToast: "공유를 취소했습니다",
+        shareFallbackToast: "공유를 지원하지 않아 문구를 복사했습니다",
+        threadsToast: "Threads에 문구를 넣어 열었습니다",
+        storyToast: "IG 스토리 이미지를 저장했습니다",
+        storyFallbackToast: "이미지 생성에 실패해 문구를 복사했습니다",
+        markDoneToast: "챌린지 완료. 친구도 배고파질 거예요.",
+        drawUnavailableToast: "⚠️ 운세통 준비 중입니다. 잠시 후 다시 시도하세요.",
+        drawFirstToast: "먼저 운세를 뽑고 다시 요청하세요 😏",
+        redrawUsedToast: "🚫 오늘은 이미 사용했습니다.",
+        redrawRollingToast: "🎲 확인 중...",
+        redrawSuccessToast: "🎉 승인! 한 번 더 뽑을 수 있어요.",
+        redrawUsedButton: "❌ 오늘 사용 완료",
+        redrawRollingButton: "🎲 확인 중...",
+        redrawButton: "🙏 다시 뽑기 (하루 1회)",
+        shareTextPrefix: "이커우 창펀에서 “{grade}” 운세를 뽑았어요",
+        shareHashTags: "#이커우창펀 #이중제맛집 #타이중맛집",
+        shareCardTitle: "Yi Kou Fortune",
+        shareCardPoem: "오늘의 운세",
+        shareCardRecommendation: "추천 메뉴",
+        shareCardChallenge: "친구 챌린지",
+        shareDefaultGrade: "오늘의 운세",
+        shareDefaultMsg: "오늘은 따뜻하게 바로 찐 메뉴가 어울려요.",
+        shareDefaultRec: "시그니처 돼지고기 달걀 창펀"
+      }
+    };
+
+    const gradeLabels = {
+      en: { "上上": "Best Luck", "大吉": "Great Luck", "吉": "Good Luck", "小吉": "Small Luck", "中平": "Steady Luck" },
+      ja: { "上上": "大大吉", "大吉": "大吉", "吉": "吉", "小吉": "小吉", "中平": "中平" },
+      ko: { "上上": "대대길", "大吉": "대길", "吉": "길", "小吉": "소길", "中平": "보통운" }
+    };
+
+    function t(key, lang = currentLang) {
+      return (translations[lang] && translations[lang][key]) || translations.zh[key] || key;
+    }
+
+    function formatText(key, values = {}) {
+      return Object.keys(values).reduce((text, name) => text.replaceAll(`{${name}}`, values[name]), t(key));
+    }
+
+    function localizeGrade(grade, lang = currentLang) {
+      return (gradeLabels[lang] && gradeLabels[lang][grade]) || grade;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function applyLanguage(lang) {
+      currentLang = supportedLangs.includes(lang) ? lang : "zh";
+      document.documentElement.lang = currentLang === "zh" ? "zh-Hant-TW" : currentLang;
+      try { localStorage.setItem("yikou:lang", currentLang); } catch (e) {}
+
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        node.textContent = t(node.dataset.i18n);
+      });
+
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === currentLang);
+      });
+
+      renderMenu();
+      setRedrawUIState();
+      updateChallengeUI();
+      if (currentFortuneData) {
+        currentFortuneDisplay = buildFortuneDisplay(currentFortuneData);
+        document.getElementById("fortuneText").innerText = currentFortuneDisplay;
+      }
+    }
+
+    function setLanguage(lang) {
+      applyLanguage(lang);
+      showToast(t("languageToast"));
+    }
+
     // ✅ 菜單資料 (已同步移除吻仔魚)
     const menuData = [
-      { title: '招牌肉蛋腸粉', price: 'NT$70', desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。', img: 'assets/menu/web/rou-dan.webp' },
-      { title: '海陸雙拼腸粉', price: 'NT$100', desc: '海味 x 肉香雙主角，口感雙重奏。', img: 'assets/menu/web/hai-lu-shuang-pin.webp', badge: '人氣' },
-      { title: '鮮蚵腸粉', price: 'NT$100', desc: '產地鮮蚵現蒸，海味爆汁。', img: 'assets/menu/web/xian-he.webp', badge: '限量' },
-      { title: '經典鮮蝦腸粉', price: 'NT$90', desc: '現剝大蝦 Q 彈，蒸出清甜。', img: 'assets/menu/web/xian-xia.webp' },
-      { title: '黃金玉米鮮蝦腸粉', price: 'NT$90', desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。', img: 'assets/menu/web/yu-mi-xia.webp' },
-      { title: '豪華海鮮腸粉', price: 'NT$140', desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。', img: 'assets/menu/web/hao-hua-shuang-xian.webp' },
+      {
+        title: '招牌肉蛋腸粉',
+        price: 'NT$70',
+        desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。',
+        img: 'assets/menu/web/rou-dan.webp',
+        i18n: {
+          en: { title: 'Signature Pork & Egg Rice Roll', desc: 'Pork strips and silky egg, the easy first pick.' },
+          ja: { title: '看板 豚肉と卵の腸粉', desc: '豚肉とふわっと卵。初めてならまずこれ。' },
+          ko: { title: '시그니처 돼지고기 달걀 창펀', desc: '돼지고기와 부드러운 달걀, 첫 방문 추천 메뉴.' }
+        }
+      },
+      {
+        title: '海陸雙拼腸粉',
+        price: 'NT$100',
+        desc: '海味 x 肉香雙主角，口感雙重奏。',
+        img: 'assets/menu/web/hai-lu-shuang-pin.webp',
+        badge: '人氣',
+        i18n: {
+          en: { title: 'Surf & Turf Rice Roll', desc: 'Seafood and pork in one roll.', badge: 'Popular' },
+          ja: { title: '海陸ミックス腸粉', desc: '海鮮と肉の両方を楽しめる一皿。', badge: '人気' },
+          ko: { title: '해륙 더블 창펀', desc: '해산물과 고기를 한 번에.', badge: '인기' }
+        }
+      },
+      {
+        title: '鮮蚵腸粉',
+        price: 'NT$100',
+        desc: '產地鮮蚵現蒸，海味爆汁。',
+        img: 'assets/menu/web/xian-he.webp',
+        badge: '限量',
+        i18n: {
+          en: { title: 'Fresh Oyster Rice Roll', desc: 'Fresh oysters, steamed to order.', badge: 'Limited' },
+          ja: { title: '牡蠣の腸粉', desc: '新鮮な牡蠣をその場で蒸します。', badge: '限定' },
+          ko: { title: '신선한 굴 창펀', desc: '신선한 굴을 주문 후 바로 쪄요.', badge: '한정' }
+        }
+      },
+      {
+        title: '經典鮮蝦腸粉',
+        price: 'NT$90',
+        desc: '現剝大蝦 Q 彈，蒸出清甜。',
+        img: 'assets/menu/web/xian-xia.webp',
+        i18n: {
+          en: { title: 'Classic Shrimp Rice Roll', desc: 'Bouncy shrimp with a clean sweet finish.' },
+          ja: { title: '定番エビ腸粉', desc: 'ぷりっとしたエビのやさしい甘み。' },
+          ko: { title: '클래식 새우 창펀', desc: '탱글한 새우와 깔끔한 단맛.' }
+        }
+      },
+      {
+        title: '黃金玉米鮮蝦腸粉',
+        price: 'NT$90',
+        desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。',
+        img: 'assets/menu/web/yu-mi-xia.webp',
+        i18n: {
+          en: { title: 'Corn Shrimp Rice Roll', desc: 'Sweet corn with bouncy shrimp.' },
+          ja: { title: 'コーンとエビの腸粉', desc: '甘いコーンとぷりぷりエビ。' },
+          ko: { title: '옥수수 새우 창펀', desc: '달콤한 옥수수와 탱글한 새우.' }
+        }
+      },
+      {
+        title: '豪華海鮮腸粉',
+        price: 'NT$140',
+        desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。',
+        img: 'assets/menu/web/hao-hua-shuang-xian.webp',
+        i18n: {
+          en: { title: 'Deluxe Seafood Rice Roll', desc: 'Shrimp and seafood, the fuller plate.' },
+          ja: { title: 'デラックス海鮮腸粉', desc: 'エビと海鮮をしっかり楽しむ一皿。' },
+          ko: { title: '디럭스 해산물 창펀', desc: '새우와 해산물이 든 든든한 한 접시.' }
+        }
+      },
       // 吻仔魚腸粉 已下架
-      { title: '雙蛋腸粉', price: 'NT$70', desc: '蛋香加倍，口感更滑更黏。', img: 'assets/menu/web/shuang-dan.webp' }
+      {
+        title: '雙蛋腸粉',
+        price: 'NT$70',
+        desc: '蛋香加倍，口感更滑更黏。',
+        img: 'assets/menu/web/shuang-dan.webp',
+        i18n: {
+          en: { title: 'Double Egg Rice Roll', desc: 'Extra egg, extra silky.' },
+          ja: { title: 'ダブル卵腸粉', desc: '卵たっぷり、さらに滑らか。' },
+          ko: { title: '더블 달걀 창펀', desc: '달걀 두 배, 더 부드럽게.' }
+        }
+      }
     ];
+
+    function localizeMenuItem(item, field, lang = currentLang) {
+      return (item.i18n && item.i18n[lang] && item.i18n[lang][field]) || item[field] || "";
+    }
+
+    function translateDishName(name, lang = currentLang) {
+      const item = menuData.find((entry) => name === entry.title || name.startsWith(entry.title) || name.includes(entry.title));
+      if (!item || lang === "zh") return name;
+      const localizedTitle = localizeMenuItem(item, "title", lang);
+      return name.startsWith(item.title) ? localizedTitle : name.replace(item.title, localizedTitle);
+    }
 
     function renderMenu() {
       const grid = document.getElementById('menu-grid');
       grid.innerHTML = menuData.map(item => `
         <article class="menu-card">
           <div class="menu-media">
-            <img class="menu-thumb" src="${item.img}" alt="${item.title}" loading="lazy">
-            <p class="menu-price">${item.price}</p>
+            <img class="menu-thumb" src="${escapeHtml(item.img)}" alt="${escapeHtml(localizeMenuItem(item, "title"))}" loading="lazy">
+            <p class="menu-price">${escapeHtml(item.price)}</p>
           </div>
           <div class="menu-body">
-            <h3 class="menu-title">${item.title} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
-            <p class="menu-desc">${item.desc}</p>
+            <h3 class="menu-title">${escapeHtml(localizeMenuItem(item, "title"))} ${localizeMenuItem(item, "badge") ? `<span class="badge">${escapeHtml(localizeMenuItem(item, "badge"))}</span>` : ''}</h3>
+            <p class="menu-desc">${escapeHtml(localizeMenuItem(item, "desc"))}</p>
           </div>
         </article>
       `).join('');
@@ -1226,6 +1800,72 @@
       "把好運丟出去，看看誰會被這卷腸粉召喚。"
     ];
 
+    const challengeLineTranslations = {
+      en: [
+        "Tag someone who needs a luck reset and make them draw first.",
+        "Send this to the stubborn friend who is definitely hungry.",
+        "Tag the friend who complains in line. Let the steam calm them down.",
+        "Drop this fortune in your group chat. Who needs hot comfort today?",
+        "Challenge a friend: loser checks the menu first next time.",
+        "Send this to someone stuck in a situationship. Tell them to pick something stickier.",
+        "Today's mission: find a friend and steam away the bad mood together.",
+        "Send the luck out and see who gets summoned by this roll."
+      ],
+      ja: [
+        "最近運を変えたい友達をタグして、先に引かせよう。",
+        "お腹が空いているのに強がる友達に送ってみて。",
+        "並ぶと文句を言う友達を指名。湯気で気分を整えよう。",
+        "この籤をグループに投下。今日は誰が熱々の慰めを必要としてる？",
+        "友達に挑戦：負けた人が次回先にメニューを見る係。",
+        "まだ恋に迷っている人へ。もっとくっつくものを食べよう。",
+        "今日のミッション：友達と一緒に悪い気分を蒸して消す。",
+        "幸運を投げて、この一巻に呼ばれる人を見てみよう。"
+      ],
+      ko: [
+        "요즘 운이 필요한 친구를 태그하고 먼저 뽑게 해보세요.",
+        "배고픈데 괜찮은 척하는 친구에게 보내세요.",
+        "줄 서면 투덜대는 친구를 지목하세요. 김으로 기분을 진정시켜요.",
+        "이 운세를 단톡방에 던져 보세요. 오늘 뜨거운 위로가 필요한 사람은?",
+        "친구에게 도전: 진 사람이 다음에 먼저 메뉴 보기.",
+        "아직 마음이 흔들리는 친구에게 보내세요. 더 착 붙는 걸 먹으라고요.",
+        "오늘의 미션: 친구와 함께 나쁜 기분을 쪄서 날려 버리기.",
+        "행운을 던져 보고 이 롤에 소환되는 친구를 찾아보세요."
+      ]
+    };
+
+    const spicyLineTranslations = {
+      en: [
+        "Exes fade. Rice rolls stay warm.",
+        "Today is not for texting back. It is for adding egg.",
+        "Acting tough will not help. Take one bite first.",
+        "Do not fight luck. Team up with rice rolls.",
+        "Life is bitter? Add sauce.",
+        "You can doubt luck, but trust the steam.",
+        "Waiting is fine. Missing fresh steam is not.",
+        "My happiness is simple: hot, sticky, and tasty."
+      ],
+      ja: [
+        "元恋人は雲、腸粉は胃に残るぬくもり。",
+        "今日は返信より、卵追加の日。",
+        "強がっても無駄。まず一口。",
+        "運と戦わず、腸粉と組もう。",
+        "人生が苦いなら、たれを足そう。",
+        "運勢は疑っても、湯気は信じていい。",
+        "待つのは平気。蒸したてを逃すのはつらい。",
+        "幸せはシンプル。熱くて、くっついて、おいしい。"
+      ],
+      ko: [
+        "전 애인은 지나가도 창펀은 따뜻해요.",
+        "오늘은 답장보다 달걀 추가.",
+        "센 척해도 소용없어요. 먼저 한 입.",
+        "운과 싸우지 말고 창펀과 팀을 맺으세요.",
+        "인생이 쓰면 소스를 더하세요.",
+        "운세는 몰라도 김은 믿어도 됩니다.",
+        "기다림은 괜찮지만 갓 찐 순간을 놓치면 아쉬워요.",
+        "행복은 단순해요. 뜨겁고, 착 붙고, 맛있는 것."
+      ]
+    };
+
     const easterEggs = [
       "今日功德：你成功讓朋友也餓了。",
       "挑戰成立：這條籤詩已經開始在路上蒸。",
@@ -1234,6 +1874,33 @@
       "友情測試開始：看誰會第一個回你「哪裡買」。",
       "今日成就：把壞心情和朋友一起蒸到融化。"
     ];
+
+    const easterEggTranslations = {
+      en: [
+        "Today's merit: you successfully made a friend hungry.",
+        "Challenge launched: this fortune is already on the move.",
+        "Social heat +1: your group chat is getting closer to a food debate.",
+        "Viral score up: the next person craving rice rolls may be them.",
+        "Friendship test started: see who asks where to buy first.",
+        "Achievement unlocked: steamed the bad mood away with a friend."
+      ],
+      ja: [
+        "今日の功徳：友達もお腹を空かせることに成功。",
+        "チャレンジ成立：この籤はもう動き始めています。",
+        "社交熱度 +1：グループ内グルメ審査に近づきました。",
+        "拡散力アップ：次に腸粉を食べたくなるのはその人かも。",
+        "友情テスト開始：誰が最初に「どこで買うの？」と返すかな。",
+        "今日の達成：友達と悪い気分を一緒に蒸して溶かした。"
+      ],
+      ko: [
+        "오늘의 공덕: 친구도 배고프게 만들었습니다.",
+        "챌린지 성립: 이 운세는 이미 움직이는 중입니다.",
+        "소셜 열기 +1: 단톡방 맛집 심판에 가까워졌습니다.",
+        "바이럴 지수 상승: 다음 창펀 craving은 그 친구일지도요.",
+        "우정 테스트 시작: 누가 먼저 어디서 사냐고 물을까요.",
+        "오늘의 성취: 친구와 함께 나쁜 기분을 쪄서 녹였습니다."
+      ]
+    };
 
     // 擲筊失敗嘲諷
     const boBeiFailLines = [
@@ -1244,6 +1911,33 @@
       "不准換。你要的不是籤，是尊嚴。",
       "想重抽？先對前任說聲謝謝（開玩笑的）。"
     ];
+
+    const boBeiFailTranslations = {
+      en: [
+        "Fate is set. Go eat rice rolls.",
+        "The gods left you on read.",
+        "Luck can change, but finish your sauce first.",
+        "The gods: VIP? Please line up.",
+        "No redraw. You want dignity, not a new fortune.",
+        "Want a redraw? Thank your ex first. Just kidding."
+      ],
+      ja: [
+        "運命は決まりました。腸粉を食べに行こう。",
+        "しつこすぎて、神様は既読スルー。",
+        "運は変えられる。でも先にたれを味わって。",
+        "神様：VIPだと思った？まず並んでね。",
+        "引き直し不可。欲しいのは籤ではなく尊厳です。",
+        "引き直したい？まず元恋人にありがとうを。冗談です。"
+      ],
+      ko: [
+        "운명은 정해졌습니다. 창펀 먹으러 가세요.",
+        "너무 끈질겨서 신도 읽씹했습니다.",
+        "운은 바뀔 수 있지만 소스부터 다 즐기세요.",
+        "신: VIP인 줄 알았나요? 먼저 줄 서세요.",
+        "다시 뽑기 금지. 필요한 건 새 운세가 아니라 자존심입니다.",
+        "다시 뽑고 싶나요? 전 애인에게 고맙다고 먼저. 농담입니다."
+      ]
+    };
 
     let currentFortuneDisplay = "";
     let currentFortuneData = null;
@@ -1290,18 +1984,18 @@
       if (hasUsedRedrawToday()) {
         btn.disabled = true;
         btn.style.opacity = "0.5";
-        btn.innerText = "❌ 今日機會已用盡";
+        btn.innerText = t("redrawUsedButton");
         return;
       }
 
       // 可用狀態
       btn.disabled = false;
       btn.style.opacity = "1";
-      btn.innerText = isRedrawRolling ? "🎲 擲筊中..." : "🙏 擲筊改運 (每日一次)";
+      btn.innerText = isRedrawRolling ? t("redrawRollingButton") : t("redrawButton");
     }
 
     window.onload = function() {
-      renderMenu();
+      applyLanguage(currentLang);
 
       const today = todayKey();
       const lastDraw = localStorage.getItem("yikou:drawDate");
@@ -1325,7 +2019,7 @@
 
     function drawFortune(isRedraw = false) {
       if (typeof fortunes === 'undefined' || !fortunes || fortunes.length === 0) {
-        showToast("⚠️ 籤筒整理中，請稍後再試");
+        showToast(t("drawUnavailableToast"));
         return;
       }
 
@@ -1354,12 +2048,12 @@
 
       const idx = getSavedIndex();
       if (idx === null) {
-        showToast("先抽籤再擲筊，流程不要亂 😏");
+        showToast(t("drawFirstToast"));
         return;
       }
 
       if (hasUsedRedrawToday()) {
-        showToast("🚫 今天已擲過了！神明說：別太盧。");
+        showToast(t("redrawUsedToast"));
         setRedrawUIState();
         return;
       }
@@ -1368,7 +2062,7 @@
       setRedrawUIState();
 
       if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-      showToast("🎲 擲筊中...（叩、叩、叩）");
+      showToast(t("redrawRollingToast"));
 
       window.setTimeout(() => {
         localStorage.setItem("yikou:lastRedrawDate", todayKey());
@@ -1376,11 +2070,11 @@
         const isSuccess = Math.random() < REDRAW_SUCCESS_RATE;
 
         if (isSuccess) {
-          showToast("🎉 聖筊！神明：下不為例，准你重抽一次。");
+          showToast(t("redrawSuccessToast"));
           drawFortune(true);
         } else {
           const type = (Math.random() < 0.5) ? "😂 笑筊" : "🥶 陰筊";
-          const taunt = boBeiFailLines[Math.floor(Math.random() * boBeiFailLines.length)];
+          const taunt = getRedrawFailLine();
           showToast(`${type}！${taunt}`);
           showResult(fortunes[idx]);
         }
@@ -1406,14 +2100,39 @@
       return index;
     }
 
+    function getLocalizedChallengeLine(index = getChallengeIndex(), lang = currentLang) {
+      return (challengeLineTranslations[lang] && challengeLineTranslations[lang][index]) || challengeLines[index] || challengeLines[0];
+    }
+
     function getChallengeLine() {
-      currentChallengeLine = challengeLines[getChallengeIndex()] || challengeLines[0];
+      currentChallengeLine = getLocalizedChallengeLine();
       return currentChallengeLine;
+    }
+
+    function getSpicyLine(index = getChallengeIndex(), lang = currentLang) {
+      const spicyIndex = (index + 3) % spicyLines.length;
+      return (spicyLineTranslations[lang] && spicyLineTranslations[lang][spicyIndex]) || spicyLines[spicyIndex];
+    }
+
+    function getEasterEgg() {
+      const lines = easterEggTranslations[currentLang] || easterEggs;
+      return lines[Math.floor(Math.random() * lines.length)];
+    }
+
+    function getRedrawFailLine() {
+      const lines = boBeiFailTranslations[currentLang] || boBeiFailLines;
+      return lines[Math.floor(Math.random() * lines.length)];
     }
 
     function updateChallengeUI() {
       const challenge = document.getElementById("challengeText");
       if (challenge) challenge.innerText = getChallengeLine();
+    }
+
+    function buildFortuneDisplay(data) {
+      const grade = localizeGrade(data.grade);
+      const rec = translateDishName(data.rec);
+      return `${grade}：${data.msg}\n${t("recommendLabel")}：${rec}`;
     }
 
     function showResult(data) {
@@ -1442,7 +2161,7 @@
       img.onload = () => { img.style.display = "block"; };
       img.src = imgSrc;
 
-      const display = `${data.grade}：${data.msg}\n💡 推薦：${data.rec}`;
+      const display = buildFortuneDisplay(data);
       currentFortuneDisplay = display;
       document.getElementById("fortuneText").innerText = display;
       updateChallengeUI();
@@ -1454,7 +2173,7 @@
       try {
         if (navigator.clipboard && window.isSecureContext) {
           navigator.clipboard.writeText(text)
-            .then(() => showToast("已複製！快去 IG/Threads 貼上吧"))
+            .then(() => showToast(t("copyToast")))
             .catch(() => fallbackCopy(text));
           return;
         }
@@ -1477,29 +2196,29 @@
         const ok = document.execCommand("copy");
         document.body.removeChild(ta);
 
-        if (ok) { showToast("已複製！快去 IG/Threads 貼上吧"); return; }
+        if (ok) { showToast(t("copyToast")); return; }
       } catch (e) {}
 
-      prompt("你的瀏覽器不允許自動複製，請長按全選後複製：", text);
+      prompt(t("copyPrompt"), text);
     }
 
     function buildShareText() {
       const challenge = currentChallengeLine || getChallengeLine();
-      const spicy = spicyLines[(getChallengeIndex() + 3) % spicyLines.length];
+      const spicy = getSpicyLine();
 
       if (!currentFortuneData) {
-        return `#一口腸粉 #一中街美食 #今日運勢\n${challenge}\n${getShareUrl()}`;
+        return `${t("shareHashTags")}\n${challenge}\n${getShareUrl()}`;
       }
 
       return [
-        `我在一口腸粉抽到「${currentFortuneData.grade}」`,
+        formatText("shareTextPrefix", { grade: localizeGrade(currentFortuneData.grade) }),
         currentFortuneData.msg,
-        `推薦：${currentFortuneData.rec}`,
+        `${t("recommendLabel")}：${translateDishName(currentFortuneData.rec)}`,
         "",
         challenge,
         spicy,
         "",
-        "#一口腸粉 #一中街美食 #今日運勢",
+        t("shareHashTags"),
         getShareUrl()
       ].join("\n");
     }
@@ -1547,7 +2266,9 @@
         try { await Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 300))]); } catch (e) {}
       }
 
-      const data = currentFortuneData || { grade: "今日籤", msg: "今天適合吃點熱的，讓運氣一起蒸上來。", rec: "招牌肉蛋腸粉" };
+      const data = currentFortuneData || { grade: t("shareDefaultGrade"), msg: t("shareDefaultMsg"), rec: t("shareDefaultRec") };
+      const gradeText = currentFortuneData ? localizeGrade(data.grade) : data.grade;
+      const recText = currentFortuneData ? translateDishName(data.rec) : data.rec;
       const challenge = currentChallengeLine || getChallengeLine();
       const canvas = document.createElement("canvas");
       canvas.width = 1080;
@@ -1571,15 +2292,15 @@
       ctx.textAlign = "center";
       ctx.fillStyle = "#fff8ed";
       ctx.font = "900 54px 'Noto Sans TC', sans-serif";
-      ctx.fillText("一口腸粉 今日靈籤", 540, 105);
+      ctx.fillText(t("shareCardTitle"), 540, 105);
       ctx.font = "900 34px 'Noto Sans TC', sans-serif";
       ctx.fillStyle = "#ffe1a1";
-      ctx.fillText("比你前任更黏的腸粉", 540, 158);
+      ctx.fillText(t("tagline"), 540, 158);
 
       fillRoundRect(ctx, 320, 205, 440, 108, 54, "#fff8ed");
       ctx.fillStyle = "#9f211b";
       ctx.font = "900 62px 'Noto Serif TC', serif";
-      ctx.fillText(data.grade, 540, 278);
+      ctx.fillText(gradeText, 540, 278);
 
       fillRoundRect(ctx, 74, 500, 932, 760, 28, "#ffffff");
       ctx.strokeStyle = "rgba(215, 53, 42, 0.28)";
@@ -1589,7 +2310,7 @@
       ctx.textAlign = "left";
       ctx.fillStyle = "#2f1d15";
       ctx.font = "900 58px 'Noto Serif TC', serif";
-      ctx.fillText("今日籤詩", 140, 620);
+      ctx.fillText(t("shareCardPoem"), 140, 620);
 
       ctx.fillStyle = "#5c3a2d";
       ctx.font = "900 48px 'Noto Sans TC', sans-serif";
@@ -1598,15 +2319,15 @@
       fillRoundRect(ctx, 140, 1045, 800, 120, 18, "#fff1d8");
       ctx.fillStyle = "#9f211b";
       ctx.font = "900 34px 'Noto Sans TC', sans-serif";
-      ctx.fillText("推薦這卷", 170, 1094);
+      ctx.fillText(t("shareCardRecommendation"), 170, 1094);
       ctx.fillStyle = "#2f1d15";
       ctx.font = "900 38px 'Noto Sans TC', sans-serif";
-      drawWrappedText(ctx, data.rec, 170, 1142, 730, 48, 2);
+      drawWrappedText(ctx, recText, 170, 1142, 730, 48, 2);
 
       fillRoundRect(ctx, 74, 1320, 932, 330, 28, "#241712");
       ctx.fillStyle = "#f3b53f";
       ctx.font = "900 40px 'Noto Sans TC', sans-serif";
-      ctx.fillText("朋友挑戰", 140, 1402);
+      ctx.fillText(t("shareCardChallenge"), 140, 1402);
       ctx.fillStyle = "#fff8ed";
       ctx.font = "900 46px 'Noto Sans TC', sans-serif";
       drawWrappedText(ctx, challenge, 140, 1482, 800, 62, 3);
@@ -1614,7 +2335,7 @@
       ctx.textAlign = "center";
       ctx.fillStyle = "#9f211b";
       ctx.font = "900 34px 'Noto Sans TC', sans-serif";
-      ctx.fillText("#一口腸粉 #一中街美食 #今日運勢", 540, 1742);
+      ctx.fillText(t("shareHashTags"), 540, 1742);
       ctx.fillStyle = "#806a5e";
       ctx.font = "700 30px 'Noto Sans TC', sans-serif";
       ctx.fillText(getShareUrl(), 540, 1800);
@@ -1634,28 +2355,28 @@
       if (navigator.share) {
         try {
           await navigator.share({
-            title: "一口腸粉今日籤",
+            title: t("shareCardTitle"),
             text,
             url: shareUrl
           });
-          showToast("分享面板已開啟，快把朋友拖下水");
+          showToast(t("shareOpenedToast"));
           return;
         } catch (e) {
           if (e && e.name === "AbortError") {
-            showToast("已取消分享");
+            showToast(t("shareCanceledToast"));
             return;
           }
         }
       }
 
       copyText();
-      showToast("你的瀏覽器不支援一鍵分享，已改成複製文案");
+      showToast(t("shareFallbackToast"));
     }
 
     function shareToThreads() {
       const text = encodeURIComponent(buildShareText());
       window.open(`https://www.threads.net/intent/post?text=${text}`, "_blank", "noopener,noreferrer");
-      showToast("Threads 文案已帶上，換你補一句狠的");
+      showToast(t("threadsToast"));
     }
 
     async function downloadShareCard() {
@@ -1669,10 +2390,10 @@
         link.click();
         document.body.removeChild(link);
         window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-        showToast("IG 限動圖已下載，丟出去就對了");
+        showToast(t("storyToast"));
       } catch (e) {
         copyText();
-        showToast("圖卡產生失敗，先幫你複製文案");
+        showToast(t("storyFallbackToast"));
       }
     }
 
@@ -1686,12 +2407,12 @@
       const redrawSection = document.getElementById("redrawSection");
       if (redrawSection) redrawSection.style.display = "none";
 
-      const egg = easterEggs[Math.floor(Math.random() * easterEggs.length)];
+      const egg = getEasterEgg();
       document.getElementById("eggText").innerText = egg;
 
       if (animate) {
         if (navigator.vibrate) navigator.vibrate(150);
-        showToast("挑戰已發起，朋友準備餓了");
+        showToast(t("markDoneToast"));
       }
     }
   </script>
