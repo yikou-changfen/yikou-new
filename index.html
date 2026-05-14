@@ -18,63 +18,722 @@
   <meta property="og:image" content="https://s101449126-collab.github.io/yikou-new/assets/menu/web/cover.webp" />
   <meta property="og:type" content="website" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
   <style>
-    :root { --bg: #0f1816; --gold: #efc166; --red: #c53030; --text: #f5f0e8; --muted: #cfd5cb; --header-bg: rgba(15, 24, 22, 0.95); --card-bg: rgba(255, 255, 255, 0.04); --border: rgba(238, 203, 117, 0.3); }
+    :root {
+      --paper: #fff8ed;
+      --paper-strong: #fff1d8;
+      --ink: #2f1d15;
+      --soy: #5c3a2d;
+      --muted: #806a5e;
+      --red: #d7352a;
+      --red-dark: #9f211b;
+      --gold: #f3b53f;
+      --gold-soft: #ffe1a1;
+      --green: #188a5a;
+      --jade: #0f6547;
+      --line: rgba(92, 58, 45, 0.18);
+      --card: rgba(255, 255, 255, 0.82);
+      --shadow: 0 18px 40px rgba(70, 38, 20, 0.16);
+    }
+
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); text-align: center; display: flex; flex-direction: column; min-height: 100vh; background-image: radial-gradient(circle at 20% 20%, rgba(238,203,117,0.05), transparent 35%), radial-gradient(circle at 80% 0%, rgba(192,57,43,0.08), transparent 30%); }
-    h1, h2, h3 { font-family: 'Noto Serif TC', serif; }
-    .site-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--header-bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
-    .brand-group { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; cursor: pointer; }
-    .header-logo { height: 44px; width: 44px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
-    .brand-info { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
-    .brand-name { font-size: 1.1rem; font-weight: 900; color: var(--gold); letter-spacing: 1px; }
-    .brand-sub { font-size: 0.75rem; opacity: 0.8; }
-    .header-actions { display: flex; gap: 8px; }
-    .btn-header { padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: bold; transition: transform 0.1s; }
-    .btn-header:active { transform: scale(0.95); }
-    .btn-uber-sm { background: #06C167; color: white; }
-    .btn-maps-sm { background: var(--red); color: white; }
-    .main-content { flex: 1; max-width: 800px; margin: 0 auto; padding: 20px 15px; width: 100%; }
-    .hero { padding: 30px 0; }
-    .tagline { color: var(--red); font-weight: bold; border: 1px solid var(--red); padding: 4px 12px; border-radius: 50px; display: inline-block; margin-bottom: 15px; font-size: 0.9rem; background: rgba(197, 48, 48, 0.1); }
-    .fortune-box { background: rgba(255,255,255,0.03); border: 2px solid var(--gold); border-radius: 16px; padding: 30px 20px; min-height: 340px; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 10px; }
-    .fortune-img { width: 100%; max-width: 280px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); display: none; }
-    .fortune-text { font-size: 1.2rem; font-weight: bold; margin: 12px 0; color: #fff; min-height: 70px; display: flex; align-items: center; justify-content: center; line-height: 1.5; white-space: pre-line; }
-    .btn { background: var(--red); color: white; border: none; padding: 14px 24px; border-radius: 50px; font-size: 1.05rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(197, 48, 48, 0.4); transition: all 0.2s; width: 100%; max-width: 280px; display: block; margin: 10px auto; text-decoration: none; }
-    .btn:active { transform: scale(0.96); }
-    .btn-secondary { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-size: 0.95rem; box-shadow: none; }
-    .task-area { margin-top: 18px; border-top: 1px dashed rgba(239, 193, 102, 0.3); padding-top: 16px; display: none; width: 100%; }
-    .hint { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; }
-    .menu-section { margin-top: 50px; text-align: left; }
-    .section-title { text-align: center; color: var(--gold); margin-bottom: 24px; font-size: 1.5rem; font-weight: 900; }
-    .menu-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    .menu-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-    .menu-thumb { width: 100%; height: 180px; object-fit: cover; display: block; background: #222; }
-    .menu-body { padding: 16px; }
-    .menu-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-    .menu-title { margin: 0; color: var(--gold); font-size: 1.1rem; font-weight: bold; }
-    .menu-price { margin: 0; color: var(--text); font-weight: bold; font-size: 0.95rem; }
-    .menu-desc { margin: 0; font-size: 0.9rem; opacity: 0.8; line-height: 1.5; }
-    .badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--red); color: var(--red); margin-left: 6px; vertical-align: middle; }
-    .site-footer { background: rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 20px 60px; margin-top: 40px; }
-    .footer-content { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center; }
-    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .footer-logo { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--gold); }
-    .footer-slogan { font-size: 0.9rem; color: var(--gold); font-weight: bold; letter-spacing: 1px; }
-    .footer-info p { margin: 5px 0; font-size: 0.85rem; opacity: 0.7; }
-    .footer-links { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 280px; }
-    .btn-footer { background: rgba(255, 255, 255, 0.1); color: var(--text); border: 1px solid rgba(255, 255, 255, 0.2); padding: 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; }
-    .btn-portaly { background: var(--gold); color: #000; border-color: var(--gold); font-weight: bold; }
-    .copyright { margin-top: 40px; font-size: 0.75rem; opacity: 0.4; }
-    .toast { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); background: rgba(0,0,0,0.78); border: 1px solid rgba(255,255,255,0.18); color: var(--text); padding: 10px 14px; border-radius: 12px; font-size: 0.9rem; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 9999; max-width: 92vw; line-height: 1.4; }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
-    @media (min-width: 768px) {
-      .footer-content { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; }
-      .footer-brand, .footer-info { align-items: flex-start; }
-      .footer-links { align-items: flex-start; width: auto; }
-      .menu-grid { grid-template-columns: 1fr 1fr; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background:
+        linear-gradient(90deg, rgba(215, 53, 42, 0.04) 0 1px, transparent 1px 48px),
+        linear-gradient(0deg, rgba(24, 138, 90, 0.035) 0 1px, transparent 1px 48px),
+        var(--paper);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(243, 181, 63, 0.24), transparent 26%),
+        radial-gradient(circle at 94% 4%, rgba(215, 53, 42, 0.13), transparent 28%),
+        radial-gradient(circle at 70% 92%, rgba(24, 138, 90, 0.12), transparent 30%);
+      z-index: -1;
+    }
+
+    a { color: inherit; }
+
+    h1, h2, h3 {
+      font-family: 'Noto Serif TC', serif;
+      margin-top: 0;
+      letter-spacing: 0;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba(255, 248, 237, 0.94);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .header-logo {
+      height: 46px;
+      width: 46px;
+      border-radius: 50%;
+      border: 2px solid var(--red);
+      object-fit: cover;
+      background: white;
+      flex: 0 0 auto;
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+      min-width: 0;
+    }
+
+    .brand-name {
+      color: var(--red-dark);
+      font-size: 1.08rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .btn-header,
+    .btn,
+    .btn-footer {
+      min-height: 44px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 900;
+      transition: transform 0.12s ease, filter 0.12s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-header {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 11px;
+      color: white;
+      font-size: 0.86rem;
+      box-shadow: 0 8px 18px rgba(47, 29, 21, 0.12);
+    }
+
+    .btn-header:active,
+    .btn:active,
+    .btn-footer:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .btn-uber-sm { background: var(--green); }
+    .btn-maps-sm { background: var(--red); }
+
+    .main-content {
+      flex: 1;
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 500px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 128px 18px 24px;
+      color: white;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(23, 13, 8, 0.2), rgba(23, 13, 8, 0.76)),
+        linear-gradient(90deg, rgba(23, 13, 8, 0.58), rgba(23, 13, 8, 0.2)),
+        url("assets/menu/web/cover.webp") center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 10px;
+      background: repeating-linear-gradient(90deg, var(--red) 0 28px, var(--gold) 28px 56px, var(--green) 56px 84px);
+    }
+
+    .hero-content {
+      position: relative;
+      width: min(100%, 1080px);
+      text-align: left;
+      z-index: 1;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 10px;
+      color: var(--gold-soft);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: #fff;
+      font-size: 3rem;
+      line-height: 1;
+      text-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
+
+    .tagline {
+      display: inline-block;
+      margin: 13px 0 0;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--red);
+      color: #fff8e8;
+      font-size: 0.98rem;
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .hero-copy {
+      max-width: 520px;
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: min(100%, 420px);
+      margin-top: 20px;
+    }
+
+    .hero-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .hero-action.primary { background: var(--red); }
+    .hero-action.secondary { background: var(--green); }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: min(100%, 520px);
+      margin-top: 18px;
+    }
+
+    .hero-facts span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 900;
+      backdrop-filter: blur(8px);
+    }
+
+    .content-shell {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      padding: 26px 14px 0;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: -4px 0 28px;
+    }
+
+    .quick-card {
+      padding: 14px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: 0 10px 26px rgba(70, 38, 20, 0.08);
+      text-align: left;
+    }
+
+    .quick-card strong {
+      display: block;
+      color: var(--red-dark);
+      font-size: 0.95rem;
+      font-weight: 900;
+    }
+
+    .quick-card span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .fortune-section,
+    .menu-section {
+      margin-top: 24px;
+      text-align: left;
+    }
+
+    .fortune-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .fortune-intro {
+      padding: 20px 18px;
+      border-radius: 8px;
+      background: var(--red-dark);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .fortune-intro h2 {
+      margin-bottom: 8px;
+      color: var(--gold-soft);
+      font-size: 1.72rem;
+      line-height: 1.15;
+    }
+
+    .fortune-intro p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.65;
+    }
+
+    .fortune-box {
+      min-height: 340px;
+      padding: 22px 16px;
+      border: 2px solid var(--red);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fffdf7, #fff3dc);
+      color: var(--ink);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .fortune-box::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px dashed rgba(215, 53, 42, 0.22);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    #startView,
+    #resultView {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      text-align: center;
+    }
+
+    #startView h2 {
+      margin-bottom: 8px;
+      color: var(--red-dark);
+      font-size: 1.55rem;
+    }
+
+    .fortune-img {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 8px;
+      margin: 0 auto 15px;
+      box-shadow: 0 12px 30px rgba(70, 38, 20, 0.18);
+      border: 1px solid rgba(92, 58, 45, 0.16);
+      display: none;
+    }
+
+    .fortune-text {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0;
+      color: var(--soy);
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1.55;
+      white-space: pre-line;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 300px;
+      margin: 10px auto;
+      padding: 14px 18px;
+      border: none;
+      background: var(--red);
+      color: white;
+      font-size: 1.02rem;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(215, 53, 42, 0.24);
+    }
+
+    .btn-secondary {
+      background: #fffaf1;
+      border: 1px solid var(--red);
+      color: var(--red-dark);
+      box-shadow: none;
+    }
+
+    .task-area {
+      display: none;
+      width: 100%;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(92, 58, 45, 0.22);
+    }
+
+    .hint {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .section-kicker {
+      color: var(--red);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.65rem;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .section-copy {
+      max-width: 430px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .menu-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(70, 38, 20, 0.1);
+    }
+
+    .menu-media {
+      position: relative;
+      aspect-ratio: 1 / 0.78;
+      overflow: hidden;
+      background: #ead7bf;
+    }
+
+    .menu-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.01);
+    }
+
+    .menu-price {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      margin: 0;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: var(--red);
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 900;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .menu-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px;
+    }
+
+    .menu-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: 0.98rem;
+      font-weight: 900;
+      line-height: 1.28;
+    }
+
+    .menu-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      min-height: 2.8em;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.4;
+      overflow: hidden;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 4px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 900;
+      vertical-align: 2px;
+      white-space: nowrap;
+    }
+
+    .site-footer {
+      margin-top: 42px;
+      padding: 34px 16px 52px;
+      background: #241712;
+      color: #fff7e8;
+      border-top: 6px solid var(--red);
+    }
+
+    .footer-content {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      text-align: left;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: white;
+      flex: 0 0 auto;
+    }
+
+    .footer-slogan {
+      color: var(--gold-soft);
+      font-size: 0.92rem;
+      font-weight: 900;
+    }
+
+    .footer-info p {
+      margin: 5px 0;
+      color: rgba(255, 247, 232, 0.72);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .footer-info strong {
+      color: white;
+      font-size: 1rem;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff7e8;
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .btn-portaly {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+
+    .copyright {
+      width: min(100%, 1100px);
+      margin: 28px auto 0;
+      color: rgba(255, 247, 232, 0.46);
+      font-size: 0.75rem;
+      text-align: left;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      max-width: 92vw;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px;
+      background: rgba(36, 23, 18, 0.94);
+      color: #fff7e8;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    @media (max-width: 640px) {
+      .site-header {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .header-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .brand-group {
+        justify-content: center;
+      }
+
+      .hero {
+        min-height: 540px;
+        padding-top: 116px;
+      }
+
+      .hero h1 { font-size: 2.55rem; }
+      .hero-facts { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: 1fr; }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (min-width: 720px) {
+      .site-header { padding: 12px 28px; }
+      .hero { min-height: 560px; padding: 150px 28px 32px; }
+      .hero h1 { font-size: 4.6rem; }
+      .content-shell { padding: 34px 24px 0; }
+      .quick-grid { grid-template-columns: repeat(3, 1fr); }
+      .fortune-layout { grid-template-columns: minmax(240px, 0.74fr) minmax(0, 1.26fr); align-items: stretch; }
+      .fortune-intro { display: flex; flex-direction: column; justify-content: center; }
+      .menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+      .footer-content { grid-template-columns: 1fr 1.2fr 1fr; align-items: center; }
+      .footer-links { grid-template-columns: 1fr; justify-self: end; max-width: 270px; }
     }
   </style>
 </head>
@@ -95,53 +754,100 @@
   </header>
 
   <main class="main-content">
-    <div class="hero">
-      <div class="tagline">比你前任更黏的腸粉</div>
-
-      <div class="fortune-box" id="fortuneBox">
-        <div id="startView">
-          <h2 style="color:var(--gold); margin-bottom:10px;">今日運勢</h2>
-          <p style="opacity:0.8; margin-bottom:30px; line-height:1.6;">等餐無聊？<br />抽一支籤，讓運氣一起蒸熱</p>
-          <button class="btn" onclick="drawFortune()">🎴 求靈籤</button>
-          <p style="opacity:0.6; font-size:0.8rem; margin-top:10px;">規則：每天 1 次，同一天重抽結果不變</p>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-content">
+        <p class="eyebrow">台中一中街｜現蒸廣東腸粉</p>
+        <h1 id="heroTitle">一口腸粉</h1>
+        <div class="tagline">比你前任更黏的腸粉</div>
+        <p class="hero-copy">熱蒸、滑嫩、醬香，夜市逛到餓的時候就來一卷。現場點餐、外帶、Uber Eats 都方便。</p>
+        <div class="hero-actions">
+          <a href="#menu" class="hero-action primary">看菜單</a>
+          <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="hero-action secondary">直接導航</a>
         </div>
-
-        <div id="resultView" style="display:none;">
-          <img id="fortuneImage" class="fortune-img" src="" alt="籤詩圖片" />
-          <div id="fortuneText" class="fortune-text"></div>
-
-          <div id="redrawSection" style="margin: 6px 0 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); width:100%;">
-            <p style="font-size: 0.85rem; opacity: 0.7; margin: 0 0 8px;">
-              覺得不準？<br>誠心祈求，看神明給不給換
-            </p>
-            <button
-              id="btnRedraw"
-              class="btn btn-secondary"
-              style="border-color: var(--muted); color: var(--muted); font-size: 0.9rem; padding: 8px 16px;"
-              onclick="attemptRedraw()"
-            >
-              🙏 擲筊改運 (每日一次)
-            </button>
-          </div>
-
-          <div class="task-area" id="taskArea">
-            <p style="font-size:0.9rem;">想讓好運更黏？<br />分享到 IG/Threads 擴散功德</p>
-            <button class="btn btn-secondary" onclick="copyText()">📋 複製文案 + 連結</button>
-            <p class="hint">☝️ 點擊複製，長按上方圖片可儲存</p>
-            <button class="btn" style="margin-top:20px; background:#06C167;" onclick="markAsDone()">✅ 我已分享還願</button>
-          </div>
-
-          <div id="rewardArea" style="display:none; margin-top:20px;">
-            <h3 style="color:var(--gold); margin-bottom:6px;">🎉 功德圓滿</h3>
-            <p id="eggText" style="font-size:1.05rem; color:#fff; line-height:1.5; margin:0;"></p>
-          </div>
+        <div class="hero-facts" aria-label="店家特色">
+          <span>現蒸現做</span>
+          <span>一中街小吃</span>
+          <span>外帶友善</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="menu-section">
-      <div class="section-title">MENU / 必吃推薦</div>
-      <div class="menu-grid" id="menu-grid"></div>
+    <div class="content-shell">
+      <section class="quick-grid" aria-label="快速資訊">
+        <div class="quick-card">
+          <strong>招牌推薦</strong>
+          <span>肉蛋、鮮蝦、海陸雙拼，第一次吃照這個點。</span>
+        </div>
+        <div class="quick-card">
+          <strong>點餐方式</strong>
+          <span>現場點餐 / 外帶 / Uber Eats，尖峰時段建議先看好菜單。</span>
+        </div>
+        <div class="quick-card">
+          <strong>等餐不無聊</strong>
+          <span>抽一支今日靈籤，讓運氣跟腸粉一起蒸熱。</span>
+        </div>
+      </section>
+
+      <section class="fortune-section" aria-labelledby="fortuneTitle">
+        <div class="fortune-layout">
+          <div class="fortune-intro">
+            <p class="section-kicker">TODAY'S LUCK</p>
+            <h2 id="fortuneTitle">等餐抽一支，今天順一點</h2>
+            <p>保留原本好玩的抽籤互動，但視覺改成更像台灣夜市攤位的紅金招牌感。手機上按鈕更大，排隊時單手也好按。</p>
+          </div>
+
+          <div class="fortune-box" id="fortuneBox">
+            <div id="startView">
+              <h2>今日運勢</h2>
+              <p style="color:var(--muted); margin-bottom:30px; line-height:1.6; font-weight:700;">等餐無聊？<br />抽一支籤，讓運氣一起蒸熱</p>
+              <button class="btn" onclick="drawFortune()">求靈籤</button>
+              <p style="color:var(--muted); font-size:0.8rem; margin-top:10px;">規則：每天 1 次，同一天重抽結果不變</p>
+            </div>
+
+            <div id="resultView" style="display:none;">
+              <img id="fortuneImage" class="fortune-img" src="" alt="籤詩圖片" />
+              <div id="fortuneText" class="fortune-text"></div>
+
+              <div id="redrawSection" style="margin: 6px 0 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(92,58,45,0.16); width:100%;">
+                <p style="font-size: 0.85rem; color:var(--muted); margin: 0 0 8px; font-weight:700;">
+                  覺得不準？<br>誠心祈求，看神明給不給換
+                </p>
+                <button
+                  id="btnRedraw"
+                  class="btn btn-secondary"
+                  style="font-size: 0.9rem; padding: 8px 16px;"
+                  onclick="attemptRedraw()"
+                >
+                  擲筊改運 (每日一次)
+                </button>
+              </div>
+
+              <div class="task-area" id="taskArea">
+                <p style="font-size:0.9rem; color:var(--soy); font-weight:700;">想讓好運更黏？<br />分享到 IG/Threads 擴散功德</p>
+                <button class="btn btn-secondary" onclick="copyText()">複製文案 + 連結</button>
+                <p class="hint">點擊複製，長按上方圖片可儲存</p>
+                <button class="btn" style="margin-top:20px; background:var(--green);" onclick="markAsDone()">我已分享還願</button>
+              </div>
+
+              <div id="rewardArea" style="display:none; margin-top:20px;">
+                <h3 style="color:var(--red-dark); margin-bottom:6px;">功德圓滿</h3>
+                <p id="eggText" style="font-size:1.05rem; color:var(--soy); line-height:1.5; margin:0; font-weight:700;"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-section" id="menu" aria-labelledby="menuTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">MENU / 必吃推薦</p>
+            <h2 class="section-title" id="menuTitle">今天想吃哪一卷？</h2>
+          </div>
+          <p class="section-copy">方格菜單改成照片優先、價格醒目、文字短一點。手機看得到重點，平板和桌機也比較像完整官網。</p>
+        </div>
+        <div class="menu-grid" id="menu-grid"></div>
+      </section>
     </div>
   </main>
 
@@ -157,10 +863,10 @@
         <p>現場點餐 / 外帶 / Uber Eats</p>
       </div>
       <div class="footer-links">
-        <a href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener noreferrer" class="btn-footer btn-portaly">👉 去 Portaly 看看</a>
+        <a href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener noreferrer" class="btn-footer btn-portaly">Portaly 資訊</a>
         <a href="https://www.instagram.com/yikouchangfen/" target="_blank" rel="noopener noreferrer" class="btn-footer">追蹤 IG</a>
-        <a href="https://www.threads.net/" target="_blank" rel="noopener noreferrer" class="btn-footer">來 Threads 嘴砲</a>
-        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="btn-footer" style="opacity:0.6;">⬆️ 回到頂部</a>
+        <a href="https://www.threads.net/" target="_blank" rel="noopener noreferrer" class="btn-footer">看 Threads</a>
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="btn-footer" style="opacity:0.7;">回到頂部</a>
       </div>
     </div>
     <div class="copyright">© 2025 一口腸粉 All Rights Reserved.</div>
@@ -189,26 +895,26 @@
 
     // ✅ 菜單資料 (已同步移除吻仔魚)
     const menuData = [
-      { title: '招牌肉蛋腸粉', price: 'TWD 70', desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。', img: 'assets/menu/web/rou-dan.webp' },
-      { title: '海陸雙拼腸粉', price: 'TWD 100', desc: '海味 x 肉香雙主角，口感雙重奏。', img: 'assets/menu/web/hai-lu-shuang-pin.webp', badge: '人氣' },
-      { title: '鮮蚵腸粉', price: 'TWD 100', desc: '產地鮮蚵現蒸，海味爆汁。', img: 'assets/menu/web/xian-he.webp', badge: '限量' },
-      { title: '經典鮮蝦腸粉', price: 'TWD 90', desc: '現剝大蝦 Q 彈，蒸出清甜。', img: 'assets/menu/web/xian-xia.webp' },
-      { title: '黃金玉米鮮蝦腸粉', price: 'TWD 90', desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。', img: 'assets/menu/web/yu-mi-xia.webp' },
-      { title: '豪華海鮮腸粉', price: 'TWD 140', desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。', img: 'assets/menu/web/hao-hua-shuang-xian.webp' },
+      { title: '招牌肉蛋腸粉', price: 'NT$70', desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。', img: 'assets/menu/web/rou-dan.webp' },
+      { title: '海陸雙拼腸粉', price: 'NT$100', desc: '海味 x 肉香雙主角，口感雙重奏。', img: 'assets/menu/web/hai-lu-shuang-pin.webp', badge: '人氣' },
+      { title: '鮮蚵腸粉', price: 'NT$100', desc: '產地鮮蚵現蒸，海味爆汁。', img: 'assets/menu/web/xian-he.webp', badge: '限量' },
+      { title: '經典鮮蝦腸粉', price: 'NT$90', desc: '現剝大蝦 Q 彈，蒸出清甜。', img: 'assets/menu/web/xian-xia.webp' },
+      { title: '黃金玉米鮮蝦腸粉', price: 'NT$90', desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。', img: 'assets/menu/web/yu-mi-xia.webp' },
+      { title: '豪華海鮮腸粉', price: 'NT$140', desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。', img: 'assets/menu/web/hao-hua-shuang-xian.webp' },
       // 吻仔魚腸粉 已下架
-      { title: '雙蛋腸粉', price: 'TWD 70', desc: '蛋香加倍，口感更滑更黏。', img: 'assets/menu/web/shuang-dan.webp' }
+      { title: '雙蛋腸粉', price: 'NT$70', desc: '蛋香加倍，口感更滑更黏。', img: 'assets/menu/web/shuang-dan.webp' }
     ];
 
     function renderMenu() {
       const grid = document.getElementById('menu-grid');
       grid.innerHTML = menuData.map(item => `
         <article class="menu-card">
-          <img class="menu-thumb" src="${item.img}" alt="${item.title}" loading="lazy">
-          <div class="menu-body">
-            <div class="menu-header">
-              <h3 class="menu-title">${item.title} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
-            </div>
+          <div class="menu-media">
+            <img class="menu-thumb" src="${item.img}" alt="${item.title}" loading="lazy">
             <p class="menu-price">${item.price}</p>
+          </div>
+          <div class="menu-body">
+            <h3 class="menu-title">${item.title} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
             <p class="menu-desc">${item.desc}</p>
           </div>
         </article>
