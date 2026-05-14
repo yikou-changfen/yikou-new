@@ -954,6 +954,23 @@
 
       .language-switcher {
         justify-content: center;
+        max-height: 48px;
+        overflow: hidden;
+        transition: max-height .2s ease, opacity .18s ease, transform .18s ease, padding .18s ease, border-width .18s ease;
+      }
+
+      .site-header.lang-collapsed .header-tools {
+        gap: 0;
+      }
+
+      .site-header.lang-collapsed .language-switcher {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-width: 0;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
       }
 
       .hero {
@@ -1656,7 +1673,72 @@
 
     function setLanguage(lang) {
       applyLanguage(lang);
+      const header = document.querySelector(".site-header");
+      if (header) header.classList.remove("lang-collapsed");
       showToast(t("languageToast"));
+    }
+
+    function setupMobileLanguageAutoHide() {
+      const header = document.querySelector(".site-header");
+      if (!header) return;
+
+      const mobileQuery = window.matchMedia("(max-width: 640px)");
+      let lastY = window.scrollY || 0;
+      let ticking = false;
+      const threshold = 12;
+      const topRevealY = 40;
+
+      function setCollapsed(shouldCollapse) {
+        header.classList.toggle("lang-collapsed", shouldCollapse && mobileQuery.matches);
+      }
+
+      function update() {
+        const currentY = window.scrollY || document.documentElement.scrollTop || 0;
+
+        if (!mobileQuery.matches) {
+          setCollapsed(false);
+          lastY = currentY;
+          ticking = false;
+          return;
+        }
+
+        if (currentY <= topRevealY) {
+          setCollapsed(false);
+        } else if (currentY > lastY + threshold) {
+          setCollapsed(true);
+        } else if (currentY < lastY - threshold) {
+          setCollapsed(false);
+        }
+
+        if (Math.abs(currentY - lastY) > threshold) {
+          lastY = currentY;
+        }
+        ticking = false;
+      }
+
+      function requestUpdate() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", () => {
+        setCollapsed(false);
+        lastY = window.scrollY || 0;
+      });
+
+      if (mobileQuery.addEventListener) {
+        mobileQuery.addEventListener("change", () => {
+          setCollapsed(false);
+          lastY = window.scrollY || 0;
+        });
+      } else if (mobileQuery.addListener) {
+        mobileQuery.addListener(() => {
+          setCollapsed(false);
+          lastY = window.scrollY || 0;
+        });
+      }
     }
 
     // ✅ 菜單資料 (已同步移除吻仔魚)
@@ -1996,6 +2078,7 @@
 
     window.onload = function() {
       applyLanguage(currentLang);
+      setupMobileLanguageAutoHide();
 
       const today = todayKey();
       const lastDraw = localStorage.getItem("yikou:drawDate");
