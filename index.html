@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>一口腸粉｜廣東腸粉 現蒸現做</title>
-  <meta name="description" content="台中一中街廣東腸粉，現蒸現做。等候也不無聊：抽一支解憂靈籤。" />
+  <title>一口腸粉｜一中街必吃 現蒸廣東腸粉</title>
+  <meta name="description" content="台中一中街必吃夜市小吃，現蒸廣東腸粉。熱蒸、滑嫩、醬香，等餐還能抽一支今日靈籤。" />
 
   <link rel="icon" href="assets/brand/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/brand/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/apple-touch-icon.png" />
 
-  <meta property="og:title" content="一口腸粉｜廣東腸粉 現蒸現做" />
-  <meta property="og:description" content="一中街必吃廣東腸粉。等候抽籤，運氣也一起蒸熱。" />
+  <meta property="og:title" content="一口腸粉｜一中街必吃 現蒸廣東腸粉" />
+  <meta property="og:description" content="一中街逛到餓就來一卷。現蒸現做，等餐抽籤，運氣也一起蒸熱。" />
   <meta property="og:url" content="https://s101449126-collab.github.io/yikou-new/" />
   <meta property="og:image" content="https://s101449126-collab.github.io/yikou-new/assets/menu/web/cover.webp" />
   <meta property="og:type" content="website" />
@@ -248,9 +248,9 @@
 
     .hero-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      width: min(100%, 420px);
+      width: min(100%, 600px);
       margin-top: 20px;
     }
 
@@ -269,6 +269,7 @@
 
     .hero-action.primary { background: var(--red); }
     .hero-action.secondary { background: var(--green); }
+    .hero-action.delivery { background: #241712; }
 
     .hero-facts {
       display: grid;
@@ -331,8 +332,60 @@
       line-height: 1.35;
     }
 
+    .location-strip {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 0 0 28px;
+      padding: 14px;
+      border-radius: 8px;
+      background: #241712;
+      color: #fff8ed;
+      text-align: left;
+      box-shadow: var(--shadow);
+    }
+
+    .location-strip strong {
+      display: block;
+      color: var(--gold-soft);
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .location-strip span {
+      display: block;
+      margin-top: 3px;
+      color: rgba(255, 248, 237, 0.78);
+      font-size: 0.88rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .location-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .location-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .location-link.map { background: var(--red); }
+    .location-link.order { background: var(--green); }
+
     .fortune-section,
-    .menu-section {
+    .menu-section,
+    .process-section {
       margin-top: 24px;
       text-align: left;
     }
@@ -601,6 +654,69 @@
       box-shadow: 0 10px 24px rgba(70, 38, 20, 0.1);
     }
 
+    .menu-note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .process-card {
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      gap: 12px;
+      min-height: 118px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(70, 38, 20, 0.1);
+    }
+
+    .process-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 118px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .process-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 12px 12px 12px 0;
+    }
+
+    .process-step {
+      color: var(--red);
+      font-size: 0.74rem;
+      font-weight: 900;
+    }
+
+    .process-body h3 {
+      margin: 3px 0 6px;
+      color: var(--ink);
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .process-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
     .menu-media {
       position: relative;
       aspect-ratio: 1 / 0.78;
@@ -801,6 +917,7 @@
         padding-top: 116px;
       }
 
+      .hero-actions { grid-template-columns: 1fr; }
       .hero h1 { font-size: 2.55rem; }
       .hero-facts { grid-template-columns: 1fr; }
       .quick-grid { grid-template-columns: 1fr; }
@@ -818,9 +935,11 @@
       .hero h1 { font-size: 4.6rem; }
       .content-shell { padding: 34px 24px 0; }
       .quick-grid { grid-template-columns: repeat(3, 1fr); }
+      .location-strip { grid-template-columns: 1fr 360px; align-items: center; }
       .fortune-layout { grid-template-columns: minmax(240px, 0.74fr) minmax(0, 1.26fr); align-items: stretch; }
       .fortune-intro { display: flex; flex-direction: column; justify-content: center; }
       .menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+      .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .footer-content { grid-template-columns: 1fr 1.2fr 1fr; align-items: center; }
       .footer-links { grid-template-columns: 1fr; justify-self: end; max-width: 270px; }
     }
@@ -845,18 +964,19 @@
   <main class="main-content">
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-content">
-        <p class="eyebrow">台中一中街｜現蒸廣東腸粉</p>
+        <p class="eyebrow">台中一中街｜夜市現蒸腸粉</p>
         <h1 id="heroTitle">一口腸粉</h1>
         <div class="tagline">比你前任更黏的腸粉</div>
-        <p class="hero-copy">熱蒸、滑嫩、醬香，夜市逛到餓的時候就來一卷。現場點餐、外帶、Uber Eats 都方便。</p>
+        <p class="hero-copy">逛到餓就來一卷。熱蒸、滑嫩、醬香，現場吃、外帶、叫外送都很順。</p>
         <div class="hero-actions">
           <a href="#menu" class="hero-action primary">看菜單</a>
           <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="hero-action secondary">直接導航</a>
+          <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="hero-action delivery">Uber Eats</a>
         </div>
         <div class="hero-facts" aria-label="店家特色">
+          <span>一中街必吃</span>
           <span>現蒸現做</span>
-          <span>一中街小吃</span>
-          <span>外帶友善</span>
+          <span>等餐抽籤</span>
         </div>
       </div>
     </section>
@@ -864,24 +984,90 @@
     <div class="content-shell">
       <section class="quick-grid" aria-label="快速資訊">
         <div class="quick-card">
-          <strong>招牌推薦</strong>
-          <span>肉蛋、鮮蝦、海陸雙拼，第一次吃照這個點。</span>
+          <strong>在哪裡</strong>
+          <span>台中一中街商圈，逛街、下課、夜市散步都順路。</span>
         </div>
         <div class="quick-card">
-          <strong>點餐方式</strong>
-          <span>現場點餐 / 外帶 / Uber Eats，尖峰時段建議先看好菜單。</span>
+          <strong>吃什麼</strong>
+          <span>肉蛋、鮮蝦、鮮蚵、海陸雙拼，熱熱一卷最剛好。</span>
         </div>
         <div class="quick-card">
-          <strong>等餐不無聊</strong>
-          <span>抽一支今日靈籤，讓運氣跟腸粉一起蒸熱。</span>
+          <strong>玩什麼</strong>
+          <span>等餐抽今日靈籤，發 IG 限動或 Threads 揪朋友一起餓。</span>
+        </div>
+      </section>
+
+      <section class="location-strip" aria-label="到店與點餐">
+        <div>
+          <strong>一中街逛到餓，就來一卷</strong>
+          <span>現場點、外帶走、叫外送都可以。尖峰時段先看菜單，輪到你就不用猶豫。</span>
+        </div>
+        <div class="location-actions">
+          <a class="location-link map" href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer">開地圖</a>
+          <a class="location-link order" href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer">叫外送</a>
+        </div>
+      </section>
+
+      <section class="menu-section" id="menu" aria-labelledby="menuTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">MENU / 必吃推薦</p>
+            <h2 class="section-title" id="menuTitle">今天想吃哪一卷？</h2>
+          </div>
+        </div>
+        <div class="menu-grid" id="menu-grid"></div>
+        <p class="menu-note">價格與品項以現場公告為準；熱門口味售完就要等下次。</p>
+      </section>
+
+      <section class="process-section" aria-labelledby="processTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">STEAM / 現蒸現做</p>
+            <h2 class="section-title" id="processTitle">蒸氣上來，就知道要開吃</h2>
+          </div>
+        </div>
+        <div class="process-grid">
+          <article class="process-card">
+            <img src="assets/menu/web/rou-dan.webp" alt="熱蒸肉蛋腸粉" loading="lazy" />
+            <div class="process-body">
+              <span class="process-step">01 現蒸</span>
+              <h3>熱熱出爐</h3>
+              <p>腸粉皮要趁熱才滑，蒸氣就是最短的等待提示。</p>
+            </div>
+          </article>
+          <article class="process-card">
+            <img src="assets/menu/web/xian-xia.webp" alt="鮮蝦腸粉淋醬" loading="lazy" />
+            <div class="process-body">
+              <span class="process-step">02 淋醬</span>
+              <h3>醬香補上</h3>
+              <p>滑嫩腸粉配鹹香醬汁，一口下去才完整。</p>
+            </div>
+          </article>
+          <article class="process-card">
+            <img src="assets/menu/web/hai-lu-shuang-pin.webp" alt="海陸雙拼腸粉" loading="lazy" />
+            <div class="process-body">
+              <span class="process-step">03 加料</span>
+              <h3>肉香海味都要</h3>
+              <p>第一次來不知道怎麼點，海陸雙拼最不容易後悔。</p>
+            </div>
+          </article>
+          <article class="process-card">
+            <img src="assets/menu/web/cover.webp" alt="一口腸粉出餐" loading="lazy" />
+            <div class="process-body">
+              <span class="process-step">04 帶走</span>
+              <h3>逛街邊走邊吃</h3>
+              <p>夜市小吃就是要快、熱、香，拿了就能繼續逛。</p>
+            </div>
+          </article>
         </div>
       </section>
 
       <section class="fortune-section" aria-labelledby="fortuneTitle">
         <div class="fortune-layout">
           <div class="fortune-intro">
-            <p class="section-kicker">TODAY'S LUCK</p>
-            <h2 id="fortuneTitle">等餐抽一支，今天順一點</h2>
+            <p class="section-kicker">LUCK / 等餐抽籤</p>
+            <h2 id="fortuneTitle">抽一支，順便揪朋友</h2>
+            <p>等餐不用乾等。抽到好籤就丟 IG 限動，抽到怪籤就丟 Threads。</p>
           </div>
 
           <div class="fortune-box" id="fortuneBox">
@@ -935,16 +1121,6 @@
           </div>
         </div>
       </section>
-
-      <section class="menu-section" id="menu" aria-labelledby="menuTitle">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">MENU / 必吃推薦</p>
-            <h2 class="section-title" id="menuTitle">今天想吃哪一卷？</h2>
-          </div>
-        </div>
-        <div class="menu-grid" id="menu-grid"></div>
-      </section>
     </div>
   </main>
 
@@ -960,6 +1136,8 @@
         <p>現場點餐 / 外帶 / Uber Eats</p>
       </div>
       <div class="footer-links">
+        <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-footer">導航到店</a>
+        <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-footer">Uber Eats</a>
         <a href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener noreferrer" class="btn-footer btn-portaly">Portaly 資訊</a>
         <a href="https://www.instagram.com/yikouchangfen/" target="_blank" rel="noopener noreferrer" class="btn-footer">追蹤 IG</a>
         <a href="https://www.threads.net/" target="_blank" rel="noopener noreferrer" class="btn-footer">看 Threads</a>
