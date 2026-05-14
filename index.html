@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>一口腸粉｜一中街必吃 現蒸廣東腸粉</title>
-  <meta name="description" content="台中一中街必吃夜市小吃，現蒸廣東腸粉。熱蒸、滑嫩、醬香，等餐還能抽一支今日靈籤。" />
+  <title>一口腸粉｜台中一中街廣東腸粉｜現點現蒸</title>
+  <meta name="description" content="一口腸粉位於台中一中街，主打現點現蒸廣東腸粉，鮮蝦蛋腸粉、肉蛋腸粉、鮮蚵腸粉與海鮮總匯。現場點餐、外帶、Uber Eats 外送皆可。" />
 
   <link rel="icon" href="assets/brand/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/brand/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/apple-touch-icon.png" />
 
-  <meta property="og:title" content="一口腸粉｜一中街必吃 現蒸廣東腸粉" />
-  <meta property="og:description" content="一中街逛到餓就來一卷。現蒸現做，等餐抽籤，運氣也一起蒸熱。" />
+  <meta property="og:title" content="一口腸粉｜比你前任更黏的腸粉" />
+  <meta property="og:description" content="台中一中街現蒸廣東腸粉，第一次來推薦鮮蝦蛋腸粉。" />
   <meta property="og:url" content="https://s101449126-collab.github.io/yikou-new/" />
-  <meta property="og:image" content="https://s101449126-collab.github.io/yikou-new/assets/menu/web/cover.webp" />
+  <meta property="og:image" content="https://s101449126-collab.github.io/yikou-new/assets/brand/og-image.png" />
   <meta property="og:type" content="website" />
 
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -280,6 +280,20 @@
       line-height: 1.7;
     }
 
+    .hero-guide {
+      max-width: 620px;
+      margin: 18px 0 0;
+      padding: 12px 14px;
+      border-left: 5px solid var(--gold);
+      border-radius: 8px;
+      background: rgba(36, 23, 18, 0.7);
+      color: #fff8ed;
+      font-size: 1.06rem;
+      font-weight: 900;
+      line-height: 1.62;
+      backdrop-filter: blur(8px);
+    }
+
     .hero-actions {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -332,6 +346,83 @@
       width: min(100%, 1100px);
       margin: 0 auto;
       padding: 26px 14px 0;
+    }
+
+    .status-section {
+      margin: 0 0 28px;
+      text-align: left;
+    }
+
+    .status-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--red);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 12px 28px rgba(70, 38, 20, 0.1);
+    }
+
+    .status-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .status-main strong {
+      color: var(--red-dark);
+      font-size: 1.12rem;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .status-pill {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .status-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(92, 58, 45, 0.16);
+      color: var(--soy);
+      font-size: 0.92rem;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .status-row dt {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .status-row dd {
+      margin: 0;
+    }
+
+    .status-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.55;
     }
 
     .quick-grid {
@@ -419,7 +510,9 @@
 
     .fortune-section,
     .menu-section,
-    .process-section {
+    .process-section,
+    .testimonial-section,
+    .share-promo-section {
       margin-top: 24px;
       text-align: left;
     }
@@ -790,22 +883,38 @@
     .menu-title {
       margin: 0;
       color: var(--ink);
-      font-size: 0.98rem;
+      font-size: 1.05rem;
       font-weight: 900;
       line-height: 1.28;
     }
 
     .menu-desc {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      min-height: 2.8em;
       margin: 0;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.86rem;
       font-weight: 700;
       line-height: 1.4;
-      overflow: hidden;
+    }
+
+    .menu-label {
+      color: var(--red-dark);
+      font-weight: 900;
+    }
+
+    .menu-reason {
+      margin: 0;
+      padding: 8px 9px;
+      border-radius: 8px;
+      background: var(--paper-strong);
+      color: var(--soy);
+      font-size: 0.86rem;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .menu-card.featured {
+      border-color: rgba(215, 53, 42, 0.55);
+      box-shadow: 0 14px 32px rgba(159, 33, 27, 0.14);
     }
 
     .badge {
@@ -821,6 +930,65 @@
       font-weight: 900;
       vertical-align: 2px;
       white-space: nowrap;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .testimonial-card {
+      min-height: 86px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--soy);
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1.55;
+      box-shadow: 0 10px 24px rgba(70, 38, 20, 0.08);
+    }
+
+    .testimonial-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .share-promo {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #241712;
+      color: #fff8ed;
+      box-shadow: var(--shadow);
+    }
+
+    .share-promo h2 {
+      margin: 0;
+      color: var(--gold-soft);
+      font-size: 1.45rem;
+      line-height: 1.25;
+    }
+
+    .share-promo p {
+      margin: 0;
+      color: rgba(255, 248, 237, 0.82);
+      font-size: 0.94rem;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .share-promo-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
     .site-footer {
@@ -991,6 +1159,7 @@
       .hero h1 { font-size: 2.55rem; }
       .hero-facts { grid-template-columns: 1fr; }
       .quick-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
       .share-grid { grid-template-columns: 1fr; }
 
       .section-head {
@@ -1004,12 +1173,16 @@
       .hero { min-height: 560px; padding: 150px 28px 32px; }
       .hero h1 { font-size: 4.6rem; }
       .content-shell { padding: 34px 24px 0; }
+      .status-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quick-grid { grid-template-columns: repeat(3, 1fr); }
       .location-strip { grid-template-columns: 1fr 360px; align-items: center; }
       .fortune-layout { grid-template-columns: minmax(240px, 0.74fr) minmax(0, 1.26fr); align-items: stretch; }
       .fortune-intro { display: flex; flex-direction: column; justify-content: center; }
       .menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
       .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .testimonial-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .share-promo { grid-template-columns: 1fr 330px; align-items: center; }
+      .share-promo-actions { grid-template-columns: 1fr; }
       .footer-content { grid-template-columns: 1fr 1.2fr 1fr; align-items: center; }
       .footer-links { grid-template-columns: 1fr; justify-self: end; max-width: 270px; }
     }
@@ -1033,8 +1206,8 @@
         <button class="lang-btn" type="button" data-lang="ko" onclick="setLanguage('ko')">한</button>
       </div>
       <div class="header-actions">
-        <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-header btn-uber-sm">Uber Eats</a>
-        <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-header btn-maps-sm" data-i18n="nav">導航</a>
+        <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-header btn-uber-sm" data-i18n="uberDelivery">Uber Eats 外送</a>
+        <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-header btn-maps-sm" data-i18n="footerMap">導航到店</a>
       </div>
     </div>
   </header>
@@ -1042,47 +1215,49 @@
   <main class="main-content">
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-content">
-        <p class="eyebrow" data-i18n="heroEyebrow">台中一中街｜夜市現蒸腸粉</p>
+        <p class="eyebrow" data-i18n="heroEyebrow">台中一中街｜廣東腸粉｜現點現蒸</p>
         <h1 id="heroTitle">一口腸粉</h1>
         <div class="tagline" data-i18n="tagline">比你前任更黏的腸粉</div>
-        <p class="hero-copy" data-i18n="heroCopy">逛到餓就來一卷。熱蒸、滑嫩、醬香，現場吃、外帶、叫外送都很順。</p>
+        <p class="hero-guide" data-i18n="heroGuide">第一次來？點鮮蝦蛋腸粉最穩。蝦仁＋雞蛋＋青菜＋XO 醬，熱熱一卷剛剛好。</p>
         <div class="hero-actions">
+          <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="hero-action secondary" data-i18n="directNav">我要導航</a>
+          <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="hero-action delivery" data-i18n="uberDelivery">Uber Eats 外送</a>
           <a href="#menu" class="hero-action primary" data-i18n="viewMenu">看菜單</a>
-          <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="hero-action secondary" data-i18n="directNav">直接導航</a>
-          <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="hero-action delivery">Uber Eats</a>
         </div>
         <div class="hero-facts" aria-label="店家特色">
-          <span data-i18n="heroFact1">一中街必吃</span>
-          <span data-i18n="heroFact2">現蒸現做</span>
-          <span data-i18n="heroFact3">等餐抽籤</span>
+          <span data-i18n="heroFact1">第一次首推鮮蝦蛋</span>
+          <span data-i18n="heroFact2">16:30–22:30</span>
+          <span data-i18n="heroFact3">一中街 / 益民商圈</span>
         </div>
       </div>
     </section>
 
     <div class="content-shell">
-      <section class="quick-grid" aria-label="快速資訊">
-        <div class="quick-card">
-          <strong data-i18n="quickWhereTitle">在哪裡</strong>
-          <span data-i18n="quickWhereText">台中一中街商圈，逛街、下課、夜市散步都順路。</span>
-        </div>
-        <div class="quick-card">
-          <strong data-i18n="quickEatTitle">吃什麼</strong>
-          <span data-i18n="quickEatText">肉蛋、鮮蝦、鮮蚵、海陸雙拼，熱熱一卷最剛好。</span>
-        </div>
-        <div class="quick-card">
-          <strong data-i18n="quickPlayTitle">玩什麼</strong>
-          <span data-i18n="quickPlayText">等餐抽今日靈籤，發 IG 限動或 Threads 揪朋友一起餓。</span>
-        </div>
-      </section>
-
-      <section class="location-strip" aria-label="到店與點餐">
-        <div>
-          <strong data-i18n="locationTitle">一中街逛到餓，就來一卷</strong>
-          <span data-i18n="locationText">現場點、外帶走、叫外送都可以。尖峰時段先看菜單，輪到你就不用猶豫。</span>
-        </div>
-        <div class="location-actions">
-          <a class="location-link map" href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" data-i18n="openMap">開地圖</a>
-          <a class="location-link order" href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" data-i18n="orderDelivery">叫外送</a>
+      <section class="status-section" aria-labelledby="statusTitle">
+        <div class="status-card">
+          <div class="status-main">
+            <strong id="statusTitle" data-i18n="statusTitle">今日營業資訊</strong>
+            <span class="status-pill" data-i18n="statusOpen">今日有開</span>
+          </div>
+          <dl class="status-list">
+            <div class="status-row">
+              <dt data-i18n="statusStateLabel">狀態</dt>
+              <dd data-i18n="statusState">今日有開，老闆還活著。</dd>
+            </div>
+            <div class="status-row">
+              <dt data-i18n="statusHoursLabel">時間</dt>
+              <dd data-i18n="statusHours">16:30–22:30</dd>
+            </div>
+            <div class="status-row">
+              <dt data-i18n="statusPlaceLabel">地點</dt>
+              <dd data-i18n="statusPlace">台中一中街 / 益民商圈</dd>
+            </div>
+            <div class="status-row">
+              <dt data-i18n="statusBuyLabel">購買</dt>
+              <dd data-i18n="statusBuy">現場點餐 / 外帶 / Uber Eats</dd>
+            </div>
+          </dl>
+          <p class="status-note" data-i18n="statusNote">實際營業狀態以 IG 限動或 Google 商家為準。</p>
         </div>
       </section>
 
@@ -1138,6 +1313,22 @@
             </div>
           </article>
         </div>
+      </section>
+
+      <section class="testimonial-section" aria-labelledby="testimonialTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker" data-i18n="testimonialKicker">VOICE / 客人真心話</p>
+            <h2 class="section-title" id="testimonialTitle" data-i18n="testimonialTitle">客人真心話</h2>
+          </div>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card" data-i18n="testimonial1">「本來只是路過，結果變固定客。」</article>
+          <article class="testimonial-card" data-i18n="testimonial2">「辣椒真的有東西，不加辣少一味。」</article>
+          <article class="testimonial-card" data-i18n="testimonial3">「第一次吃腸粉，結果回不去了。」</article>
+          <article class="testimonial-card" data-i18n="testimonial4">「老闆嘴很壞，但腸粉是好的。」</article>
+        </div>
+        <p class="testimonial-note" data-i18n="testimonialNote">如果你也覺得好吃，歡迎標記 IG，老闆會很感動，雖然臉還是一樣臭。</p>
       </section>
 
       <section class="fortune-section" aria-labelledby="fortuneTitle">
@@ -1199,6 +1390,21 @@
           </div>
         </div>
       </section>
+
+      <section class="share-promo-section" aria-labelledby="sharePromoTitle">
+        <div class="share-promo">
+          <div>
+            <p class="section-kicker" data-i18n="sharePromoKicker">SHARE / IG & Threads</p>
+            <h2 id="sharePromoTitle" data-i18n="sharePromoTitle">抽完籤，順手發出去</h2>
+            <p data-i18n="sharePromoText">抽籤結果會幫你生成限動圖與 Threads 挑戰文案。等餐時間不要浪費，讓朋友也開始餓。</p>
+          </div>
+          <div class="share-promo-actions">
+            <a class="location-link map" href="#fortuneTitle" data-i18n="sharePromoDraw">先抽一支</a>
+            <a class="location-link order" href="https://www.instagram.com/yikouchangfen/" target="_blank" rel="noopener noreferrer" data-i18n="footerIg">追蹤 IG</a>
+            <a class="location-link map" href="https://www.threads.net/" target="_blank" rel="noopener noreferrer" data-i18n="footerThreads">看 Threads</a>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -1215,7 +1421,7 @@
       </div>
       <div class="footer-links">
         <a href="https://maps.app.goo.gl/8XUo97JGfSrUdL6X6" target="_blank" rel="noopener noreferrer" class="btn-footer" data-i18n="footerMap">導航到店</a>
-        <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-footer">Uber Eats</a>
+        <a href="https://www.ubereats.com/tw/store/%E4%B8%80%E4%B8%AD%E5%95%86%E5%9C%88-%E4%B8%80%E5%8F%A3%E8%85%B8%E7%B2%89-yi-kou-cheong-fun/R52ZoYnQXuK5iCl1PeXawQ?diningMode=DELIVERY&ps=1" target="_blank" rel="noopener noreferrer" class="btn-footer" data-i18n="uberDelivery">Uber Eats 外送</a>
         <a href="https://portaly.cc/yikouchangfen" target="_blank" rel="noopener noreferrer" class="btn-footer btn-portaly" data-i18n="footerPortaly">Portaly 資訊</a>
         <a href="https://www.instagram.com/yikouchangfen/" target="_blank" rel="noopener noreferrer" class="btn-footer" data-i18n="footerIg">追蹤 IG</a>
         <a href="https://www.threads.net/" target="_blank" rel="noopener noreferrer" class="btn-footer" data-i18n="footerThreads">看 Threads</a>
@@ -1260,14 +1466,16 @@
       zh: {
         brandSub: "台中一中街夜市",
         nav: "導航",
-        heroEyebrow: "台中一中街｜夜市現蒸腸粉",
+        heroEyebrow: "台中一中街｜廣東腸粉｜現點現蒸",
         tagline: "比你前任更黏的腸粉",
-        heroCopy: "逛到餓就來一卷。熱蒸、滑嫩、醬香，現場吃、外帶、叫外送都很順。",
+        heroGuide: "第一次來？點鮮蝦蛋腸粉最穩。蝦仁＋雞蛋＋青菜＋XO 醬，熱熱一卷剛剛好。",
+        heroCopy: "第一次來？點鮮蝦蛋腸粉最穩。蝦仁＋雞蛋＋青菜＋XO 醬，熱熱一卷剛剛好。",
         viewMenu: "看菜單",
-        directNav: "直接導航",
-        heroFact1: "一中街必吃",
-        heroFact2: "現蒸現做",
-        heroFact3: "等餐抽籤",
+        directNav: "我要導航",
+        uberDelivery: "Uber Eats 外送",
+        heroFact1: "第一次首推鮮蝦蛋",
+        heroFact2: "16:30–22:30",
+        heroFact3: "一中街 / 益民商圈",
         quickWhereTitle: "在哪裡",
         quickWhereText: "台中一中街商圈，逛街、下課、夜市散步都順路。",
         quickEatTitle: "吃什麼",
@@ -1278,9 +1486,22 @@
         locationText: "現場點、外帶走、叫外送都可以。尖峰時段先看菜單，輪到你就不用猶豫。",
         openMap: "開地圖",
         orderDelivery: "叫外送",
+        statusTitle: "今日營業資訊",
+        statusOpen: "今日有開",
+        statusStateLabel: "狀態",
+        statusState: "今日有開，老闆還活著。",
+        statusHoursLabel: "時間",
+        statusHours: "16:30–22:30",
+        statusPlaceLabel: "地點",
+        statusPlace: "台中一中街 / 益民商圈",
+        statusBuyLabel: "購買",
+        statusBuy: "現場點餐 / 外帶 / Uber Eats",
+        statusNote: "實際營業狀態以 IG 限動或 Google 商家為準。",
         menuKicker: "MENU / 必吃推薦",
         menuTitle: "今天想吃哪一卷？",
-        menuNote: "價格與品項以現場公告為準；熱門口味售完就要等下次。",
+        menuNote: "價格與品項以現場公告為準，熱門品項售完為止。",
+        menuIngredientsLabel: "內容：",
+        menuReasonLabel: "推薦理由：",
         processKicker: "STEAM / 現蒸現做",
         processTitle: "蒸氣上來，就知道要開吃",
         processStep1: "01 現蒸",
@@ -1295,6 +1516,13 @@
         processStep4: "04 帶走",
         processCardTitle4: "逛街邊走邊吃",
         processText4: "夜市小吃就是要快、熱、香，拿了就能繼續逛。",
+        testimonialKicker: "VOICE / 客人真心話",
+        testimonialTitle: "客人真心話",
+        testimonial1: "「本來只是路過，結果變固定客。」",
+        testimonial2: "「辣椒真的有東西，不加辣少一味。」",
+        testimonial3: "「第一次吃腸粉，結果回不去了。」",
+        testimonial4: "「老闆嘴很壞，但腸粉是好的。」",
+        testimonialNote: "如果你也覺得好吃，歡迎標記 IG，老闆會很感動，雖然臉還是一樣臭。",
         fortuneKicker: "LUCK / 等餐抽籤",
         fortuneTitle: "抽一支，順便揪朋友",
         fortuneIntro: "等餐不用乾等。抽到好籤就丟 IG 限動，抽到怪籤就丟 Threads。",
@@ -1313,6 +1541,10 @@
         copyTextBtn: "複製文案",
         shareHint: "IG 限動建議先存圖；Threads 可直接帶入挑戰文案。",
         shareDone: "我已發起挑戰",
+        sharePromoKicker: "SHARE / IG & Threads",
+        sharePromoTitle: "抽完籤，順手發出去",
+        sharePromoText: "抽籤結果會幫你生成限動圖與 Threads 挑戰文案。等餐時間不要浪費，讓朋友也開始餓。",
+        sharePromoDraw: "先抽一支",
         rewardTitle: "挑戰發射成功",
         footerLocation: "台中一中街｜廣東腸粉 現蒸現做",
         footerMethods: "現場點餐 / 外帶 / Uber Eats",
@@ -1348,19 +1580,21 @@
         shareCardChallenge: "朋友挑戰",
         shareDefaultGrade: "今日籤",
         shareDefaultMsg: "今天適合吃點熱的，讓運氣一起蒸上來。",
-        shareDefaultRec: "招牌肉蛋腸粉"
+        shareDefaultRec: "鮮蝦蛋腸粉"
       },
       en: {
         brandSub: "Taichung Yizhong Night Market",
         nav: "Map",
-        heroEyebrow: "Taichung Yizhong Street | Steamed rice rolls",
+        heroEyebrow: "Taichung Yizhong Street | Cantonese rice rolls | Steamed to order",
         tagline: "Rice rolls stickier than your ex",
-        heroCopy: "Hungry while shopping? Grab a hot, silky rice roll with savory sauce. Eat here, take away, or order delivery.",
+        heroGuide: "First time here? Shrimp & Egg is the safest pick. Shrimp, egg, greens, XO sauce, hot and just right.",
+        heroCopy: "First time here? Shrimp & Egg is the safest pick. Shrimp, egg, greens, XO sauce, hot and just right.",
         viewMenu: "Menu",
         directNav: "Get directions",
-        heroFact1: "Yizhong must-eat",
-        heroFact2: "Steamed to order",
-        heroFact3: "Fortune draw",
+        uberDelivery: "Uber Eats delivery",
+        heroFact1: "First pick: Shrimp & Egg",
+        heroFact2: "16:30–22:30",
+        heroFact3: "Yizhong / Yimin area",
         quickWhereTitle: "Where",
         quickWhereText: "Inside Taichung's Yizhong shopping area, easy to visit while walking around.",
         quickEatTitle: "What to eat",
@@ -1371,9 +1605,22 @@
         locationText: "Order at the stall, take away, or use Uber Eats. Check the menu first during busy hours.",
         openMap: "Open map",
         orderDelivery: "Delivery",
+        statusTitle: "Today's hours",
+        statusOpen: "Open today",
+        statusStateLabel: "Status",
+        statusState: "Open today. The boss is still alive.",
+        statusHoursLabel: "Hours",
+        statusHours: "16:30–22:30",
+        statusPlaceLabel: "Place",
+        statusPlace: "Taichung Yizhong Street / Yimin area",
+        statusBuyLabel: "Buy",
+        statusBuy: "Stall orders / Takeaway / Uber Eats",
+        statusNote: "Actual opening status follows IG Stories or Google Business.",
         menuKicker: "MENU / Must-try picks",
         menuTitle: "Which roll today?",
-        menuNote: "Menu and prices follow the stall notice. Popular items may sell out.",
+        menuNote: "Menu and prices follow the stall notice. Popular items sell out first.",
+        menuIngredientsLabel: "Inside: ",
+        menuReasonLabel: "Why: ",
         processKicker: "STEAM / Made fresh",
         processTitle: "When the steam rises, it is time to eat",
         processStep1: "01 Steam",
@@ -1388,6 +1635,13 @@
         processStep4: "04 Take away",
         processCardTitle4: "Eat while exploring",
         processText4: "Night-market food should be quick, hot, and fragrant.",
+        testimonialKicker: "VOICE / Customer notes",
+        testimonialTitle: "Customer notes",
+        testimonial1: "\"I was just passing by. Now I am a regular.\"",
+        testimonial2: "\"The chili is serious. Without spice, something is missing.\"",
+        testimonial3: "\"First time trying rice rolls, and now I cannot go back.\"",
+        testimonial4: "\"The boss has a sharp mouth, but the rice rolls are good.\"",
+        testimonialNote: "If you like it too, tag us on IG. The boss will be touched, even if his face says otherwise.",
         fortuneKicker: "LUCK / Draw while waiting",
         fortuneTitle: "Draw one and challenge a friend",
         fortuneIntro: "Do not just wait. Good fortune goes to IG; weird fortune goes to Threads.",
@@ -1406,6 +1660,10 @@
         copyTextBtn: "Copy text",
         shareHint: "For IG Stories, save the card first. Threads can open with the text ready.",
         shareDone: "Challenge sent",
+        sharePromoKicker: "SHARE / IG & Threads",
+        sharePromoTitle: "Draw a fortune, then post it",
+        sharePromoText: "After drawing, you can save an IG Story card or open a Threads challenge text. Make your friends hungry while you wait.",
+        sharePromoDraw: "Draw first",
         rewardTitle: "Challenge launched",
         footerLocation: "Taichung Yizhong Street | Steamed cheung fun",
         footerMethods: "Stall orders / Takeaway / Uber Eats",
@@ -1441,19 +1699,21 @@
         shareCardChallenge: "Friend challenge",
         shareDefaultGrade: "Fortune",
         shareDefaultMsg: "Today calls for something hot and freshly steamed.",
-        shareDefaultRec: "Signature Pork & Egg Rice Roll"
+        shareDefaultRec: "Shrimp & Egg Rice Roll"
       },
       ja: {
         brandSub: "台中・一中街夜市",
         nav: "地図",
-        heroEyebrow: "台中一中街｜蒸したて腸粉",
+        heroEyebrow: "台中一中街｜広東腸粉｜注文後に蒸す",
         tagline: "元恋人よりくっつく腸粉",
-        heroCopy: "歩いてお腹が空いたら一巻。熱々、なめらか、醤油だれの香り。店頭、持ち帰り、デリバリーもOK。",
+        heroGuide: "初めてならエビ卵腸粉が一番安定。エビ、卵、青菜、XO醤。熱々の一巻がちょうどいい。",
+        heroCopy: "初めてならエビ卵腸粉が一番安定。エビ、卵、青菜、XO醤。熱々の一巻がちょうどいい。",
         viewMenu: "メニュー",
         directNav: "道案内",
-        heroFact1: "一中街の必食",
-        heroFact2: "注文後に蒸す",
-        heroFact3: "待ち時間におみくじ",
+        uberDelivery: "Uber Eats デリバリー",
+        heroFact1: "初回はエビ卵",
+        heroFact2: "16:30–22:30",
+        heroFact3: "一中街 / 益民商圈",
         quickWhereTitle: "場所",
         quickWhereText: "台中・一中街商圈の中。買い物や夜市散歩の途中に寄りやすいです。",
         quickEatTitle: "おすすめ",
@@ -1464,9 +1724,22 @@
         locationText: "店頭注文、持ち帰り、Uber Eatsに対応。混雑時は先にメニューを見るのがおすすめ。",
         openMap: "地図を開く",
         orderDelivery: "デリバリー",
+        statusTitle: "本日の営業情報",
+        statusOpen: "本日営業",
+        statusStateLabel: "状態",
+        statusState: "本日営業。店主はまだ元気です。",
+        statusHoursLabel: "時間",
+        statusHours: "16:30–22:30",
+        statusPlaceLabel: "場所",
+        statusPlace: "台中一中街 / 益民商圈",
+        statusBuyLabel: "購入",
+        statusBuy: "店頭注文 / 持ち帰り / Uber Eats",
+        statusNote: "実際の営業状況はIGストーリーまたはGoogleビジネスをご確認ください。",
         menuKicker: "MENU / 人気メニュー",
         menuTitle: "今日はどの一巻？",
-        menuNote: "価格と品目は店頭表示が優先です。人気商品は売り切れる場合があります。",
+        menuNote: "価格と品目は店頭表示が優先です。人気商品は売り切れ次第終了です。",
+        menuIngredientsLabel: "内容：",
+        menuReasonLabel: "おすすめ理由：",
         processKicker: "STEAM / 蒸したて",
         processTitle: "湯気が上がったら、食べどき",
         processStep1: "01 蒸す",
@@ -1481,6 +1754,13 @@
         processStep4: "04 持ち帰り",
         processCardTitle4: "歩きながら楽しむ",
         processText4: "夜市小吃は早く、熱く、香りよく。",
+        testimonialKicker: "VOICE / お客さんの声",
+        testimonialTitle: "お客さんの声",
+        testimonial1: "「通りすがりだったのに、気づけば常連。」",
+        testimonial2: "「唐辛子が本気。辛さなしだと一味足りない。」",
+        testimonial3: "「初めて腸粉を食べて、もう戻れない。」",
+        testimonial4: "「店主の口は悪いけど、腸粉はいい。」",
+        testimonialNote: "おいしいと思ったらIGでタグ付け歓迎です。店主は感動します。顔はたぶん変わりません。",
         fortuneKicker: "LUCK / 待ち時間のおみくじ",
         fortuneTitle: "一枚引いて、友達にも送る",
         fortuneIntro: "待つだけではもったいない。良い籤はIGへ、変な籤はThreadsへ。",
@@ -1499,6 +1779,10 @@
         copyTextBtn: "文面をコピー",
         shareHint: "IGストーリーは先に画像保存がおすすめ。Threadsは文面を入れて開けます。",
         shareDone: "チャレンジ完了",
+        sharePromoKicker: "SHARE / IG & Threads",
+        sharePromoTitle: "引いた籤をそのままシェア",
+        sharePromoText: "おみくじ結果からIGストーリー画像やThreads用の文面を作れます。待ち時間に友達もお腹を空かせよう。",
+        sharePromoDraw: "まず一枚引く",
         rewardTitle: "チャレンジ送信成功",
         footerLocation: "台中一中街｜蒸したて腸粉",
         footerMethods: "店頭注文 / 持ち帰り / Uber Eats",
@@ -1534,19 +1818,21 @@
         shareCardChallenge: "友達チャレンジ",
         shareDefaultGrade: "今日の籤",
         shareDefaultMsg: "今日は熱々の蒸したてを食べるのにぴったり。",
-        shareDefaultRec: "看板 豚肉と卵の腸粉"
+        shareDefaultRec: "エビ卵腸粉"
       },
       ko: {
         brandSub: "타이중 이중제 야시장",
         nav: "지도",
-        heroEyebrow: "타이중 이중제｜바로 찐 창펀",
+        heroEyebrow: "타이중 이중제｜광둥식 창펀｜주문 후 바로 찜",
         tagline: "전 애인보다 더 착 붙는 창펀",
-        heroCopy: "쇼핑하다 배고프면 한 롤. 뜨겁고 부드럽고 소스 향이 좋은 창펀을 현장, 포장, 배달로 즐기세요.",
+        heroGuide: "처음이라면 새우 달걀 창펀이 가장 안정적이에요. 새우, 달걀, 채소, XO 소스가 들어간 뜨거운 한 롤.",
+        heroCopy: "처음이라면 새우 달걀 창펀이 가장 안정적이에요. 새우, 달걀, 채소, XO 소스가 들어간 뜨거운 한 롤.",
         viewMenu: "메뉴",
         directNav: "길찾기",
-        heroFact1: "이중제 필수 간식",
-        heroFact2: "주문 후 바로 찜",
-        heroFact3: "기다리며 운세 뽑기",
+        uberDelivery: "Uber Eats 배달",
+        heroFact1: "첫 추천 새우 달걀",
+        heroFact2: "16:30–22:30",
+        heroFact3: "이중제 / 이민 상권",
         quickWhereTitle: "위치",
         quickWhereText: "타이중 이중제 상권 안에 있어 쇼핑과 야시장 산책 중 들르기 좋습니다.",
         quickEatTitle: "메뉴",
@@ -1557,9 +1843,22 @@
         locationText: "현장 주문, 포장, Uber Eats 가능. 바쁜 시간에는 메뉴를 먼저 확인하세요.",
         openMap: "지도 열기",
         orderDelivery: "배달",
+        statusTitle: "오늘 영업 정보",
+        statusOpen: "오늘 영업",
+        statusStateLabel: "상태",
+        statusState: "오늘 열었어요. 사장님은 아직 살아 있습니다.",
+        statusHoursLabel: "시간",
+        statusHours: "16:30–22:30",
+        statusPlaceLabel: "위치",
+        statusPlace: "타이중 이중제 / 이민 상권",
+        statusBuyLabel: "주문",
+        statusBuy: "현장 주문 / 포장 / Uber Eats",
+        statusNote: "실제 영업 상태는 IG 스토리 또는 Google 비즈니스를 확인하세요.",
         menuKicker: "MENU / 추천 메뉴",
         menuTitle: "오늘은 어떤 롤?",
-        menuNote: "가격과 품목은 현장 공지를 기준으로 합니다. 인기 메뉴는 품절될 수 있습니다.",
+        menuNote: "가격과 품목은 현장 공지를 기준으로 하며 인기 메뉴는 품절될 수 있습니다.",
+        menuIngredientsLabel: "내용: ",
+        menuReasonLabel: "추천 이유: ",
         processKicker: "STEAM / 바로 찜",
         processTitle: "김이 올라오면 먹을 시간",
         processStep1: "01 찌기",
@@ -1574,6 +1873,13 @@
         processStep4: "04 포장",
         processCardTitle4: "걸으며 먹기",
         processText4: "야시장 간식은 빠르고 뜨겁고 향긋해야 합니다.",
+        testimonialKicker: "VOICE / 손님 한마디",
+        testimonialTitle: "손님 한마디",
+        testimonial1: "\"그냥 지나가다 들렀는데 단골이 됐어요.\"",
+        testimonial2: "\"고추가 진짜예요. 매운맛 없으면 뭔가 빠진 느낌.\"",
+        testimonial3: "\"처음 먹은 창펀인데 이제 돌아갈 수 없어요.\"",
+        testimonial4: "\"사장님 말은 세지만 창펀은 좋아요.\"",
+        testimonialNote: "맛있었다면 IG에 태그해 주세요. 사장님은 감동하지만 표정은 그대로일 수 있어요.",
         fortuneKicker: "LUCK / 기다리며 운세",
         fortuneTitle: "하나 뽑고 친구에게 공유",
         fortuneIntro: "그냥 기다리지 마세요. 좋은 운세는 IG에, 웃긴 운세는 Threads에.",
@@ -1592,6 +1898,10 @@
         copyTextBtn: "문구 복사",
         shareHint: "IG 스토리는 먼저 이미지를 저장하세요. Threads는 문구를 넣어 열 수 있습니다.",
         shareDone: "챌린지 완료",
+        sharePromoKicker: "SHARE / IG & Threads",
+        sharePromoTitle: "운세 뽑고 바로 공유",
+        sharePromoText: "운세 결과로 IG 스토리 이미지와 Threads 챌린지 문구를 만들 수 있어요. 기다리는 동안 친구도 배고프게 해보세요.",
+        sharePromoDraw: "먼저 뽑기",
         rewardTitle: "챌린지 발사 성공",
         footerLocation: "타이중 이중제｜바로 찐 창펀",
         footerMethods: "현장 주문 / 포장 / Uber Eats",
@@ -1627,7 +1937,7 @@
         shareCardChallenge: "친구 챌린지",
         shareDefaultGrade: "오늘의 운세",
         shareDefaultMsg: "오늘은 따뜻하게 바로 찐 메뉴가 어울려요.",
-        shareDefaultRec: "시그니처 돼지고기 달걀 창펀"
+        shareDefaultRec: "새우 달걀 창펀"
       }
     };
 
@@ -1740,86 +2050,85 @@
       }
     }
 
-    // ✅ 菜單資料 (已同步移除吻仔魚)
+    // ✅ 菜單資料
     const menuData = [
       {
-        title: '招牌肉蛋腸粉',
-        price: 'NT$70',
-        desc: '溫體豬肉絲 + 滑嫩蛋，回購冠軍。',
-        img: 'assets/menu/web/rou-dan.webp',
+        title: '鮮蝦蛋腸粉',
+        price: '$90',
+        ingredients: '蝦仁、雞蛋、青菜、XO 醬',
+        reason: '第一次來點這份最穩，不知道吃什麼就選它。',
+        img: 'assets/menu/web/xian-xia.webp',
+        badge: '首推',
+        aliases: ['經典鮮蝦腸粉', '鮮蝦腸粉'],
         i18n: {
-          en: { title: 'Signature Pork & Egg Rice Roll', desc: 'Pork strips and silky egg, the easy first pick.' },
-          ja: { title: '看板 豚肉と卵の腸粉', desc: '豚肉とふわっと卵。初めてならまずこれ。' },
-          ko: { title: '시그니처 돼지고기 달걀 창펀', desc: '돼지고기와 부드러운 달걀, 첫 방문 추천 메뉴.' }
+          en: { title: 'Shrimp & Egg Rice Roll', ingredients: 'Shrimp, egg, greens, XO sauce', reason: 'Best first pick. Choose this when you do not know what to order.', badge: 'First pick' },
+          ja: { title: 'エビ卵腸粉', ingredients: 'エビ、卵、青菜、XO醤', reason: '初めてなら一番安定。迷ったらこれ。', badge: '初回おすすめ' },
+          ko: { title: '새우 달걀 창펀', ingredients: '새우, 달걀, 채소, XO 소스', reason: '첫 방문 추천. 뭘 먹을지 모르겠다면 이 메뉴.', badge: '첫 추천' }
         }
       },
       {
-        title: '海陸雙拼腸粉',
-        price: 'NT$100',
-        desc: '海味 x 肉香雙主角，口感雙重奏。',
-        img: 'assets/menu/web/hai-lu-shuang-pin.webp',
-        badge: '人氣',
+        title: '肉蛋腸粉',
+        price: '$70 / $90',
+        ingredients: '豬絞肉、雞蛋、青菜、XO 醬',
+        reason: '日常穩定款，鹹香飽足。',
+        img: 'assets/menu/web/rou-dan.webp',
+        aliases: ['招牌肉蛋腸粉'],
         i18n: {
-          en: { title: 'Surf & Turf Rice Roll', desc: 'Seafood and pork in one roll.', badge: 'Popular' },
-          ja: { title: '海陸ミックス腸粉', desc: '海鮮と肉の両方を楽しめる一皿。', badge: '人気' },
-          ko: { title: '해륙 더블 창펀', desc: '해산물과 고기를 한 번에.', badge: '인기' }
+          en: { title: 'Pork & Egg Rice Roll', ingredients: 'Minced pork, egg, greens, XO sauce', reason: 'Reliable everyday pick. Savory and filling.' },
+          ja: { title: '豚肉卵腸粉', ingredients: '豚ひき肉、卵、青菜、XO醤', reason: '毎日食べやすい安定の味。香ばしくて満足感あり。' },
+          ko: { title: '고기 달걀 창펀', ingredients: '돼지고기, 달걀, 채소, XO 소스', reason: '일상적으로 먹기 좋은 든든한 메뉴.' }
         }
       },
       {
         title: '鮮蚵腸粉',
-        price: 'NT$100',
-        desc: '產地鮮蚵現蒸，海味爆汁。',
+        price: '$100',
+        ingredients: '鮮蚵、雞蛋、青菜、XO 醬',
+        reason: '肥鮮系代表，喜歡海味可以直接上。',
         img: 'assets/menu/web/xian-he.webp',
-        badge: '限量',
         i18n: {
-          en: { title: 'Fresh Oyster Rice Roll', desc: 'Fresh oysters, steamed to order.', badge: 'Limited' },
-          ja: { title: '牡蠣の腸粉', desc: '新鮮な牡蠣をその場で蒸します。', badge: '限定' },
-          ko: { title: '신선한 굴 창펀', desc: '신선한 굴을 주문 후 바로 쪄요.', badge: '한정' }
+          en: { title: 'Fresh Oyster Rice Roll', ingredients: 'Fresh oysters, egg, greens, XO sauce', reason: 'Rich seafood flavor. Go for it if you like oysters.' },
+          ja: { title: '牡蠣の腸粉', ingredients: '牡蠣、卵、青菜、XO醤', reason: '海鮮好きにおすすめ。牡蠣の旨みをしっかり楽しめます。' },
+          ko: { title: '신선한 굴 창펀', ingredients: '굴, 달걀, 채소, XO 소스', reason: '바다향을 좋아한다면 바로 선택하세요.' }
         }
       },
       {
-        title: '經典鮮蝦腸粉',
-        price: 'NT$90',
-        desc: '現剝大蝦 Q 彈，蒸出清甜。',
-        img: 'assets/menu/web/xian-xia.webp',
+        title: '海陸雙拼',
+        price: '$100',
+        ingredients: '豬肉、蝦仁、雞蛋、青菜、XO 醬',
+        reason: '肉香海味都有，選擇障礙救星。',
+        img: 'assets/menu/web/hai-lu-shuang-pin.webp',
+        badge: '人氣',
+        aliases: ['海陸雙拼腸粉'],
         i18n: {
-          en: { title: 'Classic Shrimp Rice Roll', desc: 'Bouncy shrimp with a clean sweet finish.' },
-          ja: { title: '定番エビ腸粉', desc: 'ぷりっとしたエビのやさしい甘み。' },
-          ko: { title: '클래식 새우 창펀', desc: '탱글한 새우와 깔끔한 단맛.' }
+          en: { title: 'Surf & Turf Rice Roll', ingredients: 'Pork, shrimp, egg, greens, XO sauce', reason: 'Meat and seafood in one roll. Solves choice paralysis.', badge: 'Popular' },
+          ja: { title: '海陸ミックス腸粉', ingredients: '豚肉、エビ、卵、青菜、XO醤', reason: '肉も海鮮も楽しめる、迷った時の一皿。', badge: '人気' },
+          ko: { title: '해륙 더블 창펀', ingredients: '돼지고기, 새우, 달걀, 채소, XO 소스', reason: '고기와 해산물을 한 번에. 선택 장애 해결.', badge: '인기' }
         }
       },
       {
-        title: '黃金玉米鮮蝦腸粉',
-        price: 'NT$90',
-        desc: '玉米甜 + 鮮蝦咬勁，鹹甜滿足。',
-        img: 'assets/menu/web/yu-mi-xia.webp',
-        i18n: {
-          en: { title: 'Corn Shrimp Rice Roll', desc: 'Sweet corn with bouncy shrimp.' },
-          ja: { title: 'コーンとエビの腸粉', desc: '甘いコーンとぷりぷりエビ。' },
-          ko: { title: '옥수수 새우 창펀', desc: '달콤한 옥수수와 탱글한 새우.' }
-        }
-      },
-      {
-        title: '豪華海鮮腸粉',
-        price: 'NT$140',
-        desc: '蝦仁 + 魚鮮組合，豪華一卷入魂。',
+        title: '海鮮雙拼',
+        price: '$150',
+        ingredients: '蝦仁、鮮蚵、雞蛋、青菜、XO 醬',
+        reason: '想吃澎湃一點，這份很有感。',
         img: 'assets/menu/web/hao-hua-shuang-xian.webp',
+        aliases: ['豪華海鮮腸粉', '豪華雙鮮腸粉'],
         i18n: {
-          en: { title: 'Deluxe Seafood Rice Roll', desc: 'Shrimp and seafood, the fuller plate.' },
-          ja: { title: 'デラックス海鮮腸粉', desc: 'エビと海鮮をしっかり楽しむ一皿。' },
-          ko: { title: '디럭스 해산물 창펀', desc: '새우와 해산물이 든 든든한 한 접시.' }
+          en: { title: 'Seafood Double Rice Roll', ingredients: 'Shrimp, oysters, egg, greens, XO sauce', reason: 'A richer seafood pick when you want more.' },
+          ja: { title: '海鮮ダブル腸粉', ingredients: 'エビ、牡蠣、卵、青菜、XO醤', reason: '少し豪華に食べたい時にしっかり満足。' },
+          ko: { title: '해산물 더블 창펀', ingredients: '새우, 굴, 달걀, 채소, XO 소스', reason: '좀 더 푸짐하게 먹고 싶을 때 좋은 선택.' }
         }
       },
-      // 吻仔魚腸粉 已下架
       {
-        title: '雙蛋腸粉',
-        price: 'NT$70',
-        desc: '蛋香加倍，口感更滑更黏。',
-        img: 'assets/menu/web/shuang-dan.webp',
+        title: '海鮮總匯',
+        price: '$170',
+        ingredients: '蝦仁、吻仔魚、鮮蚵、雞蛋、青菜、XO 醬',
+        reason: '海鮮控直上，不要跟胃客氣。',
+        img: 'assets/menu/web/wen-zai-yu.webp',
+        aliases: ['吻仔魚腸粉'],
         i18n: {
-          en: { title: 'Double Egg Rice Roll', desc: 'Extra egg, extra silky.' },
-          ja: { title: 'ダブル卵腸粉', desc: '卵たっぷり、さらに滑らか。' },
-          ko: { title: '더블 달걀 창펀', desc: '달걀 두 배, 더 부드럽게.' }
+          en: { title: 'Seafood Combo Rice Roll', ingredients: 'Shrimp, whitebait, oysters, egg, greens, XO sauce', reason: 'For seafood lovers. Do not be too polite with your appetite.' },
+          ja: { title: '海鮮全部のせ腸粉', ingredients: 'エビ、しらす、牡蠣、卵、青菜、XO醤', reason: '海鮮好きは直行。胃に遠慮しなくていい。' },
+          ko: { title: '해산물 모둠 창펀', ingredients: '새우, 뱅어, 굴, 달걀, 채소, XO 소스', reason: '해산물 러버라면 바로 이 메뉴.' }
         }
       }
     ];
@@ -1829,34 +2138,39 @@
     }
 
     function translateDishName(name, lang = currentLang) {
-      const item = menuData.find((entry) => name === entry.title || name.startsWith(entry.title) || name.includes(entry.title));
+      const item = menuData.find((entry) => {
+        const names = [entry.title, ...(entry.aliases || [])];
+        return names.some((menuName) => name === menuName || name.startsWith(menuName) || name.includes(menuName));
+      });
       if (!item || lang === "zh") return name;
       const localizedTitle = localizeMenuItem(item, "title", lang);
-      return name.startsWith(item.title) ? localizedTitle : name.replace(item.title, localizedTitle);
+      const sourceName = [item.title, ...(item.aliases || [])].find((menuName) => name.startsWith(menuName) || name.includes(menuName));
+      return sourceName && name.startsWith(sourceName) ? localizedTitle : name.replace(sourceName || item.title, localizedTitle);
     }
 
     function renderMenu() {
       const grid = document.getElementById('menu-grid');
       grid.innerHTML = menuData.map(item => `
-        <article class="menu-card">
+        <article class="menu-card ${item.badge ? 'featured' : ''}">
           <div class="menu-media">
             <img class="menu-thumb" src="${escapeHtml(item.img)}" alt="${escapeHtml(localizeMenuItem(item, "title"))}" loading="lazy">
             <p class="menu-price">${escapeHtml(item.price)}</p>
           </div>
           <div class="menu-body">
             <h3 class="menu-title">${escapeHtml(localizeMenuItem(item, "title"))} ${localizeMenuItem(item, "badge") ? `<span class="badge">${escapeHtml(localizeMenuItem(item, "badge"))}</span>` : ''}</h3>
-            <p class="menu-desc">${escapeHtml(localizeMenuItem(item, "desc"))}</p>
+            <p class="menu-desc"><span class="menu-label">${escapeHtml(t("menuIngredientsLabel"))}</span>${escapeHtml(localizeMenuItem(item, "ingredients"))}</p>
+            <p class="menu-reason"><span class="menu-label">${escapeHtml(t("menuReasonLabel"))}</span>${escapeHtml(localizeMenuItem(item, "reason"))}</p>
           </div>
         </article>
       `).join('');
     }
 
     const imgByGrade = {
-      "上上": "assets/fortune/shang-shang.webp",
-      "大吉": "assets/fortune/da-ji.webp",
-      "吉":   "assets/fortune/ji.webp",
-      "小吉": "assets/fortune/xiao-ji.webp",
-      "中平": "assets/fortune/zhong-ping.webp"
+      "上上": "assets/brand/og-image.png",
+      "大吉": "assets/brand/og-image.png",
+      "吉":   "assets/brand/og-image.png",
+      "小吉": "assets/brand/og-image.png",
+      "中平": "assets/brand/og-image.png"
     };
 
     const spicyLines = [
