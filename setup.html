@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一口腸粉｜串接設定檢查</title>
+  <meta name="description" content="一口腸粉 LINE、Google、Supabase、Google 商家營業資訊串接設定檢查頁。">
+  <style>
+    :root{--paper:#fff8ed;--ink:#2f1d15;--red:#d7352a;--red-dark:#9f211b;--gold:#f3b53f;--jade:#0f6547;--muted:#806a5e;--line:rgba(92,58,45,.18);--card:#fff}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(90deg,rgba(215,53,42,.045) 0 1px,transparent 1px 48px),linear-gradient(0deg,rgba(15,101,71,.035) 0 1px,transparent 1px 48px),var(--paper);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 64px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:28px}.brand{font-weight:900;font-size:22px;color:var(--red-dark)}.links{display:flex;gap:12px;flex-wrap:wrap}.links a{font-weight:800;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:9px 13px;background:#fff}h1{font-family:serif;font-size:clamp(36px,7vw,82px);line-height:1;margin:0 0 12px;color:var(--red-dark)}.lead{max-width:820px;font-size:18px;line-height:1.8;color:var(--muted)}.hero{padding:34px 0 24px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 14px 34px rgba(70,38,20,.1)}.card h2,.card h3{margin:0 0 10px}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:900;color:#fff;background:#8a8a8a}.pill.ok{background:#128c49}.pill.warn{background:var(--red-dark)}.env{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.env code{background:#fff8ed;border:1px solid var(--line);border-radius:9px;padding:6px 8px;color:var(--red-dark);font-weight:800}.mono{background:#2f1d15;color:#ffe1a1;border-radius:14px;padding:14px;overflow:auto;line-height:1.7}.steps{display:grid;gap:12px}.step{border-left:5px solid var(--gold);padding:12px 14px;background:#fffaf2;border-radius:12px}.status-list{display:grid;gap:12px;margin-top:18px}.status-row{display:grid;grid-template-columns:170px 100px 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.small{font-size:14px;color:var(--muted);line-height:1.7}.footer{margin-top:26px;color:var(--muted)}button{border:0;border-radius:999px;padding:11px 16px;background:var(--red);color:#fff;font-weight:900;cursor:pointer}@media(max-width:760px){.grid,.status-row{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}h1{font-size:44px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">一口腸粉｜串接設定檢查</div>
+      <nav class="links">
+        <a href="/">回官網</a>
+        <a href="/api/health">API Health</a>
+        <a href="/admin">後台</a>
+        <a href="/admin/pos">POS</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <p class="pill warn" id="readyPill">檢查中</p>
+      <h1>LINE / Google / Google API 帶入設定</h1>
+      <p class="lead">這頁給店家與工程師用：即時讀取正式站 <code>/api/health</code>，確認一口腸粉會員系統、LINE Login、Google Login、LINE 店家與 Google 商家營業資訊還缺哪些 Vercel 環境變數。</p>
+      <button id="refreshBtn" type="button">重新檢查</button>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>正式網址與 Callback</h2>
+        <div class="mono">
+官網：https://yikou-cheungfun-line-order-v2.vercel.app
+LINE Callback：https://yikou-cheungfun-line-order-v2.vercel.app/api/auth/line/callback
+Google Callback：https://yikou-cheungfun-line-order-v2.vercel.app/api/auth/google/callback
+Google Place ID：ChIJ0wZdQgA9aTQR-dLMJWRvNEc
+地址：404 台灣臺中市北區新北里一中街 132-134 號
+        </div>
+      </article>
+      <article class="card">
+        <h2>必填 Vercel 環境變數</h2>
+        <div class="env">
+          <code>SUPABASE_URL</code><code>SUPABASE_SERVICE_ROLE_KEY</code><code>GOOGLE_PLACES_API_KEY</code><code>GOOGLE_CLIENT_ID</code><code>GOOGLE_CLIENT_SECRET</code><code>LINE_OFFICIAL_ACCOUNT_URL</code><code>POS_API_TOKEN</code><code>OAUTH_STATE_SECRET</code><code>SESSION_SECRET</code>
+        </div>
+        <p class="small">目前 `SESSION_SECRET` 已可作為 OAuth state 備援；正式長期仍建議另外設定 `OAUTH_STATE_SECRET`。</p>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>即時串接狀態</h2>
+      <div class="status-list" id="statusList">讀取中...</div>
+    </section>
+
+    <section class="grid" style="margin-top:16px">
+      <article class="card">
+        <h2>完成順序</h2>
+        <div class="steps">
+          <div class="step"><b>1. Supabase</b><br>建立 project，執行 <code>supabase/schema.sql</code>，填入 `SUPABASE_URL` 與 `SUPABASE_SERVICE_ROLE_KEY`。</div>
+          <div class="step"><b>2. Google Places</b><br>啟用 Places API，填入 `GOOGLE_PLACES_API_KEY`，首頁會自動同步營業資訊。</div>
+          <div class="step"><b>3. LINE / Google OAuth</b><br>設定 callback URL，填入 LINE 與 Google OAuth client credentials。</div>
+          <div class="step"><b>4. LINE 店家與 POS</b><br>填入 `LINE_OFFICIAL_ACCOUNT_URL` 與 `POS_API_TOKEN`，完成加好友入口與點數回寫。</div>
+        </div>
+      </article>
+      <article class="card">
+        <h2>會員資料安全原則</h2>
+        <p class="small">會員姓名、手機、生日、LINE UID、Google sub、email 不永久存放在前端。正式登入後只使用 HttpOnly session cookie，前台透過 `/api/member/*` 取得遮罩資料。Supabase schema 已啟用 RLS，anon/authenticated 直連資料表預設拒絕。</p>
+        <div class="mono">資料表：members、member_identities、orders、order_items、coupons、coupon_redemptions、point_ledger、audit_logs
+遮罩 View：member_safe_profiles
+正式 API：/api/member/me、/api/member/orders、/api/member/coupons、/api/member/export</div>
+      </article>
+    </section>
+
+    <p class="footer">一口腸粉｜中國風品牌官網｜會員系統安全優先</p>
+  </div>
+
+  <script>
+    const labels = {
+      googleBusinessHours: "Google 商家營業資訊",
+      googlePlace: "Google Place ID",
+      lineOfficialAccount: "LINE 店家官方帳號",
+      oauthSecurity: "OAuth / Session 簽章",
+      lineLogin: "LINE Login 會員",
+      googleLogin: "Google 會員",
+      memberDatabase: "Supabase 會員資料庫",
+      posIntegration: "POS 點數回寫"
+    };
+
+    function row(key, check) {
+      const ok = Boolean(check?.configured);
+      const missing = Array.isArray(check?.missing) ? check.missing : [];
+      const detail = key === "googlePlace" && check?.placeId ? `Place ID：${check.placeId}` : (missing.length ? `缺少：${missing.join(", ")}` : "已設定完成");
+      return `<div class="status-row"><b>${labels[key] || key}</b><span class="pill ${ok ? "ok" : "warn"}">${ok ? "已設定" : "待設定"}</span><span>${detail}</span></div>`;
+    }
+
+    async function loadHealth() {
+      const list = document.getElementById("statusList");
+      const pill = document.getElementById("readyPill");
+      list.textContent = "讀取中...";
+      try {
+        const response = await fetch("/api/health", { cache: "no-store", headers: { accept: "application/json" } });
+        const data = await response.json();
+        pill.textContent = data.ready ? "所有串接已就緒" : "尚未完成設定";
+        pill.className = `pill ${data.ready ? "ok" : "warn"}`;
+        list.innerHTML = Object.entries(data.checks || {}).map(([key, check]) => row(key, check)).join("");
+      } catch (error) {
+        pill.textContent = "讀取失敗";
+        pill.className = "pill warn";
+        list.textContent = "無法讀取 /api/health，請確認部署狀態。";
+      }
+    }
+
+    document.getElementById("refreshBtn").addEventListener("click", loadHealth);
+    loadHealth();
+  </script>
+</body>
+</html>
