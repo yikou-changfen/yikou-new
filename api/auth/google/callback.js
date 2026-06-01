@@ -4,29 +4,14 @@ const { upsertOAuthMember } = require("../../../lib/supabase-utils");
 const { verifyState } = require("../../../lib/oauth-utils");
 
 async function exchangeGoogleToken(code, redirectUri) {
-  const body = new URLSearchParams({
-    grant_type: "authorization_code",
-    code,
-    redirect_uri: redirectUri,
-    client_id: process.env.GOOGLE_CLIENT_ID,
-    client_secret: process.env.GOOGLE_CLIENT_SECRET
-  });
-
-  const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body
-  });
-
+  const body = new URLSearchParams({ grant_type: "authorization_code", code, redirect_uri: redirectUri, client_id: process.env.GOOGLE_CLIENT_ID, client_secret: process.env.GOOGLE_CLIENT_SECRET });
+  const tokenResponse = await fetch("https://oauth2.googleapis.com/token", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body });
   if (!tokenResponse.ok) throw new Error("GOOGLE_TOKEN_EXCHANGE_FAILED");
   return tokenResponse.json();
 }
 
 async function getGoogleProfile(accessToken) {
-  const profileResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
-    headers: { authorization: `Bearer ${accessToken}` }
-  });
-
+  const profileResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", { headers: { authorization: `Bearer ${accessToken}` } });
   if (!profileResponse.ok) throw new Error("GOOGLE_PROFILE_FAILED");
   return profileResponse.json();
 }
@@ -44,7 +29,8 @@ module.exports = async function handler(request, response) {
     return;
   }
 
-  const missing = ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY", "OAUTH_STATE_SECRET"].filter(name => !process.env[name]);
+  const missing = ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter(name => !process.env[name]);
+  if (!process.env.OAUTH_STATE_SECRET && !process.env.SESSION_SECRET) missing.push("OAUTH_STATE_SECRET_OR_SESSION_SECRET");
   if (missing.length) {
     sendJson(response, 503, { ok: false, code: "GOOGLE_CALLBACK_NOT_CONFIGURED", message: "Google callback 尚未連接正式會員資料庫。未設定完成前不會交換 token 或保存個資。", missing });
     return;
