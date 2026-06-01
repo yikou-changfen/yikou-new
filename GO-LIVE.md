@@ -39,6 +39,7 @@ POS_API_TOKEN
 目前已確認：
 
 ```text
+PUBLIC_BASE_URL=https://yikou-cheungfun-line-order-v2.vercel.app
 GOOGLE_PLACE_ID=ChIJ0wZdQgA9aTQR-dLMJWRvNEc
 ```
 
@@ -71,6 +72,7 @@ npm run check:env:file
 - 會員個資只存在後端資料庫，不寫入 localStorage。
 - 前端只保存遮罩後、低敏、可丟棄的會員狀態。
 - OAuth state 使用簽章，避免 CSRF。
+- LINE / Google OAuth redirect URI 使用 `PUBLIC_BASE_URL` 固定正式站網址，避免 Host header 影響 callback。
 - Session 使用 HttpOnly cookie，避免前端 JS 讀取 token。
 - Supabase 使用 service role 僅限 serverless API 端，不能暴露到瀏覽器。
 - 會員資料匯出只能回傳遮罩資料，並要留下 audit log。
