@@ -30,6 +30,7 @@
         <button id="refreshBtn" type="button">重新檢查</button>
         <button id="copyMissingBtn" class="secondary" type="button" disabled>複製缺少 key</button>
         <button id="copyTemplateBtn" class="secondary" type="button">複製 env 範本</button>
+        <button id="generateSecretsBtn" class="secondary" type="button">產生安全密鑰</button>
       </div>
     </section>
 
@@ -56,6 +57,17 @@ Google Place ID：ChIJ0wZdQgA9aTQR-dLMJWRvNEc
     <section class="card" style="margin-top:16px">
       <h2>即時串接狀態</h2>
       <div class="status-list" id="statusList">讀取中...</div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>本機安全密鑰產生</h2>
+      <p class="small">可在瀏覽器直接產生 `OAUTH_STATE_SECRET`、`SESSION_SECRET`、`POS_API_TOKEN`。產生過程只在這台電腦執行，不會傳到伺服器；請複製後貼到 Vercel Environment Variables。</p>
+      <div class="actions">
+        <button id="generateSecretsInlineBtn" type="button">產生新密鑰</button>
+        <button id="copyGeneratedSecretsBtn" class="secondary" type="button" disabled>複製產生結果</button>
+      </div>
+      <pre class="mono" id="generatedSecretsBox">尚未產生</pre>
+      <p class="small">換新密鑰後需重新部署。若正式會員已登入，舊 session 會失效，這是正常的安全行為。</p>
     </section>
 
     <section class="grid" style="margin-top:16px">
@@ -104,6 +116,7 @@ SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
 POS_API_TOKEN=`;
     let latestMissing = [];
+    let generatedSecrets = "";
 
     function row(key, check) {
       const ok = Boolean(check?.configured);
@@ -146,9 +159,35 @@ POS_API_TOKEN=`;
       }
     }
 
+    function token(byteLength) {
+      const bytes = new Uint8Array(byteLength);
+      crypto.getRandomValues(bytes);
+      let binary = "";
+      for (const byte of bytes) binary += String.fromCharCode(byte);
+      return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+    }
+
+    function generateSecrets() {
+      if (!window.crypto?.getRandomValues) {
+        window.alert("這個瀏覽器不支援安全亂數，請改用 npm run secrets:generate。");
+        return;
+      }
+      const values = {
+        OAUTH_STATE_SECRET: token(48),
+        SESSION_SECRET: token(48),
+        POS_API_TOKEN: token(32)
+      };
+      generatedSecrets = Object.entries(values).map(([key, value]) => `${key}=${value}`).join("\n");
+      document.getElementById("generatedSecretsBox").textContent = generatedSecrets;
+      document.getElementById("copyGeneratedSecretsBtn").disabled = false;
+    }
+
     document.getElementById("refreshBtn").addEventListener("click", loadHealth);
     document.getElementById("copyMissingBtn").addEventListener("click", () => copyText(latestMissing.join("\n"), "已複製缺少 key"));
     document.getElementById("copyTemplateBtn").addEventListener("click", () => copyText(envTemplate, "已複製 env 範本"));
+    document.getElementById("generateSecretsBtn").addEventListener("click", generateSecrets);
+    document.getElementById("generateSecretsInlineBtn").addEventListener("click", generateSecrets);
+    document.getElementById("copyGeneratedSecretsBtn").addEventListener("click", () => copyText(generatedSecrets, "已複製安全密鑰"));
     loadHealth();
   </script>
 </body>
