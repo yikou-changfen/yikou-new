@@ -7,6 +7,7 @@
     "dev": "python -m http.server 4173 --bind 127.0.0.1",
     "verify": "node scripts/verify-api.js",
     "check:env": "node scripts/check-env.js",
+    "check:env:file": "node scripts/check-env-file.js",
     "smoke:production": "node scripts/smoke-production.js",
     "predeploy": "npm run verify && npm run check:env"
   },
