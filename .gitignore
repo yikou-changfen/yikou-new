@@ -1,0 +1,15 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+!env.production.example
+
+# Dependencies and caches
+node_modules/
+.vercel/
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
