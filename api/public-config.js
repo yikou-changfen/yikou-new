@@ -1,4 +1,4 @@
-const { methodNotAllowed, sendJson } = require("./_member-utils");
+const { methodNotAllowed, sendJson } = require("../lib/member-utils");
 
 function isAllowedLineUrl(value) {
   if (!value) return false;
