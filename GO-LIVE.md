@@ -122,12 +122,26 @@ SUPABASE_SERVICE_ROLE_KEY
 5. 設定 Google Login 後，點 Google 註冊，完成 callback 並寫入會員 identities。
 6. 設定 Google Places 後，驗證 `/api/business-hours` 回傳今日營業資訊。
 7. 設定 POS token 後，用測試訂單呼叫 `/api/pos/orders/complete`，確認訂單、點數、優惠券流程。
+8. 跑 production smoke test，確認所有線上端點狀態。
 
 ## 本機驗證
 
 ```bash
 npm run verify
 npm run check:env
+npm run smoke:production
+```
+
+`smoke:production` 預設檢查：
+
+```text
+https://yikou-cheungfun-line-order-v2.vercel.app
+```
+
+若要檢查其他 Vercel preview 網址：
+
+```bash
+PRODUCTION_URL=https://your-preview.vercel.app npm run smoke:production
 ```
 
 如果只是預覽靜態頁：
