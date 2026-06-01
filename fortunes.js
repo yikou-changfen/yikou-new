@@ -10,10 +10,7 @@ const fortunes = [
 (() => {
   const APP_ID = "yikou-homepage-upgrade";
   const STORE = "yikou:member:v1";
-  const authUrls = {
-    line: "/api/auth/line/start",
-    google: "/api/auth/google/start"
-  };
+  const authUrls = { line: "/api/auth/line/start", google: "/api/auth/google/start" };
   const adminLinks = [
     ["後台管理", "https://yikou-cheungfun-line-order-v2.vercel.app/admin"],
     ["POS 收銀", "https://yikou-cheungfun-line-order-v2.vercel.app/admin/pos"],
@@ -34,9 +31,7 @@ const fortunes = [
   }
 
   function escapeHtml(value) {
-    return String(value ?? "").replace(/[&<>"']/g, ch => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-    }[ch]));
+    return String(value ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
   }
 
   function missing(check) {
@@ -44,33 +39,46 @@ const fortunes = [
     return list.length ? `缺少 ${list.join(", ")}` : "已設定";
   }
 
-  async function getJson(path) {
-    const response = await fetch(path, { headers: { accept: "application/json" }, cache: "no-store", credentials: "same-origin" });
+  async function getJson(path, options = {}) {
+    const response = await fetch(path, {
+      headers: { accept: "application/json", ...(options.headers || {}) },
+      cache: "no-store",
+      credentials: "same-origin",
+      ...options
+    });
     const data = await response.json().catch(() => ({}));
     return { ok: response.ok, status: response.status, data };
   }
 
   function loadLocalMember() {
-    try {
-      return JSON.parse(localStorage.getItem(STORE) || "{}");
-    } catch {
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(STORE) || "{}"); } catch { return {}; }
   }
 
   function saveRedactedMember(form) {
+    const points = Number(form.points || 0);
     const safe = {
       schemaVersion: 1,
       memberId: form.memberId || `YK-M-${Date.now()}`,
-      points: Number(form.points || 0),
-      tier: Number(form.points || 0) >= 600 ? "金印會員" : Number(form.points || 0) >= 250 ? "紅籠會員" : "竹籠會員",
+      points,
+      tier: points >= 600 ? "金印會員" : points >= 250 ? "紅籠會員" : "竹籠會員",
       taste: form.taste || "鮮蝦蛋腸粉",
+      orders: Array.isArray(form.orders) ? form.orders : [],
       coupons: [{ id: "welcome", title: "新會員迎賓券", detail: "任一腸粉折 10 元", status: "可使用" }],
       privacyMode: "local-redacted",
       updatedAt: new Date().toISOString()
     };
     localStorage.setItem(STORE, JSON.stringify(safe));
     return safe;
+  }
+
+  function downloadJson(filename, payload) {
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(url);
   }
 
   function renderShell() {
@@ -88,11 +96,7 @@ const fortunes = [
               <p class="eyebrow">台中一中街｜中國風現蒸廣東腸粉</p>
               <h1>一口腸粉</h1>
               <p class="lead">朱紅、墨黑、金印與宣紙底色，重新整理成能點餐、能入會、能接 LINE / Google 的品牌官網。</p>
-              <div class="hero-actions">
-                <a class="btn red" href="#member">加入會員</a>
-                <a class="btn ink" href="#menu">看菜單</a>
-                <a class="btn jade" data-line-store href="#">加入 LINE 店家</a>
-              </div>
+              <div class="hero-actions"><a class="btn red" href="#member">加入會員</a><a class="btn ink" href="#menu">看菜單</a><a class="btn jade" data-line-store href="#">加入 LINE 店家</a></div>
               <div class="seal-row"><span>現點現蒸</span><span>會員集點</span><span>Google 商家同步</span></div>
             </div>
             <div class="hero-media"><img src="assets/menu/web/cover.webp" alt="一口腸粉現蒸餐點"><div class="seal">一口<br>入魂</div></div>
@@ -112,9 +116,7 @@ const fortunes = [
 
           <section class="section" id="menu">
             <div class="section-head"><p class="eyebrow">招牌菜單</p><h2>現蒸腸粉</h2></div>
-            <div class="menu-grid">${menu.map(item => `
-              <article class="dish"><img src="${item[2]}" alt="${item[0]}" loading="lazy"><div><h3>${item[0]}</h3><p>${item[3]}</p><b>$${item[1]}</b></div></article>
-            `).join("")}</div>
+            <div class="menu-grid">${menu.map(item => `<article class="dish"><img src="${item[2]}" alt="${item[0]}" loading="lazy"><div><h3>${item[0]}</h3><p>${item[3]}</p><b>$${item[1]}</b></div></article>`).join("")}</div>
           </section>
 
           <section class="section member" id="member">
@@ -129,12 +131,14 @@ const fortunes = [
                 <p class="note">姓名、手機、生日、LINE UID 不會永久寫入瀏覽器。正式會員資料需等 Supabase 啟用。</p>
               </form>
               <aside class="panel member-card">
-                <b id="memberTier">竹籠會員</b>
-                <span id="memberPoints">0 點</span>
-                <p id="memberSummary">尚未登入正式會員</p>
+                <b id="memberTier">竹籠會員</b><span id="memberPoints">0 點</span><p id="memberSummary">尚未登入正式會員</p>
                 <div class="auth-row"><a class="auth line" href="${authUrls.line}">LINE 註冊 / 登入</a><a class="auth google" href="${authUrls.google}">Google 註冊 / 登入</a></div>
-                <button class="link-btn" id="exportBtn" type="button">匯出遮罩會員資料</button>
+                <div class="member-actions"><button class="link-btn" id="exportBtn" type="button">匯出遮罩會員資料</button><button class="link-btn" id="logoutBtn" type="button">登出會員</button></div>
               </aside>
+            </div>
+            <div class="member-data-grid">
+              <article class="panel"><h3>訂單紀錄</h3><div id="ordersList" class="mini-list">等待會員資料庫設定。</div></article>
+              <article class="panel"><h3>優惠券包</h3><div id="couponsList" class="mini-list">等待會員資料庫設定。</div></article>
             </div>
           </section>
 
@@ -157,7 +161,7 @@ const fortunes = [
     const style = document.createElement("style");
     style.id = "yikou-upgrade-style";
     style.textContent = `
-      body{margin:0;background:#fff8ed;color:#2f1d15;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;text-align:left}#${APP_ID}{min-height:100vh;background:linear-gradient(90deg,rgba(215,53,42,.045) 0 1px,transparent 1px 48px),linear-gradient(0deg,rgba(24,138,90,.035) 0 1px,transparent 1px 48px),#fff8ed}#${APP_ID} *{box-sizing:border-box}a{color:inherit}.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,52px);background:rgba(255,248,237,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(92,58,45,.16)}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:900}.brand img{width:42px;height:42px;border-radius:50%}.topbar nav{display:flex;gap:18px;font-weight:800}.topbar nav a{text-decoration:none}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding:clamp(34px,7vw,86px) clamp(16px,5vw,72px) 44px}.eyebrow{margin:0 0 10px;color:#9f211b;font-weight:900}.hero h1{margin:0;font-family:'Noto Serif TC',serif;font-size:clamp(56px,12vw,138px);line-height:.92;color:#9f211b}.lead{font-size:clamp(18px,2vw,24px);line-height:1.8;max-width:720px}.hero-actions,.auth-row{display:flex;flex-wrap:wrap;gap:12px}.btn,.auth,.link-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border:0;border-radius:999px;text-decoration:none;font-weight:900;cursor:pointer}.red{background:#d7352a;color:#fff}.ink{background:#2f1d15;color:#fff}.jade,.line{background:#06c755;color:#fff}.google{background:#1f1f1f;color:#fff}.hero-media{position:relative}.hero-media img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:24px;box-shadow:0 22px 60px rgba(70,38,20,.2)}.seal{position:absolute;right:18px;bottom:18px;background:#9f211b;color:#ffe1a1;border:3px solid #ffe1a1;padding:18px;border-radius:18px;font-weight:900;font-size:24px;text-align:center}.seal-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.seal-row span{border:1px solid rgba(92,58,45,.18);border-radius:999px;padding:8px 12px;background:#fff}.status-band{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 clamp(16px,5vw,72px) 36px}.status-band article,.panel,.integration-grid article,.dish{background:rgba(255,255,255,.86);border:1px solid rgba(92,58,45,.16);border-radius:16px;box-shadow:0 14px 34px rgba(70,38,20,.1)}.status-band article{padding:18px}.status-band b,.status-band span{display:block}.section{padding:44px clamp(16px,5vw,72px)}.story{background:#2f1d15;color:#fff}.story .eyebrow{color:#f3b53f}.story p{max-width:900px;line-height:1.9}.section h2{font-family:'Noto Serif TC',serif;font-size:clamp(28px,4vw,48px);margin:0 0 12px}.section-head p{max-width:860px;line-height:1.8}.menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.dish{overflow:hidden}.dish img{width:100%;aspect-ratio:4/3;object-fit:cover}.dish div{padding:16px}.dish h3{margin:0 0 8px;font-size:22px}.dish p{line-height:1.7;color:#6d5648}.dish b{color:#9f211b;font-size:22px}.member-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.panel{padding:20px}.panel label{display:grid;gap:8px;margin-bottom:12px;font-weight:800}.panel input,.panel select{width:100%;min-height:44px;border:1px solid rgba(92,58,45,.22);border-radius:12px;padding:0 12px;font:inherit;background:#fff}.note{font-size:14px;color:#806a5e;line-height:1.7}.member-card b{display:block;font-size:34px;color:#9f211b}.member-card span{font-size:22px;font-weight:900}.integration-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.integration-grid article{padding:18px}.integration-grid p{line-height:1.75;color:#6d5648}footer{padding:28px clamp(16px,5vw,72px);background:#2f1d15;color:#fff}footer div{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}footer a{color:#ffe1a1}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#2f1d15;color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}@media(max-width:850px){.topbar{align-items:flex-start;gap:12px;flex-direction:column}.hero,.member-layout{grid-template-columns:1fr}.menu-grid,.status-band,.integration-grid{grid-template-columns:1fr}.hero h1{font-size:64px}}
+      body{margin:0;background:#fff8ed;color:#2f1d15;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;text-align:left}#${APP_ID}{min-height:100vh;background:linear-gradient(90deg,rgba(215,53,42,.045) 0 1px,transparent 1px 48px),linear-gradient(0deg,rgba(24,138,90,.035) 0 1px,transparent 1px 48px),#fff8ed}#${APP_ID} *{box-sizing:border-box}a{color:inherit}.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,52px);background:rgba(255,248,237,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(92,58,45,.16)}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:900}.brand img{width:42px;height:42px;border-radius:50%}.topbar nav{display:flex;gap:18px;font-weight:800}.topbar nav a{text-decoration:none}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding:clamp(34px,7vw,86px) clamp(16px,5vw,72px) 44px}.eyebrow{margin:0 0 10px;color:#9f211b;font-weight:900}.hero h1{margin:0;font-family:'Noto Serif TC',serif;font-size:clamp(56px,12vw,138px);line-height:.92;color:#9f211b}.lead{font-size:clamp(18px,2vw,24px);line-height:1.8;max-width:720px}.hero-actions,.auth-row,.member-actions{display:flex;flex-wrap:wrap;gap:12px}.btn,.auth,.link-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border:0;border-radius:999px;text-decoration:none;font-weight:900;cursor:pointer}.red{background:#d7352a;color:#fff}.ink{background:#2f1d15;color:#fff}.jade,.line{background:#06c755;color:#fff}.google{background:#1f1f1f;color:#fff}.hero-media{position:relative}.hero-media img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:24px;box-shadow:0 22px 60px rgba(70,38,20,.2)}.seal{position:absolute;right:18px;bottom:18px;background:#9f211b;color:#ffe1a1;border:3px solid #ffe1a1;padding:18px;border-radius:18px;font-weight:900;font-size:24px;text-align:center}.seal-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.seal-row span{border:1px solid rgba(92,58,45,.18);border-radius:999px;padding:8px 12px;background:#fff}.status-band{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 clamp(16px,5vw,72px) 36px}.status-band article,.panel,.integration-grid article,.dish{background:rgba(255,255,255,.86);border:1px solid rgba(92,58,45,.16);border-radius:16px;box-shadow:0 14px 34px rgba(70,38,20,.1)}.status-band article{padding:18px}.status-band b,.status-band span{display:block}.section{padding:44px clamp(16px,5vw,72px)}.story{background:#2f1d15;color:#fff}.story .eyebrow{color:#f3b53f}.story p{max-width:900px;line-height:1.9}.section h2{font-family:'Noto Serif TC',serif;font-size:clamp(28px,4vw,48px);margin:0 0 12px}.section-head p{max-width:860px;line-height:1.8}.menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.dish{overflow:hidden}.dish img{width:100%;aspect-ratio:4/3;object-fit:cover}.dish div{padding:16px}.dish h3{margin:0 0 8px;font-size:22px}.dish p{line-height:1.7;color:#6d5648}.dish b{color:#9f211b;font-size:22px}.member-layout,.member-data-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.member-data-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:16px}.panel{padding:20px}.panel label{display:grid;gap:8px;margin-bottom:12px;font-weight:800}.panel input,.panel select{width:100%;min-height:44px;border:1px solid rgba(92,58,45,.22);border-radius:12px;padding:0 12px;font:inherit;background:#fff}.note{font-size:14px;color:#806a5e;line-height:1.7}.member-card b{display:block;font-size:34px;color:#9f211b}.member-card span{font-size:22px;font-weight:900}.mini-list{display:grid;gap:10px;color:#6d5648;line-height:1.65}.mini-list .item{padding:10px;border-radius:12px;background:#fff8ed;border:1px solid rgba(92,58,45,.14)}.integration-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.integration-grid article{padding:18px}.integration-grid p{line-height:1.75;color:#6d5648}footer{padding:28px clamp(16px,5vw,72px);background:#2f1d15;color:#fff}footer div{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}footer a{color:#ffe1a1}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#2f1d15;color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}@media(max-width:850px){.topbar{align-items:flex-start;gap:12px;flex-direction:column}.hero,.member-layout,.member-data-grid{grid-template-columns:1fr}.menu-grid,.status-band,.integration-grid{grid-template-columns:1fr}.hero h1{font-size:64px}}
     `;
     document.head.appendChild(style);
   }
@@ -171,34 +175,79 @@ const fortunes = [
     toast.timer = setTimeout(() => el.classList.remove("show"), 2400);
   }
 
-  function wireMember() {
-    const saved = loadLocalMember();
+  function renderMemberState(saved) {
     const tier = document.getElementById("memberTier");
     const points = document.getElementById("memberPoints");
     const summary = document.getElementById("memberSummary");
     if (saved.tier) tier.textContent = saved.tier;
-    if (saved.points) points.textContent = `${saved.points} 點`;
-    if (saved.memberId) summary.textContent = `${saved.memberId}｜本機遮罩模式`;
+    points.textContent = `${Number(saved.points || 0)} 點`;
+    summary.textContent = saved.memberId ? `${saved.memberId}｜本機遮罩模式` : "尚未登入正式會員";
+  }
 
+  function wireMember() {
+    renderMemberState(loadLocalMember());
     document.getElementById("memberForm")?.addEventListener("submit", event => {
       event.preventDefault();
-      const safe = saveRedactedMember({ taste: document.getElementById("memberTaste")?.value, points: saved.points || 0, memberId: saved.memberId });
-      tier.textContent = safe.tier;
-      points.textContent = `${safe.points} 點`;
-      summary.textContent = `${safe.memberId}｜已建立安全本機會員，個資未永久保存`;
+      const current = loadLocalMember();
+      const safe = saveRedactedMember({ taste: document.getElementById("memberTaste")?.value, points: current.points || 0, memberId: current.memberId, orders: current.orders });
+      renderMemberState(safe);
       toast("已建立安全本機會員，個資未永久保存");
     });
+    document.getElementById("exportBtn")?.addEventListener("click", exportMemberData);
+    document.getElementById("logoutBtn")?.addEventListener("click", logoutMember);
+  }
 
-    document.getElementById("exportBtn")?.addEventListener("click", () => {
-      const payload = { exportedAt: new Date().toISOString(), privacyMode: "redacted-client-export", member: loadLocalMember() };
-      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "yikou-member-redacted.json";
-      link.click();
-      URL.revokeObjectURL(url);
-    });
+  function renderList(targetId, items, emptyText, formatter) {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    if (!Array.isArray(items) || items.length === 0) {
+      target.textContent = emptyText;
+      return;
+    }
+    target.innerHTML = items.map(item => `<div class="item">${formatter(item)}</div>`).join("");
+  }
+
+  async function hydrateMemberData() {
+    const me = await getJson("/api/member/me").catch(error => ({ ok: false, data: { message: error.message } }));
+    if (me.ok && me.data?.member) {
+      document.getElementById("memberSummary").textContent = "已登入正式會員";
+      document.getElementById("memberTier").textContent = me.data.member.tier || "竹籠會員";
+      document.getElementById("memberPoints").textContent = `${Number(me.data.member.points || 0)} 點`;
+    }
+
+    const orders = await getJson("/api/member/orders").catch(() => null);
+    if (orders?.ok) {
+      renderList("ordersList", orders.data?.orders || [], "目前沒有訂單紀錄", order => `${escapeHtml(order.title || order.id || "訂單")}<br>${escapeHtml(order.date || order.createdAt || "")}｜${escapeHtml(order.items || "")}｜$${escapeHtml(order.total || order.totalAmount || 0)}`);
+    } else {
+      document.getElementById("ordersList").textContent = orders?.data?.message || missing({ missing: orders?.data?.missing || ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"] });
+    }
+
+    const coupons = await getJson("/api/member/coupons").catch(() => null);
+    if (coupons?.ok) {
+      renderList("couponsList", coupons.data?.coupons || [], "目前沒有可用優惠券", coupon => `${escapeHtml(coupon.title || "優惠券")}<br>${escapeHtml(coupon.detail || "")}｜${escapeHtml(coupon.status || "available")}`);
+    } else {
+      document.getElementById("couponsList").textContent = coupons?.data?.message || missing({ missing: coupons?.data?.missing || ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"] });
+    }
+  }
+
+  async function exportMemberData() {
+    const server = await getJson("/api/member/export", { method: "POST" }).catch(() => null);
+    if (server?.ok) {
+      downloadJson("yikou-member-server-export.json", server.data);
+      toast("已從後端匯出遮罩會員資料");
+      return;
+    }
+    downloadJson("yikou-member-redacted.json", { exportedAt: new Date().toISOString(), privacyMode: "redacted-client-export", member: loadLocalMember(), serverExport: server?.data || null });
+    toast("後端會員尚未設定，已匯出本機遮罩資料");
+  }
+
+  async function logoutMember() {
+    await getJson("/api/auth/logout", { method: "POST" }).catch(() => null);
+    localStorage.removeItem(STORE);
+    renderMemberState({});
+    document.getElementById("ordersList").textContent = "已登出，等待會員登入。";
+    document.getElementById("couponsList").textContent = "已登出，等待會員登入。";
+    toast("已清除會員 session 與本機遮罩資料");
   }
 
   async function hydrate() {
@@ -225,11 +274,7 @@ const fortunes = [
       document.getElementById("hoursStatus").textContent = msg;
       document.getElementById("googleBusinessText").textContent = `${msg}；設定後會自動追蹤一口腸粉 Google 商家營業資訊。`;
     }
-
-    const member = await getJson("/api/member/me").catch(() => null);
-    if (member?.ok && member.data?.member) {
-      document.getElementById("memberSummary").textContent = "已登入正式會員";
-    }
+    hydrateMemberData();
   }
 
   ready(() => {
