@@ -1,9 +1,4 @@
-function sendJson(response, statusCode, payload) {
-  response.statusCode = statusCode;
-  response.setHeader("content-type", "application/json; charset=utf-8");
-  response.setHeader("cache-control", "no-store");
-  response.end(JSON.stringify(payload));
-}
+const { methodNotAllowed, sendJson } = require("../lib/member-utils");
 
 function has(name) {
   return Boolean(process.env[name]);
@@ -19,8 +14,7 @@ function status(required) {
 
 module.exports = function handler(request, response) {
   if (request.method !== "GET") {
-    response.setHeader("allow", "GET");
-    sendJson(response, 405, { ok: false, code: "METHOD_NOT_ALLOWED", allowed: ["GET"] });
+    methodNotAllowed(response, ["GET"]);
     return;
   }
 
@@ -40,6 +34,7 @@ module.exports = function handler(request, response) {
 
   const ready = Object.values(checks).every(check => check.configured);
 
+  response.setHeader("cache-control", "no-store");
   sendJson(response, 200, {
     ok: true,
     ready,
