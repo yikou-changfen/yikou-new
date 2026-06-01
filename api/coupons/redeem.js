@@ -1,4 +1,11 @@
-const { methodNotAllowed, requireConfiguredEnv, sendJson } = require("../_member-utils");
+const {
+  methodNotAllowed,
+  readBody,
+  requireConfiguredEnv,
+  sendJson
+} = require("../_member-utils");
+const { getSession } = require("../_session-utils");
+const { redeemCouponForMember } = require("../_supabase-utils");
 
 module.exports = async function handler(request, response) {
   if (request.method !== "POST") {
@@ -8,9 +15,37 @@ module.exports = async function handler(request, response) {
 
   if (!requireConfiguredEnv(response)) return;
 
-  sendJson(response, 501, {
-    ok: false,
-    code: "COUPON_REDEEM_NOT_CONNECTED",
-    message: "優惠券核銷需先連接會員資料庫與登入 session。"
-  });
+  const session = getSession(request);
+  if (!session) {
+    sendJson(response, 401, {
+      ok: false,
+      code: "AUTH_REQUIRED",
+      message: "優惠券核銷需要會員登入。"
+    });
+    return;
+  }
+
+  try {
+    const body = await readBody(request);
+    if (!body.couponId) {
+      sendJson(response, 400, { ok: false, code: "COUPON_ID_REQUIRED" });
+      return;
+    }
+    const coupon = await redeemCouponForMember({
+      memberId: session.memberId,
+      couponId: body.couponId,
+      orderId: body.orderId || null,
+      redeemedBy: "member"
+    });
+    sendJson(response, 200, {
+      ok: true,
+      coupon: {
+        id: coupon.id,
+        title: coupon.title,
+        status: coupon.status
+      }
+    });
+  } catch (error) {
+    sendJson(response, error.status || 400, { ok: false, code: error.message || "COUPON_REDEEM_FAILED" });
+  }
 };
