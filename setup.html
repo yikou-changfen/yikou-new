@@ -7,7 +7,7 @@
   <meta name="description" content="一口腸粉 LINE、Google、Supabase、Google 商家營業資訊串接設定檢查頁。">
   <style>
     :root{--paper:#fff8ed;--ink:#2f1d15;--red:#d7352a;--red-dark:#9f211b;--gold:#f3b53f;--jade:#0f6547;--muted:#806a5e;--line:rgba(92,58,45,.18);--card:#fff}
-    *{box-sizing:border-box}body{margin:0;background:linear-gradient(90deg,rgba(215,53,42,.045) 0 1px,transparent 1px 48px),linear-gradient(0deg,rgba(15,101,71,.035) 0 1px,transparent 1px 48px),var(--paper);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 64px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:28px}.brand{font-weight:900;font-size:22px;color:var(--red-dark)}.links{display:flex;gap:12px;flex-wrap:wrap}.links a{font-weight:800;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:9px 13px;background:#fff}h1{font-family:serif;font-size:clamp(36px,7vw,82px);line-height:1;margin:0 0 12px;color:var(--red-dark)}.lead{max-width:820px;font-size:18px;line-height:1.8;color:var(--muted)}.hero{padding:34px 0 24px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 14px 34px rgba(70,38,20,.1)}.card h2,.card h3{margin:0 0 10px}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:900;color:#fff;background:#8a8a8a}.pill.ok{background:#128c49}.pill.warn{background:var(--red-dark)}.env{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.env code{background:#fff8ed;border:1px solid var(--line);border-radius:9px;padding:6px 8px;color:var(--red-dark);font-weight:800}.mono{background:#2f1d15;color:#ffe1a1;border-radius:14px;padding:14px;overflow:auto;line-height:1.7}.steps{display:grid;gap:12px}.step{border-left:5px solid var(--gold);padding:12px 14px;background:#fffaf2;border-radius:12px}.status-list{display:grid;gap:12px;margin-top:18px}.status-row{display:grid;grid-template-columns:170px 100px 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.small{font-size:14px;color:var(--muted);line-height:1.7}.footer{margin-top:26px;color:var(--muted)}button{border:0;border-radius:999px;padding:11px 16px;background:var(--red);color:#fff;font-weight:900;cursor:pointer}@media(max-width:760px){.grid,.status-row{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}h1{font-size:44px}}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(90deg,rgba(215,53,42,.045) 0 1px,transparent 1px 48px),linear-gradient(0deg,rgba(15,101,71,.035) 0 1px,transparent 1px 48px),var(--paper);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 64px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:28px}.brand{font-weight:900;font-size:22px;color:var(--red-dark)}.links,.actions{display:flex;gap:12px;flex-wrap:wrap}.links a{font-weight:800;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:9px 13px;background:#fff}h1{font-family:serif;font-size:clamp(36px,7vw,82px);line-height:1;margin:0 0 12px;color:var(--red-dark)}.lead{max-width:820px;font-size:18px;line-height:1.8;color:var(--muted)}.hero{padding:34px 0 24px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 14px 34px rgba(70,38,20,.1)}.card h2,.card h3{margin:0 0 10px}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:900;color:#fff;background:#8a8a8a}.pill.ok{background:#128c49}.pill.warn{background:var(--red-dark)}.env{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.env code{background:#fff8ed;border:1px solid var(--line);border-radius:9px;padding:6px 8px;color:var(--red-dark);font-weight:800}.mono{background:#2f1d15;color:#ffe1a1;border-radius:14px;padding:14px;overflow:auto;line-height:1.7}.steps{display:grid;gap:12px}.step{border-left:5px solid var(--gold);padding:12px 14px;background:#fffaf2;border-radius:12px}.status-list{display:grid;gap:12px;margin-top:18px}.status-row{display:grid;grid-template-columns:170px 100px 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.small{font-size:14px;color:var(--muted);line-height:1.7}.footer{margin-top:26px;color:var(--muted)}button{border:0;border-radius:999px;padding:11px 16px;background:var(--red);color:#fff;font-weight:900;cursor:pointer}button.secondary{background:var(--ink)}button:disabled{background:#9b8c83;cursor:not-allowed}@media(max-width:760px){.grid,.status-row{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}h1{font-size:44px}}
   </style>
 </head>
 <body>
@@ -26,7 +26,11 @@
       <p class="pill warn" id="readyPill">檢查中</p>
       <h1>LINE / Google / Google API 帶入設定</h1>
       <p class="lead">這頁給店家與工程師用：即時讀取正式站 <code>/api/health</code>，確認一口腸粉會員系統、LINE Login、Google Login、LINE 店家與 Google 商家營業資訊還缺哪些 Vercel 環境變數。</p>
-      <button id="refreshBtn" type="button">重新檢查</button>
+      <div class="actions">
+        <button id="refreshBtn" type="button">重新檢查</button>
+        <button id="copyMissingBtn" class="secondary" type="button" disabled>複製缺少 key</button>
+        <button id="copyTemplateBtn" class="secondary" type="button">複製 env 範本</button>
+      </div>
     </section>
 
     <section class="grid">
@@ -87,6 +91,19 @@ Google Place ID：ChIJ0wZdQgA9aTQR-dLMJWRvNEc
       memberDatabase: "Supabase 會員資料庫",
       posIntegration: "POS 點數回寫"
     };
+    const envTemplate = `GOOGLE_PLACE_ID=ChIJ0wZdQgA9aTQR-dLMJWRvNEc
+GOOGLE_PLACES_API_KEY=
+LINE_OFFICIAL_ACCOUNT_URL=
+OAUTH_STATE_SECRET=
+SESSION_SECRET=
+LINE_LOGIN_CHANNEL_ID=
+LINE_LOGIN_CHANNEL_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+POS_API_TOKEN=`;
+    let latestMissing = [];
 
     function row(key, check) {
       const ok = Boolean(check?.configured);
@@ -98,10 +115,15 @@ Google Place ID：ChIJ0wZdQgA9aTQR-dLMJWRvNEc
     async function loadHealth() {
       const list = document.getElementById("statusList");
       const pill = document.getElementById("readyPill");
+      const copyMissingBtn = document.getElementById("copyMissingBtn");
       list.textContent = "讀取中...";
+      latestMissing = [];
+      copyMissingBtn.disabled = true;
       try {
         const response = await fetch("/api/health", { cache: "no-store", headers: { accept: "application/json" } });
         const data = await response.json();
+        latestMissing = [...new Set(Object.values(data.checks || {}).flatMap(check => Array.isArray(check.missing) ? check.missing : []))];
+        copyMissingBtn.disabled = latestMissing.length === 0;
         pill.textContent = data.ready ? "所有串接已就緒" : "尚未完成設定";
         pill.className = `pill ${data.ready ? "ok" : "warn"}`;
         list.innerHTML = Object.entries(data.checks || {}).map(([key, check]) => row(key, check)).join("");
@@ -112,7 +134,21 @@ Google Place ID：ChIJ0wZdQgA9aTQR-dLMJWRvNEc
       }
     }
 
+    async function copyText(text, successText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        const pill = document.getElementById("readyPill");
+        const previous = pill.textContent;
+        pill.textContent = successText;
+        setTimeout(() => { pill.textContent = previous; }, 1800);
+      } catch {
+        window.prompt("請手動複製以下內容", text);
+      }
+    }
+
     document.getElementById("refreshBtn").addEventListener("click", loadHealth);
+    document.getElementById("copyMissingBtn").addEventListener("click", () => copyText(latestMissing.join("\n"), "已複製缺少 key"));
+    document.getElementById("copyTemplateBtn").addEventListener("click", () => copyText(envTemplate, "已複製 env 範本"));
     loadHealth();
   </script>
 </body>
