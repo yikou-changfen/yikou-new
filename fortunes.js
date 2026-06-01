@@ -97,7 +97,7 @@ const fortunes = [
   { grade:"中平", msg:"今天不要硬撐到最後，先把自己顧好。", rec:"鮮蚵腸粉（海味補血）" }
 ];
 
-﻿(() => {
+(() => {
   const panelId = "yikou-api-bridge";
   if (document.getElementById(panelId)) return;
 
@@ -304,4 +304,3 @@ const fortunes = [
     }
   });
 })();
-
