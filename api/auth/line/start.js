@@ -7,7 +7,8 @@ module.exports = function handler(request, response) {
     return;
   }
 
-  const missing = ["LINE_LOGIN_CHANNEL_ID", "OAUTH_STATE_SECRET"].filter(name => !process.env[name]);
+  const missing = ["LINE_LOGIN_CHANNEL_ID"].filter(name => !process.env[name]);
+  if (!process.env.OAUTH_STATE_SECRET && !process.env.SESSION_SECRET) missing.push("OAUTH_STATE_SECRET_OR_SESSION_SECRET");
   if (missing.length) {
     missingOAuth(response, "line", missing);
     return;
@@ -16,13 +17,7 @@ module.exports = function handler(request, response) {
   const baseUrl = getBaseUrl(request);
   const callbackUrl = `${baseUrl}/api/auth/line/callback`;
   const state = createSignedState("line");
-  const params = new URLSearchParams({
-    response_type: "code",
-    client_id: process.env.LINE_LOGIN_CHANNEL_ID,
-    redirect_uri: callbackUrl,
-    state,
-    scope: "profile openid email"
-  });
+  const params = new URLSearchParams({ response_type: "code", client_id: process.env.LINE_LOGIN_CHANNEL_ID, redirect_uri: callbackUrl, state, scope: "profile openid email" });
 
   setStateCookie(response, "line", state);
   response.statusCode = 302;
