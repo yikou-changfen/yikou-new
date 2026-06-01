@@ -1,5 +1,5 @@
-const { methodNotAllowed } = require("../../_member-utils");
-const { createSignedState, getBaseUrl, missingOAuth, setStateCookie } = require("../_oauth-utils");
+const { methodNotAllowed } = require("../../../lib/member-utils");
+const { createSignedState, getBaseUrl, missingOAuth, setStateCookie } = require("../../../lib/oauth-utils");
 
 module.exports = function handler(request, response) {
   if (request.method !== "GET") {
