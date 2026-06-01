@@ -1,22 +1,31 @@
-const { sendJson } = require("../../_member-utils");
+const { methodNotAllowed } = require("../../_member-utils");
+const { createSignedState, getBaseUrl, missingOAuth, setStateCookie } = require("../_oauth-utils");
 
 module.exports = function handler(request, response) {
   if (request.method !== "GET") {
-    response.setHeader("allow", "GET");
-    sendJson(response, 405, { ok: false, code: "METHOD_NOT_ALLOWED", allowed: ["GET"] });
+    methodNotAllowed(response, ["GET"]);
     return;
   }
 
-  const missing = ["LINE_LOGIN_CHANNEL_ID", "OAUTH_STATE_SECRET", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter(name => !process.env[name]);
+  const missing = ["LINE_LOGIN_CHANNEL_ID", "OAUTH_STATE_SECRET"].filter(name => !process.env[name]);
   if (missing.length) {
-    sendJson(response, 503, {
-      ok: false,
-      code: "LINE_LOGIN_NOT_CONFIGURED",
-      message: "LINE 會員登入尚未設定完成。",
-      missing
-    });
+    missingOAuth(response, "line", missing);
     return;
   }
 
-  sendJson(response, 501, { ok: false, code: "LINE_LOGIN_CALLBACK_NOT_CONNECTED" });
+  const baseUrl = getBaseUrl(request);
+  const callbackUrl = `${baseUrl}/api/auth/line/callback`;
+  const state = createSignedState("line");
+  const params = new URLSearchParams({
+    response_type: "code",
+    client_id: process.env.LINE_LOGIN_CHANNEL_ID,
+    redirect_uri: callbackUrl,
+    state,
+    scope: "profile openid email"
+  });
+
+  setStateCookie(response, "line", state);
+  response.statusCode = 302;
+  response.setHeader("location", `https://access.line.me/oauth2/v2.1/authorize?${params.toString()}`);
+  response.end();
 };
