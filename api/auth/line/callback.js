@@ -4,36 +4,15 @@ const { upsertOAuthMember } = require("../../../lib/supabase-utils");
 const { verifyState } = require("../../../lib/oauth-utils");
 
 async function exchangeLineToken(code, redirectUri) {
-  const body = new URLSearchParams({
-    grant_type: "authorization_code",
-    code,
-    redirect_uri: redirectUri,
-    client_id: process.env.LINE_LOGIN_CHANNEL_ID,
-    client_secret: process.env.LINE_LOGIN_CHANNEL_SECRET
-  });
-
-  const tokenResponse = await fetch("https://api.line.me/oauth2/v2.1/token", {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body
-  });
-
+  const body = new URLSearchParams({ grant_type: "authorization_code", code, redirect_uri: redirectUri, client_id: process.env.LINE_LOGIN_CHANNEL_ID, client_secret: process.env.LINE_LOGIN_CHANNEL_SECRET });
+  const tokenResponse = await fetch("https://api.line.me/oauth2/v2.1/token", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body });
   if (!tokenResponse.ok) throw new Error("LINE_TOKEN_EXCHANGE_FAILED");
   return tokenResponse.json();
 }
 
 async function verifyLineIdToken(idToken) {
-  const body = new URLSearchParams({
-    id_token: idToken,
-    client_id: process.env.LINE_LOGIN_CHANNEL_ID
-  });
-
-  const verifyResponse = await fetch("https://api.line.me/oauth2/v2.1/verify", {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body
-  });
-
+  const body = new URLSearchParams({ id_token: idToken, client_id: process.env.LINE_LOGIN_CHANNEL_ID });
+  const verifyResponse = await fetch("https://api.line.me/oauth2/v2.1/verify", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body });
   if (!verifyResponse.ok) throw new Error("LINE_ID_TOKEN_VERIFY_FAILED");
   return verifyResponse.json();
 }
@@ -51,7 +30,8 @@ module.exports = async function handler(request, response) {
     return;
   }
 
-  const missing = ["LINE_LOGIN_CHANNEL_ID", "LINE_LOGIN_CHANNEL_SECRET", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY", "OAUTH_STATE_SECRET"].filter(name => !process.env[name]);
+  const missing = ["LINE_LOGIN_CHANNEL_ID", "LINE_LOGIN_CHANNEL_SECRET", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter(name => !process.env[name]);
+  if (!process.env.OAUTH_STATE_SECRET && !process.env.SESSION_SECRET) missing.push("OAUTH_STATE_SECRET_OR_SESSION_SECRET");
   if (missing.length) {
     sendJson(response, 503, { ok: false, code: "LINE_CALLBACK_NOT_CONFIGURED", message: "LINE callback 尚未連接正式會員資料庫。未設定完成前不會交換 token 或保存個資。", missing });
     return;
