@@ -212,6 +212,17 @@ function testSecretGenerator() {
   assert.equal(new Set(required.map(key => payload[key])).size, required.length);
 }
 
+function testSetupPageCanGenerateSecretsLocally() {
+  const html = fs.readFileSync(path.join(__dirname, "..", "setup.html"), "utf8");
+  assert(html.includes("generateSecretsBtn"));
+  assert(html.includes("generateSecretsInlineBtn"));
+  assert(html.includes("copyGeneratedSecretsBtn"));
+  assert(html.includes("crypto.getRandomValues"));
+  assert(html.includes("OAUTH_STATE_SECRET"));
+  assert(html.includes("SESSION_SECRET"));
+  assert(html.includes("POS_API_TOKEN"));
+}
+
 async function main() {
   delete process.env.GOOGLE_PLACES_API_KEY;
   delete process.env.GOOGLE_PLACE_ID;
@@ -242,6 +253,7 @@ async function main() {
   testOAuthStateSignatureValidation();
   testFrontendUsesServerExport();
   testSecretGenerator();
+  testSetupPageCanGenerateSecretsLocally();
 
   console.log("API safety checks passed");
 }
