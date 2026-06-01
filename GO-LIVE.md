@@ -42,6 +42,22 @@ POS_API_TOKEN
 GOOGLE_PLACE_ID=ChIJ0wZdQgA9aTQR-dLMJWRvNEc
 ```
 
+以下三個值可以在本機安全產生，不需要去第三方平台申請：
+
+```bash
+npm run secrets:generate
+```
+
+執行後把輸出的值貼到 `.env.production.local` 和 Vercel Environment Variables：
+
+```text
+OAUTH_STATE_SECRET
+SESSION_SECRET
+POS_API_TOKEN
+```
+
+每次執行都會產生新值。若正式站已上線，換值後需要重新部署，舊 session 也會失效。
+
 可以先複製 `env.production.example` 成 `.env.production.local`，填入正式值後執行：
 
 ```bash
