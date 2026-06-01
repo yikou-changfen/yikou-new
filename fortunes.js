@@ -14,7 +14,8 @@ const fortunes = [
   const adminLinks = [
     ["後台管理", "https://yikou-cheungfun-line-order-v2.vercel.app/admin"],
     ["POS 收銀", "https://yikou-cheungfun-line-order-v2.vercel.app/admin/pos"],
-    ["會員中心", "https://yikou-cheungfun-line-order-v2.vercel.app/member"]
+    ["會員中心", "https://yikou-cheungfun-line-order-v2.vercel.app/member"],
+    ["串接設定", "https://yikou-cheungfun-line-order-v2.vercel.app/setup.html"]
   ];
   const menu = [
     ["鮮蝦蛋腸粉", "95", "assets/menu/web/xian-xia.webp", "蝦仁、雞蛋、青菜與醬香，是第一次來最穩的選擇。"],
