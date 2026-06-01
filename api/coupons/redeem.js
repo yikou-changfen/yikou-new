@@ -3,9 +3,9 @@ const {
   readBody,
   requireConfiguredEnv,
   sendJson
-} = require("../_member-utils");
-const { getSession } = require("../_session-utils");
-const { redeemCouponForMember } = require("../_supabase-utils");
+} = require("../../lib/member-utils");
+const { getSession } = require("../../lib/session-utils");
+const { redeemCouponForMember } = require("../../lib/supabase-utils");
 
 module.exports = async function handler(request, response) {
   if (request.method !== "POST") {
@@ -17,11 +17,7 @@ module.exports = async function handler(request, response) {
 
   const session = getSession(request);
   if (!session) {
-    sendJson(response, 401, {
-      ok: false,
-      code: "AUTH_REQUIRED",
-      message: "優惠券核銷需要會員登入。"
-    });
+    sendJson(response, 401, { ok: false, code: "AUTH_REQUIRED", message: "優惠券核銷需要會員登入。" });
     return;
   }
 
@@ -31,20 +27,8 @@ module.exports = async function handler(request, response) {
       sendJson(response, 400, { ok: false, code: "COUPON_ID_REQUIRED" });
       return;
     }
-    const coupon = await redeemCouponForMember({
-      memberId: session.memberId,
-      couponId: body.couponId,
-      orderId: body.orderId || null,
-      redeemedBy: "member"
-    });
-    sendJson(response, 200, {
-      ok: true,
-      coupon: {
-        id: coupon.id,
-        title: coupon.title,
-        status: coupon.status
-      }
-    });
+    const coupon = await redeemCouponForMember({ memberId: session.memberId, couponId: body.couponId, orderId: body.orderId || null, redeemedBy: "member" });
+    sendJson(response, 200, { ok: true, coupon: { id: coupon.id, title: coupon.title, status: coupon.status } });
   } catch (error) {
     sendJson(response, error.status || 400, { ok: false, code: error.message || "COUPON_REDEEM_FAILED" });
   }
