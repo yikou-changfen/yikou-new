@@ -1,4 +1,5 @@
-const { methodNotAllowed, sendJson } = require("../_member-utils");
+const { methodNotAllowed, sendJson } = require("../../lib/member-utils");
+const { clearSessionCookie } = require("../../lib/session-utils");
 
 module.exports = function handler(request, response) {
   if (request.method !== "POST") {
@@ -6,7 +7,7 @@ module.exports = function handler(request, response) {
     return;
   }
 
-  response.setHeader("set-cookie", "yikou_member_session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
+  clearSessionCookie(response);
   sendJson(response, 200, {
     ok: true,
     message: "已登出會員。"
