@@ -1,0 +1,16 @@
+{
+  "name": "yikou-brand-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "一口腸粉中國風品牌官網，含安全會員系統、LINE/Google OAuth、Google 商家營業資訊與 POS 串接 API。",
+  "scripts": {
+    "dev": "python -m http.server 4173 --bind 127.0.0.1",
+    "verify": "node scripts/verify-api.js",
+    "check:env": "node scripts/check-env.js",
+    "smoke:production": "node scripts/smoke-production.js",
+    "predeploy": "npm run verify && npm run check:env"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
