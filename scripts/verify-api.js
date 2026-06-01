@@ -223,6 +223,21 @@ function testSetupPageCanGenerateSecretsLocally() {
   assert(html.includes("POS_API_TOKEN"));
 }
 
+function testIntegrationStatusUsesSharedReadinessRules() {
+  const { buildIntegrationChecks } = require("../lib/integration-status");
+
+  const emptyChecks = buildIntegrationChecks({});
+  assert.equal(emptyChecks.oauthSecurity.configured, false);
+  assert(emptyChecks.oauthSecurity.missing.includes("OAUTH_STATE_SECRET_OR_SESSION_SECRET"));
+  assert(emptyChecks.lineLogin.missing.includes("SUPABASE_URL"));
+  assert(emptyChecks.lineLogin.missing.includes("SUPABASE_SERVICE_ROLE_KEY"));
+  assert(emptyChecks.posIntegration.missing.includes("POS_API_TOKEN"));
+
+  const sessionOnlyChecks = buildIntegrationChecks({ SESSION_SECRET: "x".repeat(40) });
+  assert.equal(sessionOnlyChecks.oauthSecurity.configured, true);
+  assert(!sessionOnlyChecks.memberDatabase.missing.includes("OAUTH_STATE_SECRET_OR_SESSION_SECRET"));
+}
+
 async function main() {
   delete process.env.GOOGLE_PLACES_API_KEY;
   delete process.env.GOOGLE_PLACE_ID;
@@ -254,6 +269,7 @@ async function main() {
   testFrontendUsesServerExport();
   testSecretGenerator();
   testSetupPageCanGenerateSecretsLocally();
+  testIntegrationStatusUsesSharedReadinessRules();
 
   console.log("API safety checks passed");
 }
