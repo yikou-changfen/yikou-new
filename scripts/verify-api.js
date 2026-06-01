@@ -1,4 +1,5 @@
 const assert = require("assert");
+const { execFileSync } = require("child_process");
 const { EventEmitter } = require("events");
 const fs = require("fs");
 const path = require("path");
@@ -195,6 +196,22 @@ function testFrontendUsesServerExport() {
   assert(html.includes("已從後端匯出遮罩會員資料"));
 }
 
+function testSecretGenerator() {
+  const output = execFileSync(process.execPath, [path.join(__dirname, "generate-secrets.js"), "--json"], {
+    encoding: "utf8"
+  });
+  const payload = JSON.parse(output);
+  const required = ["OAUTH_STATE_SECRET", "SESSION_SECRET", "POS_API_TOKEN"];
+
+  for (const key of required) {
+    assert.equal(typeof payload[key], "string");
+    assert(payload[key].length >= 32);
+    assert(/^[A-Za-z0-9_-]+$/.test(payload[key]));
+  }
+
+  assert.equal(new Set(required.map(key => payload[key])).size, required.length);
+}
+
 async function main() {
   delete process.env.GOOGLE_PLACES_API_KEY;
   delete process.env.GOOGLE_PLACE_ID;
@@ -224,6 +241,7 @@ async function main() {
   testSessionSignatureValidation();
   testOAuthStateSignatureValidation();
   testFrontendUsesServerExport();
+  testSecretGenerator();
 
   console.log("API safety checks passed");
 }
