@@ -5,6 +5,14 @@ const { requiredGroups, missingFor } = require("../lib/integration-status");
 const filePath = process.argv[2] || ".env.production.local";
 
 const validators = {
+  PUBLIC_BASE_URL(value) {
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:";
+    } catch {
+      return false;
+    }
+  },
   GOOGLE_PLACE_ID(value) {
     return value === "ChIJ0wZdQgA9aTQR-dLMJWRvNEc";
   },
