@@ -42,6 +42,14 @@ POS_API_TOKEN
 GOOGLE_PLACE_ID=ChIJ0wZdQgA9aTQR-dLMJWRvNEc
 ```
 
+可以先複製 `env.production.example` 成 `.env.production.local`，填入正式值後執行：
+
+```bash
+npm run check:env:file
+```
+
+確認通過後，再把 `.env.production.local` 內的 key/value 逐項貼到 Vercel Project Settings > Environment Variables。`.env.production.local` 不可以 commit 到 GitHub。
+
 ## 安全原則
 
 - 會員個資只存在後端資料庫，不寫入 localStorage。
@@ -129,6 +137,7 @@ SUPABASE_SERVICE_ROLE_KEY
 ```bash
 npm run verify
 npm run check:env
+npm run check:env:file
 npm run smoke:production
 ```
 
