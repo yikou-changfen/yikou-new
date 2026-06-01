@@ -96,3 +96,212 @@ const fortunes = [
   { grade:"小吉", msg:"心裡卡卡的？那是你需要一點 Q 彈。", rec:"經典鮮蝦腸粉（Q 彈解卡）" },
   { grade:"中平", msg:"今天不要硬撐到最後，先把自己顧好。", rec:"鮮蚵腸粉（海味補血）" }
 ];
+
+﻿(() => {
+  const panelId = "yikou-api-bridge";
+  if (document.getElementById(panelId)) return;
+
+  const styleId = "yikou-api-bridge-style";
+  const css = `
+    #${panelId} {
+      max-width: 1120px;
+      margin: 32px auto;
+      padding: 24px;
+      border: 1px solid rgba(132, 35, 23, 0.18);
+      border-radius: 18px;
+      background: #fffaf2;
+      color: #351d17;
+      box-shadow: 0 18px 45px rgba(64, 27, 15, 0.12);
+      font-family: inherit;
+    }
+    #${panelId} .bridge-kicker {
+      color: #9a2f22;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin: 0 0 6px;
+    }
+    #${panelId} h2 {
+      margin: 0 0 10px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.2;
+    }
+    #${panelId} p {
+      margin: 0;
+      line-height: 1.8;
+    }
+    #${panelId} .bridge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    #${panelId} .bridge-card {
+      min-height: 132px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(132, 35, 23, 0.14);
+      background: #fff;
+    }
+    #${panelId} .bridge-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+    #${panelId} .bridge-pill {
+      flex: 0 0 auto;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      background: #8f8f8f;
+    }
+    #${panelId} .bridge-pill.ok { background: #128c49; }
+    #${panelId} .bridge-pill.warn { background: #9a2f22; }
+    #${panelId} .bridge-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    #${panelId} .bridge-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      color: #fff;
+      background: #9a2f22;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    #${panelId} .bridge-btn.line { background: #06c755; }
+    #${panelId} .bridge-btn.google { background: #1f1f1f; }
+    #${panelId} .bridge-btn.secondary { background: #6f4a2f; }
+    #${panelId} .bridge-note {
+      margin-top: 14px;
+      color: #6e5549;
+      font-size: 14px;
+    }
+    @media (max-width: 760px) {
+      #${panelId} { margin: 22px 14px; padding: 18px; border-radius: 14px; }
+      #${panelId} .bridge-grid { grid-template-columns: 1fr; }
+      #${panelId} .bridge-btn { width: 100%; }
+    }
+  `;
+
+  function ready(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn, { once: true });
+    } else {
+      fn();
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    }[char]));
+  }
+
+  async function getJson(path) {
+    const response = await fetch(path, { credentials: "same-origin" });
+    const data = await response.json().catch(() => ({}));
+    return { ok: response.ok, status: response.status, data };
+  }
+
+  function missingText(check) {
+    const missing = Array.isArray(check?.missing) ? check.missing : [];
+    return missing.length ? `缺少 ${missing.join(", ")}` : "已設定";
+  }
+
+  ready(async () => {
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = css;
+      document.head.appendChild(style);
+    }
+
+    const section = document.createElement("section");
+    section.id = panelId;
+    section.innerHTML = `
+      <p class="bridge-kicker">會員與店家資訊</p>
+      <h2>LINE / Google 會員登入與 Google 商家營業資訊</h2>
+      <p>正式站已接上安全 API 檢查。會員資料會等 Supabase 後端密鑰設定完成後才開放正式寫入，避免資料外洩。</p>
+      <div class="bridge-grid" aria-live="polite">
+        <div class="bridge-card" id="bridge-line"><div class="bridge-title">LINE 會員 <span class="bridge-pill">檢查中</span></div><p>正在檢查 LINE Login 與會員資料庫。</p></div>
+        <div class="bridge-card" id="bridge-google"><div class="bridge-title">Google 會員 <span class="bridge-pill">檢查中</span></div><p>正在檢查 Google OAuth 與會員資料庫。</p></div>
+        <div class="bridge-card" id="bridge-hours"><div class="bridge-title">營業資訊 <span class="bridge-pill">檢查中</span></div><p>正在讀取 Google 商家營業時間。</p></div>
+      </div>
+      <div class="bridge-actions">
+        <a class="bridge-btn line" href="/api/auth/line/start">使用 LINE 註冊 / 登入</a>
+        <a class="bridge-btn google" href="/api/auth/google/start">使用 Google 註冊 / 登入</a>
+        <a class="bridge-btn secondary" id="bridge-line-official" href="#" aria-disabled="true">加入 LINE 店家</a>
+      </div>
+      <p class="bridge-note" id="bridge-note">設定完成後，此區會自動顯示最新 Google 商家營業資訊。</p>
+    `;
+
+    const anchor = document.querySelector("footer") || document.body.lastElementChild;
+    if (anchor?.parentNode) {
+      anchor.parentNode.insertBefore(section, anchor);
+    } else {
+      document.body.appendChild(section);
+    }
+
+    const lineCard = section.querySelector("#bridge-line");
+    const googleCard = section.querySelector("#bridge-google");
+    const hoursCard = section.querySelector("#bridge-hours");
+    const officialLink = section.querySelector("#bridge-line-official");
+    const note = section.querySelector("#bridge-note");
+
+    try {
+      const health = await getJson("/api/health");
+      const checks = health.data?.checks || {};
+      const lineReady = Boolean(checks.lineLogin?.configured);
+      const googleReady = Boolean(checks.googleLogin?.configured);
+      lineCard.innerHTML = `<div class="bridge-title">LINE 會員 <span class="bridge-pill ${lineReady ? "ok" : "warn"}">${lineReady ? "已連接" : "待設定"}</span></div><p>${escapeHtml(missingText(checks.lineLogin))}</p>`;
+      googleCard.innerHTML = `<div class="bridge-title">Google 會員 <span class="bridge-pill ${googleReady ? "ok" : "warn"}">${googleReady ? "已連接" : "待設定"}</span></div><p>${escapeHtml(missingText(checks.googleLogin))}</p>`;
+      if (!health.data?.ready) {
+        note.textContent = "目前網站 API 已上線，但部分正式密鑰尚未設定完成；未完成前會員資料不會寫入正式資料庫。";
+      }
+    } catch (error) {
+      lineCard.innerHTML = `<div class="bridge-title">LINE 會員 <span class="bridge-pill warn">檢查失敗</span></div><p>暫時無法讀取 API 狀態。</p>`;
+      googleCard.innerHTML = `<div class="bridge-title">Google 會員 <span class="bridge-pill warn">檢查失敗</span></div><p>暫時無法讀取 API 狀態。</p>`;
+    }
+
+    try {
+      const config = await getJson("/api/public-config");
+      const url = config.data?.lineOfficialAccountUrl;
+      if (url) {
+        officialLink.href = url;
+        officialLink.removeAttribute("aria-disabled");
+      } else {
+        officialLink.addEventListener("click", (event) => event.preventDefault());
+      }
+    } catch (error) {
+      officialLink.addEventListener("click", (event) => event.preventDefault());
+    }
+
+    try {
+      const hours = await getJson("/api/business-hours");
+      if (hours.ok && hours.data?.todayText) {
+        hoursCard.innerHTML = `<div class="bridge-title">營業資訊 <span class="bridge-pill ok">已同步</span></div><p>${escapeHtml(hours.data.todayText)}</p>`;
+      } else {
+        const missing = Array.isArray(hours.data?.missing) ? hours.data.missing.join(", ") : "GOOGLE_PLACES_API_KEY";
+        hoursCard.innerHTML = `<div class="bridge-title">營業資訊 <span class="bridge-pill warn">待設定</span></div><p>缺少 ${escapeHtml(missing)}，設定後會自動追蹤一口腸粉 Google 商家營業資訊。</p>`;
+      }
+    } catch (error) {
+      hoursCard.innerHTML = `<div class="bridge-title">營業資訊 <span class="bridge-pill warn">檢查失敗</span></div><p>暫時無法讀取 Google 商家營業資訊。</p>`;
+    }
+  });
+})();
+
