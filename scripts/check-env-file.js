@@ -1,17 +1,8 @@
 const fs = require("fs");
 const path = require("path");
+const { requiredGroups, missingFor } = require("../lib/integration-status");
 
 const filePath = process.argv[2] || ".env.production.local";
-
-const requiredGroups = {
-  googleBusinessHours: ["GOOGLE_PLACES_API_KEY"],
-  lineOfficialAccount: ["LINE_OFFICIAL_ACCOUNT_URL"],
-  oauthSecurity: ["OAUTH_STATE_SECRET_OR_SESSION_SECRET"],
-  lineLogin: ["LINE_LOGIN_CHANNEL_ID", "LINE_LOGIN_CHANNEL_SECRET"],
-  googleLogin: ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"],
-  memberDatabase: ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"],
-  posIntegration: ["POS_API_TOKEN"]
-};
 
 const validators = {
   GOOGLE_PLACE_ID(value) {
@@ -54,15 +45,6 @@ function parseEnv(content) {
     env[key] = value;
   });
   return env;
-}
-
-function missingFor(env, names) {
-  return names.filter(name => {
-    if (name === "OAUTH_STATE_SECRET_OR_SESSION_SECRET") {
-      return !env.OAUTH_STATE_SECRET && !env.SESSION_SECRET;
-    }
-    return !env[name];
-  });
 }
 
 function validate(env) {
