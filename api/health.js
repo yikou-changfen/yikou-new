@@ -5,7 +5,10 @@ function has(name) {
 }
 
 function status(required) {
-  const missing = required.filter(name => !has(name));
+  const missing = required.filter(name => {
+    if (name === "OAUTH_STATE_SECRET") return !has("OAUTH_STATE_SECRET") && !has("SESSION_SECRET");
+    return !has(name);
+  });
   return {
     configured: missing.length === 0,
     missing
