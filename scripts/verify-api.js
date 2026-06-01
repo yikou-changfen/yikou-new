@@ -238,6 +238,29 @@ function testIntegrationStatusUsesSharedReadinessRules() {
   assert(!sessionOnlyChecks.memberDatabase.missing.includes("OAUTH_STATE_SECRET_OR_SESSION_SECRET"));
 }
 
+function testOAuthBaseUrlIsStableAgainstHostHeaders() {
+  const { getBaseUrl, getRequestUrl } = require("../lib/oauth-utils");
+  const originalPublicBaseUrl = process.env.PUBLIC_BASE_URL;
+  delete process.env.PUBLIC_BASE_URL;
+
+  const request = {
+    url: "/api/auth/google/callback?code=abc&state=state",
+    headers: {
+      host: "evil.example.com",
+      "x-forwarded-host": "evil.example.com"
+    }
+  };
+
+  assert.equal(getBaseUrl(request), "https://yikou-cheungfun-line-order-v2.vercel.app");
+  assert.equal(getRequestUrl(request).origin, "https://yikou-cheungfun-line-order-v2.vercel.app");
+
+  process.env.PUBLIC_BASE_URL = "https://custom.example.com/path";
+  assert.equal(getBaseUrl(request), "https://custom.example.com");
+
+  if (originalPublicBaseUrl) process.env.PUBLIC_BASE_URL = originalPublicBaseUrl;
+  else delete process.env.PUBLIC_BASE_URL;
+}
+
 async function main() {
   delete process.env.GOOGLE_PLACES_API_KEY;
   delete process.env.GOOGLE_PLACE_ID;
@@ -270,6 +293,7 @@ async function main() {
   testSecretGenerator();
   testSetupPageCanGenerateSecretsLocally();
   testIntegrationStatusUsesSharedReadinessRules();
+  testOAuthBaseUrlIsStableAgainstHostHeaders();
 
   console.log("API safety checks passed");
 }
